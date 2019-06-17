@@ -2,7 +2,7 @@
     <v-container>
         <v-layout row>
             <v-flex sm6 offset-sm3>
-                <v-form ref="form" v-model="valid">
+                <v-form ref="form" v-model="valid" lazy-validation>
                     <v-text-field
                             v-model="name"
                             :counter="10"
@@ -51,7 +51,7 @@
                 'Other'
             ],
             checkbox: false,
-            valid: false,
+            valid: true,
             nameRules: [
                 v => !!v || 'Name is required',
                 v => (v && v.length <= 10) || 'Name must be less than 10 characters'
@@ -60,7 +60,7 @@
                 v => !!v || "Pick at least one field"
             ],
             checkboxRules: [
-                v => !v.checked || 'You must agree to continue!'
+                v => v.checked || 'You must agree to continue!'
             ]
         }),
         methods: {
