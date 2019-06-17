@@ -21,34 +21,7 @@
           </v-list-tile>
         </v-list>
       </v-navigation-drawer>
-
-      <v-toolbar app dark color="primary">
-        <v-toolbar-side-icon
-                class="hidden-md-and-up"
-                @click="drawer = !drawer"
-        ></v-toolbar-side-icon>
-        <v-toolbar-title>
-          <router-link
-                  to="/"
-                  tag="span"
-                  class="pointer"
-          >
-            Treasury
-          </router-link>
-        </v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-toolbar-items class="hidden-sm-and-down">
-          <v-btn
-                  v-for="link of links"
-                  :key="link.title"
-                  :to="link.url"
-                  flat
-          >
-            <v-icon left>{{link.icon}}</v-icon>
-            {{link.title}}
-          </v-btn>
-        </v-toolbar-items>
-      </v-toolbar>
+      <app-header :links="links"></app-header>
       <v-content>
         <router-view></router-view>
       </v-content>
@@ -61,6 +34,7 @@
 
 <script>
   import Footer from '@/components/Items/Footer'
+  import Header from '@/components/Items/Header'
   export default {
     data() {
       return {
@@ -75,7 +49,8 @@
       }
     },
     components: {
-      appFooter: Footer
+      appFooter: Footer,
+      appHeader: Header
     }
   }
 </script>
