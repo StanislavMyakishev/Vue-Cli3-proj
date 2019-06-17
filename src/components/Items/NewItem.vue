@@ -2,11 +2,12 @@
     <v-container>
         <v-layout row>
             <v-flex sm6 offset-sm3>
-                <form>
+                <v-form ref="form" v-model="valid">
                     <v-text-field
                             v-model="name"
                             :counter="10"
                             label="New Item name"
+                            :rules="nameRules"
                             required
                     ></v-text-field>
                     <v-text-field
@@ -18,16 +19,18 @@
                             v-model="select"
                             :items="items"
                             label="Areas"
+                            :rules="selectRules"
                             required
                     ></v-select>
                     <v-checkbox
                             v-model="checkbox"
                             label="I read Terms and conditions"
+                            :rules="checkboxRules"
                             required
                     ></v-checkbox>
-                    <v-btn @click="submit">submit</v-btn>
+                    <v-btn @click="validate" :disabled="!valid">submit</v-btn>
                     <v-btn @click="clear">clear</v-btn>
-                </form>
+                </v-form>
             </v-flex>
         </v-layout>
     </v-container>
@@ -47,11 +50,24 @@
                 'Retail',
                 'Other'
             ],
-            checkbox: false
+            checkbox: false,
+            valid: false,
+            nameRules: [
+                v => !!v || 'Name is required',
+                v => (v && v.length <= 10) || 'Name must be less than 10 characters'
+            ],
+            selectRules: [
+                v => !!v || "Pick at least one field"
+            ],
+            checkboxRules: [
+                v => !v.checked || 'You must agree to continue!'
+            ]
         }),
         methods: {
-            submit () {
-                //logic
+            validate () {
+                if (this.$refs.form.validate()) {
+                    // Add POST request
+                }
             },
             clear () {
                 this.name = ''

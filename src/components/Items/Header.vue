@@ -33,3 +33,9 @@ export default {
     props: ['links']
 }
 </script>
+
+<style>
+    .pointer {
+        cursor: pointer;
+    }
+</style>
