@@ -13,6 +13,7 @@
                     <v-text-field
                             v-model="descr"
                             label="Description"
+                            :rules="descrRules"
                             required
                     ></v-text-field>
                     <v-select
@@ -56,11 +57,14 @@
                 v => !!v || 'Name is required',
                 v => (v && v.length <= 10) || 'Name must be less than 10 characters'
             ],
+            descrRules: [
+                v => !!v || 'Description is required'
+            ],
             selectRules: [
                 v => !!v || "Pick at least one field"
             ],
             checkboxRules: [
-                v => v.checked || 'You must agree to continue!'
+                v => !!v || 'You must agree to continue!'
             ]
         }),
         methods: {
