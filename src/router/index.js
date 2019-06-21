@@ -8,7 +8,7 @@ import Orders from '@/components/User/Orders'
 import Login from '@/components/Auth/Login'
 import Registration from '@/components/Auth/Registration'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
     routes: [

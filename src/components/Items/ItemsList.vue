@@ -2,7 +2,7 @@
     <v-content>
         <v-container>
             <v-layout row>
-                <v-flex sm6 offset-sm3>
+                <v-flex xs12 sm12 md12>
                     <v-list two-line>
                         <v-subheader>
                             Order List
@@ -14,15 +14,15 @@
                                 <v-list-tile-content>
                                     <v-list-tile-title>
                                         <v-layout row>
-                                            {{ord.order}}
-                                            {{ord.area}}
+                                            {{ord.name}}
+                                            {{ord.category}}
                                         </v-layout>
                                     </v-list-tile-title>
-                                    <v-list-tile-sub-title class="text--primary">
-                                        {{ord.customer}}
-                                    </v-list-tile-sub-title>
+                                    <!--<v-list-tile-sub-title class="text&#45;&#45;primary">-->
+                                        <!--{{ord.customer_id}}-->
+                                    <!--</v-list-tile-sub-title>-->
                                     <v-list-tile-sub-title>
-                                        {{ord.comment}}
+                                        {{ord.description}}
                                     </v-list-tile-sub-title>
                                 </v-list-tile-content>
                                 <!--<v-list-tile-action>-->
@@ -36,6 +36,7 @@
                             </v-divider>
                         </div>
                     </v-list>
+
                 </v-flex>
             </v-layout>
         </v-container>
@@ -44,37 +45,37 @@
 
 
 <script>
+
     export default {
         data() {
             return {
                 orders: [
                     {
                         id: 1,
-                        order: "Order 1",
-                        comment: "Order 1 comment",
+                        name: "Order 1",
+                        description: "Order 1 comment",
                         customer: "Company 1",
-                        area: "IT",
+                        category: "IT",
                         data: '17.06.2019'
                     },
                     {
                         id: 2,
-                        order: "Order 2",
-                        comment: "Order 2 comment",
+                        name: "Order 2",
+                        description: "Order 2 comment",
                         customer: "Company 2",
-                        area: "IT",
+                        category: "IT",
                         data: '17.06.2019'
                     },
                     {
                         id: 3,
-                        order: "Order 3",
-                        comment: "Order 3 comment",
+                        name: "Order 3",
+                        description: "Order 3 comment",
                         customer: "Company 3",
-                        area: "IT",
+                        category: "IT",
                         data: '17.06.2019'
                     }
                 ]
             }
-        },
-
+        }
     }
 </script>
