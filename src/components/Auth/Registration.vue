@@ -59,6 +59,8 @@
 </template>
 
 <script>
+    import axios from 'axios'
+
     export default {
         data() {
             return {
@@ -84,13 +86,22 @@
             onSubmit(){
                 if (this.$refs.form.validate()) {
                     const user = {
-                        emial: this.email,
+                        email: this.email,
                         password: this.password
                     }
 
-                    //test actions
-
-                    alert(user.emial + ' ' + user.password)
+                    // Можно будет добавть визуальщину или переход в лк при регистрации, пока этого нема
+                    axios.post('http://127.0.0.1:8081/api/registration/', user)
+                        .then(response => {
+                            if (response.code === '200') {
+                                alert("User added to database")
+                            } else {
+                                throw new Error('Some error occured')
+                            }
+                        })
+                        .catch(error => {
+                            alert(error);
+                        })
                 }
             }
         }

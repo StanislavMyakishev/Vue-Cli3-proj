@@ -48,6 +48,8 @@
 </template>
 
 <script>
+    import axios from 'axios'
+    
     export default {
         data: () => ({
             name: '',
@@ -80,7 +82,7 @@
         methods: {
             validate() {
                 if (this.$refs.form.validate()) {
-                    // Add POST request
+                    axios.post('')
                 }
             },
             clear() {
