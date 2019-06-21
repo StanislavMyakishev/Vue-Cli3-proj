@@ -7,7 +7,7 @@
                         <v-subheader>
                             Order List
                         </v-subheader>
-                        <div v-for="(ord, index) in orders" >
+                        <div v-for="(ord, index) in orders">
                             <v-list-tile
                                     :key="ord.id"
                             >
@@ -15,11 +15,12 @@
                                     <v-list-tile-title>
                                         <v-layout row>
                                             {{ord.name}}
+                                            <v-spacer></v-spacer>
                                             {{ord.category}}
                                         </v-layout>
                                     </v-list-tile-title>
                                     <!--<v-list-tile-sub-title class="text&#45;&#45;primary">-->
-                                        <!--{{ord.customer_id}}-->
+                                    <!--{{ord.customer_id}}-->
                                     <!--</v-list-tile-sub-title>-->
                                     <v-list-tile-sub-title>
                                         {{ord.description}}
@@ -28,6 +29,7 @@
                                 <!--<v-list-tile-action>-->
                                 <!--<v-list-tile-action-text>{{ order.data }}</v-list-tile-action-text>-->
                                 <!--</v-list-tile-action>-->
+
                             </v-list-tile>
                             <v-divider
                                     v-if="index + 1 < orders.length"
@@ -56,7 +58,8 @@
                         description: "Order 1 comment",
                         customer: "Company 1",
                         category: "IT",
-                        data: '17.06.2019'
+                        data: '17.06.2019',
+
                     },
                     {
                         id: 2,

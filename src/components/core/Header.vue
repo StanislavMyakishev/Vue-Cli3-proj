@@ -25,7 +25,7 @@
                 {{link.title}}
             </v-btn>
         </v-toolbar-items>
-        <!--<button @click="getUsers">`click me</button>-->
+        <button @click="getUsers">`click me</button>
     </v-toolbar>
 </template>
 
@@ -46,9 +46,9 @@
         methods: {
             getUsers() {
                 axios.get('http://127.0.0.1:8081/api/orders/')
-                    .then(response => {this.data = response.data})
-                    .catch(error => console.log('nibba', error));
-            },
+                    .then(response => console.log(response.data))
+                    .catch(error => console.log('nibba', error))
+            }
 
         }
 
