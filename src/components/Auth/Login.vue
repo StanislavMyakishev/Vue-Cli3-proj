@@ -76,7 +76,13 @@
                         emial: this.email,
                         password: this.password
                     }
-                    alert(user.emial + ' ' + user.password)
+                    axios.post('http://127.0.0.1:8081/api/login/', user)
+                        .then(response => {
+                            console.log(response)
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        })
                 }
             }
         }
