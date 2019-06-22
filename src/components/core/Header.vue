@@ -46,9 +46,12 @@
         methods: {
             getUsers() {
                 axios.get('http://127.0.0.1:8081/api/orders/')
-                    .then(response => console.log(response.data))
-                    .catch(error => console.log('nibba', error))
-            }
+                    .then(response => {
+                        this.data = response.data
+                    })
+                    .catch(error => console.log('nibba', error));
+            },
+
 
         }
 

@@ -3,56 +3,19 @@
         <v-layout row>
             <v-flex xs12>
                 <v-card>
-                    <v-toolbar
-                            color="lue-grey lighten-5"
+                    <v-img
+                            :src="testOrder.imageSrc"
+                            height="300px"
                     >
-                        <v-toolbar-title>{{order.name}}</v-toolbar-title>
-                    </v-toolbar>
+                    </v-img>
                     <v-card-text>
-                        <v-list two-line>
-                            <v-divider></v-divider>
-                            <v-list-tile>
-                                <v-list-tile-sub-title>
-                                    Customer:
-                                </v-list-tile-sub-title>
-                                <v-list-tile-title>
-                                    {{order.customer}}
-                                </v-list-tile-title>
-                            </v-list-tile>
-                            <v-divider></v-divider>
-                            <v-list-tile>
-                                <v-list-tile-sub-title>
-                                    Category:
-                                </v-list-tile-sub-title>
-                                <v-list-tile-title>
-                                    {{order.category}}
-                                </v-list-tile-title>
-                            </v-list-tile>
-                            <v-divider></v-divider>
-                            <v-list-tile>
-                                <v-list-tile-sub-title>
-                                    Date:
-                                </v-list-tile-sub-title>
-                                <v-list-tile-title>
-                                    {{order.date}}
-                                </v-list-tile-title>
-                            </v-list-tile>
-                            <v-divider></v-divider>
-                            <v-list-tile>
-                                <v-list-tile-sub-title>
-                                    Description:
-                                </v-list-tile-sub-title>
-                                <v-list-tile-title>
-                                    {{order.description}}
-                                </v-list-tile-title>
-                            </v-list-tile>
-                            <v-divider></v-divider>
-                        </v-list>
+                        <h1 class="text--primary">{{testOrder.title}}</h1>
+                        <p>{{testOrder.description}}</p>
                     </v-card-text>
                     <v-card-actions>
-                        <v-btn>
-
-                        </v-btn>
+                        <v-spacer></v-spacer>
+                        <v-btn class="warning" flat>Edit</v-btn>
+                        <v-btn class="success">Buy</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-flex>
@@ -62,15 +25,14 @@
 
 <script>
     export default {
+        props: ['id'],
         data() {
             return {
-                order: {
-                    id: 1,
-                    name: "Order 1",
-                    description: "Order 1 comment",
-                    customer: "Company 1",
-                    category: "IT",
-                    date: '17.06.2019'
+                testOrder: {
+                    title: 'Test order',
+                    description: 'This is test order page, just look at this qt pie',
+                    imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+                    id: '1'
                 }
             }
         }
