@@ -7,6 +7,7 @@ import NewItem from '@/components/Items/NewItem'
 import Orders from '@/components/User/Orders'
 import Login from '@/components/Auth/Login'
 import Registration from '@/components/Auth/Registration'
+import Modify from '@/components/Auth/Modify'
 
 Vue.use(Router);
 
@@ -21,6 +22,11 @@ export default new Router({
             path: '/item/:id',
             name: 'item',
             component: Item
+        },
+        {
+            path: '/modify',
+            name: 'modify',
+            component: Modify
         },
         {
             path: '/list',
