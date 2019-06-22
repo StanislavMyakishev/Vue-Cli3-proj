@@ -30,7 +30,7 @@
             <v-layout row wrap>
                 <v-flex d-flex xs12 sm6 md4>
                     <v-card
-                            color="blue-grey lighten-4"
+                            color="primary"
                             dark>
                         <v-card-title primary class="title black--text">IT</v-card-title>
                         <v-card-text class="black--text">{{ lorem }}</v-card-text>
@@ -38,35 +38,35 @@
                 </v-flex>
 
                 <v-flex d-flex xs12 sm6 md4>
-                    <v-card color="blue-grey lighten-4" dark>
+                    <v-card color="primary" dark>
                         <v-card-title primary roundcard class="title black--text">Finance</v-card-title>
                         <v-card-text class="black--text">{{ lorem }}</v-card-text>
                     </v-card>
                 </v-flex>
 
                 <v-flex d-flex xs12 sm6 md4>
-                    <v-card color="blue-grey lighten-4" dark>
+                    <v-card color="primary" dark>
                         <v-card-title primary class="title black--text">Human Resources</v-card-title>
                         <v-card-text class="black--text">{{ lorem }}</v-card-text>
                     </v-card>
                 </v-flex>
 
                 <v-flex d-flex xs12 sm6 md4>
-                    <v-card color="blue-grey lighten-4" dark>
+                    <v-card color="primary" dark>
                         <v-card-title primary class="title black--text">Marketing</v-card-title>
                         <v-card-text class="black--text">{{ lorem }}</v-card-text>
                     </v-card>
                 </v-flex>
 
                 <v-flex d-flex xs12 sm6 md4>
-                    <v-card color="blue-grey lighten-4" dark>
+                    <v-card color="primary" dark>
                         <v-card-title primary class="title black--text">Retail</v-card-title>
                         <v-card-text class="black--text">{{ lorem }}</v-card-text>
                     </v-card>
                 </v-flex>
 
                 <v-flex d-flex xs12 sm6 md4>
-                    <v-card color="blue-grey lighten-4" dark>
+                    <v-card color="primary" dark>
                         <v-card-title primary class="title black--text">Other</v-card-title>
                         <v-card-text class="black--text">{{ lorem }}</v-card-text>
                     </v-card>

@@ -1,33 +1,47 @@
 <template>
-    <v-container>
-        <v-layout row>
-            <v-flex xs12 sm6 offset-sm3>
-                <h1>Orders</h1>
-                <v-list
-                        subheader
-                        two-line
-                >
-                    <v-list-tile>
-                        <v-list-tile-action>
-                            <v-checkbox v-model="notifications"></v-checkbox>
-                        </v-list-tile-action>
+    <v-content>
+        <v-container>
+            <v-layout row>
+                <v-flex xs12 sm12 md12>
+                    <v-list two-line>
+                        <v-subheader>
+                            Order List
+                        </v-subheader>
+                        <div v-for="(ord, index) in orders">
+                            <v-list-tile
+                                    :key="ord.id"
+                            >
+                                <v-list-tile-content>
+                                    <v-list-tile-title>
+                                        <v-layout row>
+                                            {{ord.name}}
+                                            <v-spacer></v-spacer>
+                                            <!--{{findCategory(ord.category, categories)}}-->
+                                        </v-layout>
+                                    </v-list-tile-title>
+                                    <!--<v-list-tile-sub-title class="text&#45;&#45;primary">-->
+                                    <!--{{ord.customer_id}}-->
+                                    <!--</v-list-tile-sub-title>-->
+                                    <v-list-tile-sub-title>
+                                        {{ord.description}}
+                                    </v-list-tile-sub-title>
+                                </v-list-tile-content>
+                                <!--<v-list-tile-action>-->
+                                <!--<v-list-tile-action-text>{{ order.data }}</v-list-tile-action-text>-->
+                                <!--</v-list-tile-action>-->
 
-                        <v-list-tile-content @click="notifications = !notifications">
-                            <v-list-tile-title>Notifications</v-list-tile-title>
-                            <v-list-tile-sub-title>Allow notifications</v-list-tile-sub-title>
-                        </v-list-tile-content>
-                    </v-list-tile>
-                </v-list>
-            </v-flex>
-        </v-layout>
-        <div class="order" v-for="order in orders" :key="order.id">
-            <h2 class="order__header">Name: {{ order.name }}</h2>
-            <p class="order__description">Description: {{ order.description }}</p>
-            <p class="order__customer">Customer: {{ order. customer }}</p>
-            <p class="order__performer">Performer: {{order.performer }}</p>
-            <p>Тут нет стилей пока, + это не все данные что есть в order, остальные не вижу</p>
-        </div>
-    </v-container>
+                            </v-list-tile>
+                            <v-divider
+                                    v-if="index + 1 < orders.length"
+                                    :key="index"
+                            >
+                            </v-divider>
+                        </div>
+                    </v-list>
+                </v-flex>
+            </v-layout>
+        </v-container>
+    </v-content>
 </template>
 
 <script>

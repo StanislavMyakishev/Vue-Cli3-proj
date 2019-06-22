@@ -60,16 +60,16 @@
         },
         computed: {
             loggedIn() {
-                // return this.user.token.length > 0 ? true : false;
-                return true;
+                return this.user.token.length > 0 ? true : false;
+                // return true;
             },
             links() {
                 if (this.loggedIn) {
                     return [
-                        {title: 'Orders', icon: 'bookmark_border', url: '/orders'},
-                        {title: 'New ad', icon: 'note_add', url: '/new'},
-                        {title: 'My ads', icon: 'list', url: '/list'},
-                        {title: 'Log out', icon: 'face', url: '/'}
+                        {title: 'My Orders', icon: 'bookmark_border', url: '/orders'},
+                        {title: 'New order', icon: 'note_add', url: '/new'},
+                        {title: 'My requests', icon: 'description', url: '/list'},
+                        {title: 'logout', icon: 'lock', url: '/'},
                     ]
                 } else {
                     return [
@@ -87,6 +87,11 @@
             }
         },
         mounted() {
+            this.$root.$on('authorized', user => {
+                this.user.username = user.username;
+                this.user.token = user.token;
+            });
+
             this.$root.$on('newItem', order => {
                 axios.post('http://127.0.0.1:8081/api/orders/', order)
                     .then(response => {
@@ -101,7 +106,7 @@
 <style scoped>
 
     #app {
-        background-color: #607d8b;
+        background-color: #CFD8DC;
     }
 
     .body {
