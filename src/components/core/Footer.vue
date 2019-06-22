@@ -25,7 +25,7 @@
                     white--text
                     xs12
             >
-                &copy;2018 — <strong>Vuetify</strong>
+                &copy;2018 — <strong>ITMO Dev</strong>
             </v-flex>
         </v-layout>
     </v-footer>
@@ -38,7 +38,6 @@
                 'Home',
                 'About Us',
                 'Team',
-                'Services',
                 'Blog',
                 'Contact Us'
             ]
