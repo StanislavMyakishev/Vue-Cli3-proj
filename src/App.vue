@@ -98,7 +98,7 @@
                         alert("NEW ITEM ADDED");
                         // Add some logic, waiting for spec
                     })
-            })
+            });
         }
     }
 </script>

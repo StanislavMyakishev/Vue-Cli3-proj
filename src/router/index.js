@@ -7,6 +7,7 @@ import NewItem from '@/components/Items/NewItem'
 import Orders from '@/components/User/Orders'
 import Login from '@/components/Auth/Login'
 import Registration from '@/components/Auth/Registration'
+import OrderCategory from '@/components/Items/OrderCategory'
 
 Vue.use(Router);
 
@@ -46,6 +47,11 @@ export default new Router({
             path: '/orders',
             name: 'orders',
             component: Orders
+        },
+        {
+            path: '/test',
+            name: 'test',
+            component: OrderCategory
         }
     ],
     mode: 'history'

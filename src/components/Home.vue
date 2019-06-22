@@ -30,6 +30,7 @@
             <v-layout row wrap>
                 <v-flex d-flex xs12 sm6 md4>
                     <v-card
+                            @click="showCategory"
                             color="primary"
                             dark>
                         <v-card-title primary class="title black--text">IT</v-card-title>
@@ -80,6 +81,7 @@
 </template>
 
 <script>
+    import router from '../router/index'
 
     export default {
         data() {
@@ -89,6 +91,13 @@
                     {title: 'Registration', icon: 'face', url: '/reg'}],
                 lorem: `Lorem ipsum dolor sit amet, mel at clita quando. Te sit oratio vituperatoribus, nam ad ipsum posidonium mediocritatem, explicari dissentiunt cu mea. Repudiare disputationi vim in, mollis iriure nec cu, alienum argumentum ius ad. Pri eu justo aeque torquatos.`,
 
+            }
+        },
+        methods: {
+            showCategory(event) {
+                const category = event.currentTarget.firstElementChild.innerText;
+                router.push('/test')
+                this.$root.$emit('showCategory', category);
             }
         }
     }
