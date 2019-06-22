@@ -2,7 +2,7 @@
     <v-container>
         <v-layout>
             <v-flex xs12 sm6 offset-sm3>
-                {{template}}
+                <h1 class="text--secondary mb-3">{{ id }}</h1>
                 <v-card
                         color="blue-grey lighten-4"
                         class="elevation-10 mb-3"
@@ -42,8 +42,7 @@
     export default {
         data() {
             return {
-                props: ['id'],
-                template: '<h1 class="text--secondary mb-3">field</h1>',
+                id: this.$route.params.id,
                 ordList: [
                     {
                         title: 'First order',
