@@ -11,12 +11,12 @@
                                 required
 
                         ></v-text-field>
-                        <v-text-field
+                        <v-textarea
                                 v-model="descr"
                                 label="Description"
                                 :rules="descrRules"
                                 required
-                        ></v-text-field>
+                        ></v-textarea>
                         <v-select
                                 v-model="select"
                                 :items="items"
@@ -65,7 +65,7 @@
                 v => !!v || "Pick at least one field"
             ],
             checkboxRules: [
-                v => !!v || 'You must agree to continue!'
+                v => !!v || 'You must accept terms to continue'
             ]
         }),
         methods: {

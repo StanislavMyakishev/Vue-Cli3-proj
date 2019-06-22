@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
 import Item from '@/components/Items/Item'
-import ItemsList from '@/components/Items/ItemsList'
+import ItemsList from '@/components/Items/List'
 import NewItem from '@/components/Items/NewItem'
 import Orders from '@/components/User/Orders'
 import Login from '@/components/Auth/Login'
@@ -18,8 +18,9 @@ export default new Router({
             component: Home
         },
         {
-            path: '/item/:id',
-            name: 'item',
+            path: '/ord/:id',
+            props: true,
+            name: 'order',
             component: Item
         },
         {
