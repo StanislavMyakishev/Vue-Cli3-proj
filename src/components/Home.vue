@@ -99,7 +99,7 @@
         },
         methods: {
             goToField(item) {
-                this.$router.push({ path: item.title })
+                this.$router.push({ path: `/field/${item.title}` })
             }
         }
     }

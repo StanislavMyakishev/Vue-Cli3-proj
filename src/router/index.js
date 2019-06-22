@@ -7,10 +7,14 @@ import NewItem from '@/components/Items/NewItem'
 import Orders from '@/components/User/Orders'
 import Login from '@/components/Auth/Login'
 import Registration from '@/components/Auth/Registration'
+import Field from '@/components/Filter/fields'
+import Test from '@/components/test'
+import VueRouter from 'vue-router'
+import Modify from '@/components/Auth/Modify'
 
 Vue.use(Router);
 
-export default new Router({
+export default new VueRouter({
     routes: [
         {
             path: '',
@@ -18,10 +22,26 @@ export default new Router({
             component: Home
         },
         {
+            path: '/test',
+            name: 'test',
+            component: Test
+        },
+        {
+            path: '/modify',
+            name: 'modify',
+            component: Modify
+        },
+        {
             path: '/ord/:id',
             props: true,
             name: 'order',
             component: Item
+        },
+        {
+            path: '/field/:id',
+            props: true,
+            name: 'field',
+            component: Field
         },
         {
             path: '/list',
