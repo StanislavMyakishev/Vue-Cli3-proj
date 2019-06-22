@@ -49,7 +49,7 @@
 
 <script>
     import axios from 'axios'
-    
+
     export default {
         data: () => ({
             name: '',
@@ -82,7 +82,17 @@
         methods: {
             validate() {
                 if (this.$refs.form.validate()) {
-                    axios.post('')
+                    const order = {
+                        name: this.name,
+                        description: this.descr,
+                        field: this.select
+                    }
+
+                    this.$root.$emit('newItem', order);
+                    axios.post('http://127.0.0.1:8081/api/orders/', order)
+                        .then(response => {
+                            // Add some logiccccc
+                        })
                 }
             },
             clear() {

@@ -35,23 +35,65 @@
 <script>
     import Footer from '@/components/core/Footer'
     import Header from '@/components/core/Header'
+    import axios from 'axios'
 
     export default {
         data() {
             return {
                 drawer: false,
-                links: [
-                    {title: 'login', icon: 'lock', url: '/login'},
-                    {title: 'Registration', icon: 'face', url: '/reg'},
-                    {title: 'Orders', icon: 'bookmark_border', url: '/orders'},
-                    {title: 'New ad', icon: 'note_add', url: '/new'},
-                    {title: 'My ads', icon: 'list', url: '/list'}
-                ]
+                user: {
+                    username: "",
+                    token: ""
+                }
             }
         },
         components: {
             appFooter: Footer,
             appHeader: Header
+        }, 
+        methods: {
+            authorized(user) {
+                this.user.username = user.username;
+                this.user.token = user.token;
+                // Может еще какие данные передавать чтоб в ЛК отображать
+            }
+        },
+        computed: {
+            loggedIn() {
+                // return this.user.token.length > 0 ? true : false;
+                return true;
+            },
+            links() {
+                if (this.loggedIn) {
+                    return [
+                        {title: 'Orders', icon: 'bookmark_border', url: '/orders'},
+                        {title: 'New ad', icon: 'note_add', url: '/new'},
+                        {title: 'My ads', icon: 'list', url: '/list'},
+                        {title: 'Log out', icon: 'face', url: '/'}
+                    ]
+                } else {
+                    return [
+                        {title: 'login', icon: 'lock', url: '/login'},
+                        {title: 'Registration', icon: 'face', url: '/reg'}
+                    ]
+                }
+            },
+            config() {
+                return {
+                    headers: {
+                        Authorization: this.user.token
+                    }
+                }
+            }
+        },
+        mounted() {
+            this.$root.$on('newItem', order => {
+                axios.post('http://127.0.0.1:8081/api/orders/', order)
+                    .then(response => {
+                        alert("NEW ITEM ADDED");
+                        // Add some logic, waiting for spec
+                    })
+            })
         }
     }
 </script>

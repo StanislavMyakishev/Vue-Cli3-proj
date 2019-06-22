@@ -25,6 +25,7 @@
                                     <v-list-tile-sub-title>
                                         {{ord.description}}
                                     </v-list-tile-sub-title>
+                                    <button class='temp' @click="edit">Edit</button>
                                 </v-list-tile-content>
                                 <!--<v-list-tile-action>-->
                                 <!--<v-list-tile-action-text>{{ order.data }}</v-list-tile-action-text>-->
@@ -82,3 +83,11 @@
         }
     }
 </script>
+
+<style>
+    .temp {
+        border: 1px solid black;
+        padding: 5px 20px;
+        background: green;
+    }
+</style>

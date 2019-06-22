@@ -55,7 +55,17 @@
                 </v-flex>
             </v-layout>
         </v-container>
+    <div v-if="authorized">
+        <div class="icon">Мои заказы</div>
+        <div class="icon">Личный кабинет</div>
+        <div class="icon">Что-то еще личное</div>
+    </div>
+    <div v-else>
+        <div class="icon">Регистрация</div>
+        <div class="icon">Логин</div>
+    </div>
     </v-content>
+
 </template>
 
 <script>
@@ -86,7 +96,7 @@
             onSubmit(){
                 if (this.$refs.form.validate()) {
                     const user = {
-                        email: this.email,
+                        username: this.email,
                         password: this.password
                     }
 
@@ -94,7 +104,8 @@
                     axios.post('http://127.0.0.1:8081/api/registration/', user)
                         .then(response => {
                             if (response.code === '200') {
-                                alert("User added to database")
+                                // alert("User added to database")
+                                this.$root.$emit('authorized', {...user, token: response.data.token})
                             } else {
                                 throw new Error('Some error occured')
                             }
