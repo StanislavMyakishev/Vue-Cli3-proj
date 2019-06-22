@@ -40,11 +40,13 @@
                                         color="blue-grey lighten-4"
                                         class="align-center"
                                         height="200"
+                                        @click="goToField(item)"
                                 >
                                     <v-card-title
                                             primary class="title black--text"
-                                    >{{item.title}}</v-card-title>
-                                    <v-card-text class="black--text">{{ lorem }}</v-card-text>
+                                    >{{item.title}}
+                                    </v-card-title>
+                                    <v-card-text class="black--text">{{ item.description }}</v-card-text>
                                 </v-card>
                             </v-item>
                         </v-flex>
@@ -61,42 +63,44 @@
     export default {
         data() {
             return {
-                links: [
-                    {title: 'login', icon: 'lock', url: '/login'},
-                    {title: 'Registration', icon: 'face', url: '/reg'}],
-                lorem: `Lorem ipsum dolor sit amet, mel at clita quando. Te sit oratio vituperatoribus,
-                nam ad ipsum posidonium mediocritatem, explicari dissentiunt cu mea. Repudiare disputationi vim in,
-                mollis iriure nec cu, alienum argumentum ius ad. Pri eu justo aeque torquatos.`,
                 items: [
                     {
                         id: 1,
                         title: 'IT',
+                        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet at debitis deserunt, optio rem eaque obcaecati non possimus nisi assumenda architecto exercitationem dolore quo praesentium, deleniti reiciendis sed ab nihil!"
                     },
                     {
                         id: 2,
                         title: 'Finance',
+                        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet at debitis deserunt, optio rem eaque obcaecati non possimus nisi assumenda architecto exercitationem dolore quo praesentium, deleniti reiciendis sed ab nihil!"
                     },
                     {
                         id: 3,
                         title: 'HR',
+                        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet at debitis deserunt, optio rem eaque obcaecati non possimus nisi assumenda architecto exercitationem dolore quo praesentium, deleniti reiciendis sed ab nihil!"
                     },
                     {
                         id: 4,
                         title: 'Marketing',
+                        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet at debitis deserunt, optio rem eaque obcaecati non possimus nisi assumenda architecto exercitationem dolore quo praesentium, deleniti reiciendis sed ab nihil!"
                     },
                     {
                         id: 5,
                         title: 'Retail',
+                        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet at debitis deserunt, optio rem eaque obcaecati non possimus nisi assumenda architecto exercitationem dolore quo praesentium, deleniti reiciendis sed ab nihil!"
                     },
                     {
                         id: 6,
                         title: 'Other',
+                        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet at debitis deserunt, optio rem eaque obcaecati non possimus nisi assumenda architecto exercitationem dolore quo praesentium, deleniti reiciendis sed ab nihil!"
                     }
                 ]
             }
         },
         methods: {
-
+            goToField(item) {
+                this.$router.push({ path: item.title })
+            }
         }
     }
 </script>

@@ -5,6 +5,7 @@
                 <h1 class="text--secondary mb-3">My orders</h1>
 
                 <v-card
+                        color="blue-grey lighten-4"
                         class="elevation-10 mb-3"
                         v-for="ord in ordList"
                         :key="ord.id"
@@ -27,7 +28,8 @@
                                 <v-btn
                                         class="info"
                                         :to="/ord/ + ord.id"
-                                >Open</v-btn>
+                                >Open
+                                </v-btn>
                             </v-card-actions>
                         </v-flex>
                     </v-layout>
@@ -39,7 +41,7 @@
 
 <script>
     export default {
-        data () {
+        data() {
             return {
                 ordList: [
                     {
