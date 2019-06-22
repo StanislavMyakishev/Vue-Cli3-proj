@@ -25,7 +25,7 @@
                 {{link.title}}
             </v-btn>
         </v-toolbar-items>
-        <!--<button @click="getUsers">`click me</button>-->
+        <button @click="getUsers">`click me</button>
     </v-toolbar>
 </template>
 
@@ -51,6 +51,7 @@
                     })
                     .catch(error => console.log('nibba', error));
             },
+
 
         }
 

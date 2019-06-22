@@ -33,6 +33,7 @@
                     <v-btn @click="validate" :disabled="!valid" class="blue-grey lighten-4">submit</v-btn>
                     <v-btn @click="clear" class="blue-grey lighten-4">clear</v-btn>
                 </v-form>
+
             </v-flex>
         </v-layout>
     </v-container>
