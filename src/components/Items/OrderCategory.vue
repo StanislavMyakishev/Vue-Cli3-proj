@@ -3,7 +3,9 @@
         <v-layout>
             <v-flex xs12 sm6 offset-sm3>
                 <h1 class="text--secondary mb-3">My orders</h1>
-                <h2>{{orders}}</h2>
+                <ul>
+                    <li v-for="(order, index) in orders" :key="index">ID : {{ order.id }}</li>
+                </ul>
                 <v-btn
                     @click="showOrders"></v-btn>
                 <!--<v-card-->
