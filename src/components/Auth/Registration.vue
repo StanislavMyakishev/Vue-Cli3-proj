@@ -2,7 +2,7 @@
     <v-content>
         <v-container fluid fill-height>
             <v-layout align-center justify-center>
-                <v-flex xs12 sm8 md6>
+                <v-flex xs12 sm8 md8>
                     <v-card
                             class="elevation-10"
                     >
@@ -43,6 +43,83 @@
                                         v-model="confirmPassword"
                                         :rules="confirmPasswordRules"
                                 ></v-text-field>
+                                <v-layout row wrap>
+                                    <v-text-field
+                                            prepend-icon="person"
+                                            class="compact-form"
+                                            name="companyname"
+                                            label="Company name"
+                                            type="text"
+                                            v-model="companyname"
+                                    ></v-text-field>
+                                    <v-text-field
+                                            prepend-icon="person"
+                                            name="taxnumber"
+                                            class="compact-form"
+                                            label="TIN"
+                                            type="text"
+                                            v-model="TIN"
+                                    ></v-text-field>
+                                </v-layout>
+                                <v-layout row wrap>
+                                    <v-text-field
+                                            prepend-icon="person"
+                                            class="compact-form"
+                                            name="address"
+                                            label="Address"
+                                            type="text"
+                                            v-model="address"
+                                    ></v-text-field>
+                                    <v-text-field
+                                            prepend-icon="person"
+                                            name="website"
+                                            class="compact-form"
+                                            label="Website"
+                                            type="text"
+                                            v-model="website"
+                                    ></v-text-field>
+                                </v-layout>
+                                <v-textarea
+                                        prepend-icon="person"
+                                        name="description"
+                                        label="Description"
+                                        type="text"
+                                        v-model="description">
+
+                                </v-textarea>
+                                <v-layout row wrap>
+                                    <v-text-field
+                                            prepend-icon="person"
+                                            class="compact-form"
+                                            name="first_name"
+                                            label="First Name"
+                                            type="text"
+                                            v-model="first_name"
+                                    ></v-text-field>
+                                    <v-text-field
+                                            prepend-icon="person"
+                                            name="last_name"
+                                            class="compact-form"
+                                            label="Last Name"
+                                            type="text"
+                                            v-model="last_name"
+                                    ></v-text-field>
+                                    <v-text-field
+                                            prepend-icon="person"
+                                            name="patronymic"
+                                            class="compact-form"
+                                            label="Patronymic"
+                                            type="text"
+                                            v-model="patronymic"
+                                    ></v-text-field>
+                                </v-layout>
+                                <v-text-field
+                                        prepend-icon="person"
+                                        name="position"
+                                        label="Position"
+                                        type="text"
+                                        v-model="position"
+                                ></v-text-field>
                             </v-form>
                         </v-card-text>
                         <v-card-actions>
@@ -61,11 +138,21 @@
 </template>
 
 <script>
+    import axios from 'axios'
     export default {
         data() {
             return {
                 email: '',
                 password: '',
+                companyname: '',
+                TIN: '',
+                address: '',
+                website: '',
+                description: '',
+                first_name: '',
+                last_name: '',
+                patronymic: '',
+                position: '',
                 valid: false,
                 confirmPasswrod: '',
                 emailRules: [
@@ -86,15 +173,35 @@
             onSubmit(){
                 if (this.$refs.form.validate()) {
                     const user = {
-                        emial: this.email,
-                        password: this.password
-                    }
+                        email: this.email,
+                        password: this.password,
+                        name: this.companyname,
+                        itn: this.TIN,
+                        address: this.address,
+                        website: this.website,
+                        description: this.description,
+                        first_name: this.first_name,
+                        last_name: this.last_name,
+                        patronymic: this.patronymic,
+                        position: this.position
 
-                    //test actions
+                    };
 
-                    alert(user.emial + ' ' + user.password)
+                    axios.post('http://127.0.0.1:8081/api/organizations/', user)
+                        .then(response => console.log(response))
+                        .catch(error => {
+                            console.log(error);
+                        });
+                    this.$router.push('/login')
                 }
             }
         }
     }
 </script>
+
+<style>
+    .compact-form {
+        transform: scale(0.875);
+        transform-origin: left;
+    }
+</style>
