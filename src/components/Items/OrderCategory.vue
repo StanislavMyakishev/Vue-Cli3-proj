@@ -62,41 +62,27 @@
         },
 
 
-        // created() {
-        //     this.$root.$on('showCategory', category => {
-        //             axios.get('http://127.0.0.1:8081/api/orders/')
-        //                 .then(response => {
-        //                     let test = response.data.filter(element => element.category === this.categoryDict[category]);
-        //                     return test;
-        //                 })
-        //                 .then((test) => {
-        //                         this.orders = test;
-        //                         console.log(this.orders);
-        //                     return this.orders
-        //                     }
-        //                 );
-        //         },
-        //     )
-        // },
+        mounted() {
+            this.$root.$on('showCategory', category => {
+                this.showOrders();
+            });
+        },
         methods: {
-            async getOrders() {
-                this.$root.$on('showCategory', category => {
-                        axios.get('http://127.0.0.1:8081/api/orders/')
-                            .then(response => {
-                                let test = response.data.filter(element => element.category === this.categoryDict[category]);
-                                console.log(test);
-                                return test;
-                            })
-                    },
-                )
-            },
-
+            // async getOrders() {
+            //     axios.get('http://127.0.0.1:8081/api/orders/')
+            //         .then(response => {
+            //             let test = response.data.filter(element => element.category === this.categoryDict[category]);
+            //             console.log(test);
+            //             return test;
+            //         });
+            // },
+              
             async showOrders() {
-                const response = await this.getOrders();
-                console.log(response);
-                this.orders = response;
-                console.log(this.orders)
-            },
-        }
+                const response = await axios.get('http://127.0.0.1:8081/api/orders/');
+                console.log('1', response);
+                this.orders = response.data.filter(element => element.category === this.categoryDict[category]);
+                console.log('2', this.orders);
+            }
+        },
     }
 </script>
