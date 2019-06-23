@@ -7,6 +7,7 @@ import NewItem from '@/components/Items/NewItem'
 import Orders from '@/components/User/Orders'
 import Login from '@/components/Auth/Login'
 import Registration from '@/components/Auth/Registration'
+import OrganizationInfo from "../components/User/OrganizationInfo";
 
 Vue.use(Router);
 
@@ -47,6 +48,12 @@ export default new Router({
             path: '/orders',
             name: 'orders',
             component: Orders
+        },
+        {
+            path: '/organization',
+            // props: true,
+            name: 'organization',
+            component: OrganizationInfo
         }
     ],
     mode: 'history'
