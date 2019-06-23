@@ -96,8 +96,9 @@
         methods: {
             showCategory(event) {
                 const category = event.currentTarget.firstElementChild.innerText;
-                router.push('/test')
+
                 this.$root.$emit('showCategory', category);
+                router.push('/test');
             }
         }
     }
