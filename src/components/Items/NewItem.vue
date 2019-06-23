@@ -1,43 +1,63 @@
 <template>
-    <v-container>
-        <v-layout row justify-center>
-            <v-flex d-flex sm8 md8>
-                <v-form ref="form" v-model="valid" lazy-validation>
-                    <v-text-field
-                            v-model="name"
-                            :counter="10"
-                            label="New Item name"
-                            :rules="nameRules"
-                            required
+    <v-content>
+        <v-container fluid fill-height>
+            <v-layout align-center justify-center>
 
-                    ></v-text-field>
-                    <v-textarea
-                            v-model="descr"
-                            label="Description"
-                            :rules="descrRules"
-                            required
-                    ></v-textarea>
-                    <v-select
-                            v-model="select"
-                            :items="items"
-                            label="Areas"
-                            :rules="selectRules"
-                            required
-                    ></v-select>
-                    <v-checkbox
-                            v-model="checkbox"
-                            label="I read Terms and conditions"
-                            :rules="checkboxRules"
-                            required
-                    ></v-checkbox>
-                    <v-btn @click="validate" :disabled="!valid" class="blue-grey lighten-4">submit</v-btn>
-                    <v-btn @click="clear" class="blue-grey lighten-4">clear</v-btn>
-                </v-form>
-
-            </v-flex>
-        </v-layout>
-    </v-container>
+                <v-flex>
+                    <v-card
+                            class="elevation-12"
+                    >
+                        <v-toolbar
+                                dark color="primary"
+                        >
+                            <v-toolbar-title>New Order</v-toolbar-title>
+                        </v-toolbar>
+                        <v-card-text>
+                            <v-form
+                                    v-model="valid"
+                                    ref="form"
+                                    lazy-validation
+                            >
+                                <v-text-field
+                                        v-model="name"
+                                        :counter="10"
+                                        label="New Item name"
+                                        :rules="nameRules"
+                                        required
+                                ></v-text-field>
+                                <v-textarea
+                                        v-model="descr"
+                                        label="Description"
+                                        :rules="descrRules"
+                                        required
+                                ></v-textarea>
+                                <v-select
+                                        v-model="select"
+                                        :items="items"
+                                        label="Areas"
+                                        :rules="selectRules"
+                                        required
+                                ></v-select>
+                                <v-checkbox
+                                        v-model="checkbox"
+                                        label="I read Terms and conditions"
+                                        :rules="checkboxRules"
+                                        required
+                                ></v-checkbox>
+                            </v-form>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn @click="validate" :disabled="!valid" class="blue-grey lighten-4">submit</v-btn>
+                            <v-btn @click="clear" class="blue-grey lighten-4">clear</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-flex>
+            </v-layout>
+        </v-container>
+    </v-content>
 </template>
+
 
 <script>
     export default {
@@ -57,7 +77,7 @@
             valid: true,
             nameRules: [
                 v => !!v || 'Name is required',
-                v => (v && v.length <= 10) || 'Name must be less than 10 characters'
+                v => (v && v.length >= 10) || 'Name must be more than 10 characters'
             ],
             descrRules: [
                 v => !!v || 'Description is required'

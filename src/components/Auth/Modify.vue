@@ -1,15 +1,16 @@
-<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
+<template>
     <v-content>
         <v-container fluid fill-height>
             <v-layout align-center justify-center>
-                <v-flex xs12 sm8 md6>
+
+                <v-flex>
                     <v-card
-                            class="elevation-10"
+                            class="elevation-12"
                     >
                         <v-toolbar
                                 dark color="primary"
                         >
-                            <v-toolbar-title>Registration form</v-toolbar-title>
+                            <v-toolbar-title>Account settings</v-toolbar-title>
                         </v-toolbar>
                         <v-card-text>
                             <v-form
@@ -18,7 +19,6 @@
                                     lazy-validation
                             >
                                 <v-text-field
-                                        prepend-icon="person"
                                         name="email"
                                         label="Email"
                                         type="email"
@@ -26,7 +26,6 @@
                                         :rules="emailRules"
                                 ></v-text-field>
                                 <v-text-field
-                                        prepend-icon="lock"
                                         name="password"
                                         label="Password"
                                         type="password"
@@ -35,14 +34,29 @@
                                         :rules="passwordRules"
                                 ></v-text-field>
                                 <v-text-field
-                                        prepend-icon="lock"
-                                        name="confirm-password"
+                                        name="confirmpassword"
                                         label="Confirm password"
                                         type="password"
                                         counter
-                                        v-model="confirmPassword"
-                                        :rules="confirmPasswordRules"
+                                        v-model="password"
+                                        :rules="passwordRules"
                                 ></v-text-field>
+                                <v-layout row wrap>
+                                    <v-text-field
+                                            class="compact-form"
+                                            name="companyname"
+                                            label="Company name"
+                                            type="text"
+                                            v-model="textNode"
+                                    ></v-text-field>
+                                    <v-text-field
+                                            name="taxnumber"
+                                            class="compact-form"
+                                            label="TIN"
+                                            type="text"
+                                            v-model="textNode"
+                                    ></v-text-field>
+                                </v-layout>
                             </v-form>
                         </v-card-text>
                         <v-card-actions>
@@ -51,7 +65,8 @@
                                     color="primary"
                                     @click="onSubmit"
                                     :disabled="!valid"
-                            >Create account</v-btn>
+                            >Save changes
+                            </v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>
@@ -67,7 +82,6 @@
                 email: '',
                 password: '',
                 valid: false,
-                confirmPasswrod: '',
                 emailRules: [
                     v => !!v || 'E-mail is required',
                     v => /.+@.+/.test(v) || 'E-mail must be valid'
@@ -75,26 +89,26 @@
                 passwordRules: [
                     v => !!v || 'Password is required',
                     v => (v && v.length >= 6) || 'Password must be equal or more than 6 characters'
-                ],
-                confirmPasswordRules: [
-                    v => !!v || 'Password confirm is required',
-                    v => v === this.password || 'Passwords have to match '
                 ]
             }
         },
         methods: {
-            onSubmit(){
+            onSubmit() {
                 if (this.$refs.form.validate()) {
                     const user = {
                         emial: this.email,
                         password: this.password
                     }
-
-                    //test actions
-
                     alert(user.emial + ' ' + user.password)
                 }
             }
         }
     }
 </script>
+
+<style>
+    .compact-form {
+        transform: scale(0.875);
+        transform-origin: left;
+    }
+</style>
