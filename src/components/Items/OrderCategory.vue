@@ -62,31 +62,41 @@
         },
 
 
-        mounted() {
-            this.$root.$on('showCategory', category => {
-                    axios.get('http://127.0.0.1:8081/api/orders/')
-                        .then(response => {
-                            let test = response.data.filter(element => element.category === this.categoryDict[category]);
-                            return test;
-                        })
-                        .then((test) => {
-                                this.orders = test;
-                                console.log(this.orders);
-                            return this.orders
-                            }
-                        );
-                },
-            )
-        },
+        // created() {
+        //     this.$root.$on('showCategory', category => {
+        //             axios.get('http://127.0.0.1:8081/api/orders/')
+        //                 .then(response => {
+        //                     let test = response.data.filter(element => element.category === this.categoryDict[category]);
+        //                     return test;
+        //                 })
+        //                 .then((test) => {
+        //                         this.orders = test;
+        //                         console.log(this.orders);
+        //                     return this.orders
+        //                     }
+        //                 );
+        //         },
+        //     )
+        // },
         methods: {
-            showOrders() {
-                console.log('Hallo');
+            async getOrders() {
+                this.$root.$on('showCategory', category => {
+                        axios.get('http://127.0.0.1:8081/api/orders/')
+                            .then(response => {
+                                let test = response.data.filter(element => element.category === this.categoryDict[category]);
+                                console.log(test);
+                                return test;
+                            })
+                    },
+                )
+            },
+
+            async showOrders() {
+                const response = await this.getOrders();
+                console.log(response);
+                this.orders = response;
                 console.log(this.orders)
             },
         }
     }
 </script>
-
-<style>
-
-</style>
