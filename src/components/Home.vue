@@ -27,52 +27,32 @@
             <!--SEARCH ENDS-->
 
             <!--AREAS-->
-            <v-layout row wrap>
-                <v-flex d-flex xs12 sm6 md4>
-                    <v-card
-                            @click="showCategory"
-                            color="primary"
-                            dark>
-                        <v-card-title primary class="title black--text">IT</v-card-title>
-                        <v-card-text class="black--text">{{ lorem }}</v-card-text>
-                    </v-card>
-                </v-flex>
-
-                <v-flex d-flex xs12 sm6 md4>
-                    <v-card color="primary" dark>
-                        <v-card-title primary roundcard class="title black--text">Finance</v-card-title>
-                        <v-card-text class="black--text">{{ lorem }}</v-card-text>
-                    </v-card>
-                </v-flex>
-
-                <v-flex d-flex xs12 sm6 md4>
-                    <v-card color="primary" dark>
-                        <v-card-title primary class="title black--text">Human Resources</v-card-title>
-                        <v-card-text class="black--text">{{ lorem }}</v-card-text>
-                    </v-card>
-                </v-flex>
-
-                <v-flex d-flex xs12 sm6 md4>
-                    <v-card color="primary" dark>
-                        <v-card-title primary class="title black--text">Marketing</v-card-title>
-                        <v-card-text class="black--text">{{ lorem }}</v-card-text>
-                    </v-card>
-                </v-flex>
-
-                <v-flex d-flex xs12 sm6 md4>
-                    <v-card color="primary" dark>
-                        <v-card-title primary class="title black--text">Retail</v-card-title>
-                        <v-card-text class="black--text">{{ lorem }}</v-card-text>
-                    </v-card>
-                </v-flex>
-
-                <v-flex d-flex xs12 sm6 md4>
-                    <v-card color="primary" dark>
-                        <v-card-title primary class="title black--text">Other</v-card-title>
-                        <v-card-text class="black--text">{{ lorem }}</v-card-text>
-                    </v-card>
-                </v-flex>
-            </v-layout>
+            <v-item-group>
+                <v-container grid-list-md>
+                    <v-layout wrap>
+                        <v-flex
+                                v-for="item in items"
+                                :key="item.id"
+                                xs12 sm6 md4
+                        >
+                            <v-item>
+                                <v-card
+                                        color="blue-grey lighten-4"
+                                        class="align-center"
+                                        height="200"
+                                        @click="showCategory(item.id)"
+                                >
+                                    <v-card-title
+                                            primary class="title black--text"
+                                    >{{item.title}}
+                                    </v-card-title>
+                                    <v-card-text class="black--text">{{ item.description }}</v-card-text>
+                                </v-card>
+                            </v-item>
+                        </v-flex>
+                    </v-layout>
+                </v-container>
+            </v-item-group>
             <!--AREAS END-->
 
 
@@ -86,16 +66,43 @@
     export default {
         data() {
             return {
-                links: [
-                    {title: 'login', icon: 'lock', url: '/login'},
-                    {title: 'Registration', icon: 'face', url: '/reg'}],
-                lorem: `Lorem ipsum dolor sit amet, mel at clita quando. Te sit oratio vituperatoribus, nam ad ipsum posidonium mediocritatem, explicari dissentiunt cu mea. Repudiare disputationi vim in, mollis iriure nec cu, alienum argumentum ius ad. Pri eu justo aeque torquatos.`,
-
+                items: [
+                    {
+                        id: 1,
+                        title: 'IT',
+                        description: "Loremm ipsum dolor sit amet, consectetur adipisicing elit. Eveniet at debitis deserunt, optio rem eaque obcaecati non possimus nisi assumenda architecto exercitationem dolore quo praesentium, deleniti reiciendis sed ab nihil!"
+                    },
+                    {
+                        id: 2,
+                        title: 'Finance',
+                        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet at debitis deserunt, optio rem eaque obcaecati non possimus nisi assumenda architecto exercitationem dolore quo praesentium, deleniti reiciendis sed ab nihil!"
+                    },
+                    {
+                        id: 3,
+                        title: 'HR',
+                        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet at debitis deserunt, optio rem eaque obcaecati non possimus nisi assumenda architecto exercitationem dolore quo praesentium, deleniti reiciendis sed ab nihil!"
+                    },
+                    {
+                        id: 4,
+                        title: 'Marketing',
+                        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet at debitis deserunt, optio rem eaque obcaecati non possimus nisi assumenda architecto exercitationem dolore quo praesentium, deleniti reiciendis sed ab nihil!"
+                    },
+                    {
+                        id: 5,
+                        title: 'Retail',
+                        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet at debitis deserunt, optio rem eaque obcaecati non possimus nisi assumenda architecto exercitationem dolore quo praesentium, deleniti reiciendis sed ab nihil!"
+                    },
+                    {
+                        id: 6,
+                        title: 'Other',
+                        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet at debitis deserunt, optio rem eaque obcaecati non possimus nisi assumenda architecto exercitationem dolore quo praesentium, deleniti reiciendis sed ab nihil!"
+                    }
+                ]
             }
         },
         methods: {
-            showCategory(event) {
-                const category = event.currentTarget.firstElementChild.innerText;
+            showCategory(id) {
+                const category = id - 1;
 
                 this.$root.$emit('showCategory', category);
                 router.push('/test');

@@ -3,14 +3,13 @@
         <v-layout>
             <v-flex xs12 sm6 offset-sm3>
                 <h1 class="text--secondary mb-3">My orders</h1>
-                <ul>
-                    <li v-for="(order, index) in orders" :key="index">ID : {{ order.id }}</li>
-                </ul>
-                <v-btn
-                    @click="showOrders"></v-btn>
+                <!--<ul>-->
+                    <!--<li v-for="(order, index) in orders" :key="index">ID : {{ order.id }}</li>-->
+                <!--</ul>-->
+                <v-card>{{orders}}</v-card>
                 <!--<v-card-->
                 <!--color="primary"-->
-                <!---->
+
                 <!--v-for="(ord,index) in orders"-->
                 <!--:key="index"-->
                 <!--&gt;-->
@@ -49,14 +48,22 @@
     export default {
         data() {
             return {
-                categoryDict: {
-                    'IT': 0,
-                    'Finance': 1,
-                    'Human Resources': 2,
-                    'Marketing': 3,
-                    'Retail': 4,
-                    'Others': 5
-                },
+                // categoryDict: {
+                //     'IT': 0,
+                //     'Finance': 1,
+                //     'Human Resources': 2,
+                //     'Marketing': 3,
+                //     'Retail': 4,
+                //     'Others': 5
+                // },
+                categoryDict: [
+                    [0, 'IT'],
+                    [1, 'Finance'],
+                    [2, 'HR'],
+                    [3, 'Marketing'],
+                    [4, 'Retail'],
+                    [5, 'Others']
+                ],
                 orders: []
             }
         },
@@ -66,22 +73,17 @@
             this.$root.$on('showCategory', category => {
                 this.showOrders(category);
             });
+
+
         },
         methods: {
-            // async getOrders() {
-            //     axios.get('http://127.0.0.1:8081/api/orders/')
-            //         .then(response => {
-            //             let test = response.data.filter(element => element.category === this.categoryDict[category]);
-            //             console.log(test);
-            //             return test;
-            //         });
-            // },
-              
             async showOrders(category) {
                 const response = await axios.get('http://127.0.0.1:8081/api/orders/');
                 console.log('1', response);
-                this.orders = response.data.filter(element => element.category === this.categoryDict[category]);
+                this.orders = response.data.filter(element => element.category === this.categoryDict[category][0]);
                 console.log('2', this.orders);
+                return this.orders
+
             }
         },
     }
