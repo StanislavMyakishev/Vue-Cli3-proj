@@ -3,9 +3,7 @@
         <v-container fluid fill-height>
             <v-layout align-center justify-center>
                 <v-flex xs12 sm8 md6>
-                    <v-card
-                            class="elevation-10"
-                    >
+                    <v-card>
                         <v-toolbar
                                 dark color="primary"
                         >
@@ -53,6 +51,7 @@
 </template>
 
 <script>
+    import axios from 'axios'
     export default {
         data() {
             return {
@@ -75,14 +74,15 @@
                     const user = {
                         username: this.email,
                         password: this.password
-                    }
+                    };
                     axios.post('http://127.0.0.1:8081/api/login/', user)
                         .then(response => {
                             this.$root.$emit('authorized', {...user, token: response.data.token})
                         })
                         .catch(error => {
                             console.log(error);
-                        })
+                        });
+                    this.$router.push('/')
                 }
             }
         }

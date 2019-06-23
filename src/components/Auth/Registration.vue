@@ -6,7 +6,6 @@
                     <v-card
                             class="elevation-10"
                     >
-                    <v-card>
                         <v-toolbar
                                 dark color="primary"
                         >
