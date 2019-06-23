@@ -62,9 +62,9 @@
         },
 
 
-        mounted() {
+        created() {
             this.$root.$on('showCategory', category => {
-                this.showOrders();
+                this.showOrders(category);
             });
         },
         methods: {
@@ -77,7 +77,7 @@
             //         });
             // },
               
-            async showOrders() {
+            async showOrders(category) {
                 const response = await axios.get('http://127.0.0.1:8081/api/orders/');
                 console.log('1', response);
                 this.orders = response.data.filter(element => element.category === this.categoryDict[category]);
