@@ -40,6 +40,8 @@
 </template>
 
 <script>
+    import axios from 'axios'
+
     export default {
         data: () => ({
             name: '',
@@ -69,16 +71,27 @@
                 v => !!v || 'You must accept terms to continue'
             ]
         }),
+
         methods: {
             validate() {
                 if (this.$refs.form.validate()) {
-                    // Add POST request
+                    const order = {
+                        name: this.name,
+                        description: this.descr,
+                        category: this.select
+                    };
+                    this.$root.$emit('newItem', order);
+                    axios.post('http://127.0.0.1:8081/api/orders/', order)
+                        .then(response => {
+                            console.log(response)
+                        })
                 }
             },
+
             clear() {
-                this.name = ''
-                this.descr = ''
-                this.select = null
+                this.name = '';
+                this.descr = '';
+                this.select = null;
                 this.checkbox = false
             }
         }

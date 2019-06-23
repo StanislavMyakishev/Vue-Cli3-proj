@@ -39,7 +39,6 @@
                                 <v-card
                                         color="primary"
                                         class="align-center"
-                                        height="200"
                                         @click="showCategory"
                                 >
                                     <v-card-title
