@@ -25,7 +25,6 @@
                 {{link.title}}
             </v-btn>
         </v-toolbar-items>
-        <button @click="getUsers">`click me</button>
     </v-toolbar>
 </template>
 

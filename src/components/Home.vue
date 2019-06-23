@@ -13,7 +13,7 @@
                         >
 
                         </v-text-field>
-                        <v-btn class="blue-grey lighten-4">
+                        <v-btn class="primary">
                             <v-icon>search</v-icon>
                         </v-btn>
                         <v-form
@@ -31,22 +31,22 @@
                 <v-container grid-list-md>
                     <v-layout wrap>
                         <v-flex
-                                v-for="item in items"
-                                :key="item.id"
+                                v-for="category in orderCategories"
+                                :key="category.id"
                                 xs12 sm6 md4
                         >
                             <v-item>
                                 <v-card
-                                        color="blue-grey lighten-4"
+                                        color="primary"
                                         class="align-center"
                                         height="200"
-                                        @click="goToField(item)"
+                                        @click="showCategory"
                                 >
                                     <v-card-title
                                             primary class="title black--text"
-                                    >{{item.title}}
+                                    >{{category.title}}
                                     </v-card-title>
-                                    <v-card-text class="black--text">{{ item.description }}</v-card-text>
+                                    <v-card-text class="black--text">{{ category.description }}</v-card-text>
                                 </v-card>
                             </v-item>
                         </v-flex>
@@ -60,10 +60,13 @@
 
 <script>
 
+    import CategoryOrders from "./Items/CategoryOrders";
+    import router from '../router/index'
+
     export default {
         data() {
             return {
-                items: [
+                orderCategories: [
                     {
                         id: 1,
                         title: 'IT',
@@ -97,11 +100,19 @@
                 ]
             }
         },
-        methods: {
-            goToField(item) {
-                this.$router.push({ path: item.title })
-            }
-        }
+
+        //ЕБОТНЯ КАКАЯ-ТО, ПАМАГИТИ, Я ТУПАЯ
+        // methods: {
+        //     // goToField(category) {
+        //     //     this.$router.push({path: category.title, component: CategoryOrders})
+        //     // },
+        //
+        //     showCategory(event) {
+        //         const category = event.currentTarget.firstElementChild.innerText;
+        //         router.push({path: this.orderCategories.title});
+        //         this.$root.$emit('showCategory', category);
+        //     }
+        // }
     }
 </script>
 
