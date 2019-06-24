@@ -81,7 +81,7 @@
             config() {
                 return {
                     headers: {
-                        Authorization: this.user.token
+                        Authorization: 'Token ' + this.user.token
                     }
                 }
             }
@@ -93,7 +93,7 @@
             });
 
             this.$root.$on('newItem', order => {
-                axios.post('http://127.0.0.1:8081/api/orders/', order, config)
+                axios.post('http://127.0.0.1:8081/api/orders/', order, this.config)
                     .then(response => {
                         alert("NEW ITEM ADDED");
                         // Add some logic, waiting for spec

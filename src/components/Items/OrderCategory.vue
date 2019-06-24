@@ -70,7 +70,7 @@
 
 
         async mounted() {
-            await this.showOrders(0);
+            await this.showOrders();
         },
         methods: {
             async showOrders() {

@@ -27,6 +27,8 @@
                             <v-select
                                     v-model="select"
                                     :items="items"
+                                    item-text="text"
+                                    item-value="value"
                                     label="Areas"
                                     :rules="selectRules"
                                     required
@@ -56,12 +58,12 @@
             descr: '',
             select: null,
             items: [
-                'IT',
-                'Finance',
-                'Human Resources',
-                'Marketing',
-                'Retail',
-                'Other'
+                {value: 0, text: 'IT'},
+                {value: 1, text: 'Finance'},
+                {value: 2, text: 'Human Resources'},
+                {value: 3, text: 'Marketing'},
+                {value: 4, text: 'Retail'},
+                {value: 5, text: 'Other'}
             ],
             checkbox: false,
             valid: true,
@@ -86,7 +88,6 @@
                         name: this.name,
                         description: this.descr,
                         category: this.select,
-                        customer_id: 2,
                     };
                     //Ошибка 401 (unauthorized) + Uncaught (in promise) Error: Request failed with status code 401
                     this.$root.$emit('newItem', order);
@@ -99,9 +100,9 @@
             },
             clear() {
                 this.name = '',
-                this.descr = '',
-                this.select = null,
-                this.checkbox = false
+                    this.descr = '',
+                    this.select = null,
+                    this.checkbox = false
             }
         }
     }
