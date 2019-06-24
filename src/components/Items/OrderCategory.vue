@@ -6,7 +6,7 @@
                 <!--<ul>-->
                     <!--<li v-for="(order, index) in orders" :key="index">ID : {{ order.id }}</li>-->
                 <!--</ul>-->
-                <v-card>{{orders}}</v-card>
+                <v-card v-if="orders">{{orders}}</v-card>
                 <!--<v-card-->
                 <!--color="primary"-->
 
@@ -64,26 +64,21 @@
                     [4, 'Retail'],
                     [5, 'Others']
                 ],
-                orders: []
+                orders: null
             }
         },
 
 
-        created() {
-            this.$root.$on('showCategory', category => {
-                this.showOrders(category);
-            });
-
-
+        async mounted() {
+            await this.showOrders(0);
         },
         methods: {
-            async showOrders(category) {
-
+            async showOrders() {
                 const response = await axios.get('http://127.0.0.1:8081/api/orders/');
                 console.log('1', response);
+                let category = this.$route.query.category;
                 this.orders = response.data.filter(element => element.category === this.categoryDict[category][0]);
                 console.log('2', this.orders);
-                return this.orders
 
             },
 

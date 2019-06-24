@@ -65,6 +65,7 @@
     export default {
         data() {
             return {
+                valid: true,
                 items: [
                     {
                         id: 1,
@@ -103,8 +104,8 @@
             showCategory(id) {
                 const category = id - 1;
 
-                this.$root.$emit('showCategory', category);
-                router.push('/test');
+                this.$root.$emit('showCategory');
+                router.push({ path: '/test', query: { category: category } });
             }
         }
     }
