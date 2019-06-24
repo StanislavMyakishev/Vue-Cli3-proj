@@ -99,6 +99,10 @@
                         // Add some logic, waiting for spec
                     })
             });
+
+            this.$root.$on('logout', () => {
+                this.user.token = '';
+            })
         }
     }
 </script>

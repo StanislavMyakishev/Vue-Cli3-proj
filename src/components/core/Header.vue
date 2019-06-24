@@ -20,6 +20,7 @@
                     :key="link.title"
                     :to="link.url"
                     flat
+                    @click="logout(link.title)"
             >
                 <v-icon left>{{link.icon}}</v-icon>
                 {{link.title}}
@@ -41,7 +42,14 @@
                 data: []
             }
         },
-
+        methods: {
+            logout(title) {
+                if(title === 'logout') {
+                    this.$root.$emit('logout');
+                    this.$router.push('/');
+                }
+            }
+        }
     }
 
 </script>
