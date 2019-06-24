@@ -93,10 +93,13 @@
             });
 
             this.$root.$on('newItem', order => {
-                axios.post('http://127.0.0.1:8081/api/orders/', order)
+                axios.post('http://127.0.0.1:8081/api/orders/', order, config)
                     .then(response => {
                         alert("NEW ITEM ADDED");
                         // Add some logic, waiting for spec
+                    })
+                    .catch(error => {
+                        console.log(error);
                     })
             });
 

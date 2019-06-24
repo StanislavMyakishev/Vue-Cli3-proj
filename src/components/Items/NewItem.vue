@@ -90,11 +90,11 @@
                     };
                     //Ошибка 401 (unauthorized) + Uncaught (in promise) Error: Request failed with status code 401
                     this.$root.$emit('newItem', order);
-                    axios.post('http://127.0.0.1:8081/api/orders/', order)
-                        .then(response => console.log(response))
-                        .catch(error => {
-                            console.log(error);
-                        });
+                    // axios.post('http://127.0.0.1:8081/api/orders/', order)
+                    //     .then(response => console.log(response))
+                    //     .catch(error => {
+                    //         console.log(error);
+                    //     });
                 }
             },
             clear() {
