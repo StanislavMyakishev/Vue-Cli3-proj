@@ -76,14 +76,15 @@
                     const user = {
                         username: this.email,
                         password: this.password
-                    }
+                    };
                     axios.post('http://127.0.0.1:8081/api/login/', user)
                         .then(response => {
                             this.$root.$emit('authorized', {...user, token: response.data.token})
                         })
                         .catch(error => {
                             console.log(error);
-                        })
+                        });
+                    this.$router.push('/')
                 }
             }
         }

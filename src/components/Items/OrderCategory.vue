@@ -2,7 +2,7 @@
     <v-container>
         <v-layout>
             <v-flex xs12 sm6 offset-sm3>
-                <h1 class="text--secondary mb-3">My orders</h1>
+                <h1 class="text--secondary mb-3">Here must be title of Category</h1>
                 <!--<ul>-->
                     <!--<li v-for="(order, index) in orders" :key="index">ID : {{ order.id }}</li>-->
                 <!--</ul>-->
@@ -78,13 +78,15 @@
         },
         methods: {
             async showOrders(category) {
+
                 const response = await axios.get('http://127.0.0.1:8081/api/orders/');
                 console.log('1', response);
                 this.orders = response.data.filter(element => element.category === this.categoryDict[category][0]);
                 console.log('2', this.orders);
                 return this.orders
 
-            }
+            },
+
         },
     }
 </script>

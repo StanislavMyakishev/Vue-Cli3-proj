@@ -2,8 +2,10 @@
     <v-content>
         <v-container fluid fill-height>
             <v-layout align-center justify-center>
-                <v-flex xs12 sm8 md6>
-                    <v-card>
+                <v-flex xs12 sm8 md8>
+                    <v-card
+                            class="elevation-10"
+                    >
                         <v-toolbar
                                 dark color="primary"
                         >
@@ -41,6 +43,83 @@
                                         v-model="confirmPassword"
                                         :rules="confirmPasswordRules"
                                 ></v-text-field>
+                                <v-layout row wrap>
+                                    <v-text-field
+                                            prepend-icon="person"
+                                            class="compact-form"
+                                            name="companyname"
+                                            label="Company name"
+                                            type="text"
+                                            v-model="companyname"
+                                    ></v-text-field>
+                                    <v-text-field
+                                            prepend-icon="person"
+                                            name="taxnumber"
+                                            class="compact-form"
+                                            label="TIN"
+                                            type="text"
+                                            v-model="TIN"
+                                    ></v-text-field>
+                                </v-layout>
+                                <v-layout row wrap>
+                                    <v-text-field
+                                            prepend-icon="person"
+                                            class="compact-form"
+                                            name="address"
+                                            label="Address"
+                                            type="text"
+                                            v-model="address"
+                                    ></v-text-field>
+                                    <v-text-field
+                                            prepend-icon="person"
+                                            name="website"
+                                            class="compact-form"
+                                            label="Website"
+                                            type="text"
+                                            v-model="website"
+                                    ></v-text-field>
+                                </v-layout>
+                                <v-textarea
+                                        prepend-icon="person"
+                                        name="description"
+                                        label="Description"
+                                        type="text"
+                                        v-model="description">
+
+                                </v-textarea>
+                                <v-layout row wrap>
+                                    <v-text-field
+                                            prepend-icon="person"
+                                            class="compact-form"
+                                            name="first_name"
+                                            label="First Name"
+                                            type="text"
+                                            v-model="first_name"
+                                    ></v-text-field>
+                                    <v-text-field
+                                            prepend-icon="person"
+                                            name="last_name"
+                                            class="compact-form"
+                                            label="Last Name"
+                                            type="text"
+                                            v-model="last_name"
+                                    ></v-text-field>
+                                    <v-text-field
+                                            prepend-icon="person"
+                                            name="patronymic"
+                                            class="compact-form"
+                                            label="Patronymic"
+                                            type="text"
+                                            v-model="patronymic"
+                                    ></v-text-field>
+                                </v-layout>
+                                <v-text-field
+                                        prepend-icon="person"
+                                        name="position"
+                                        label="Position"
+                                        type="text"
+                                        v-model="position"
+                                ></v-text-field>
                             </v-form>
                         </v-card-text>
                         <v-card-actions>
@@ -55,27 +134,25 @@
                 </v-flex>
             </v-layout>
         </v-container>
-    <div v-if="authorized">
-        <div class="icon">Мои заказы</div>
-        <div class="icon">Личный кабинет</div>
-        <div class="icon">Что-то еще личное</div>
-    </div>
-    <div v-else>
-        <div class="icon">Регистрация</div>
-        <div class="icon">Логин</div>
-    </div>
     </v-content>
-
 </template>
 
 <script>
     import axios from 'axios'
-
     export default {
         data() {
             return {
                 email: '',
                 password: '',
+                companyname: '',
+                TIN: '',
+                address: '',
+                website: '',
+                description: '',
+                first_name: '',
+                last_name: '',
+                patronymic: '',
+                position: '',
                 valid: false,
                 confirmPasswrod: '',
                 emailRules: [
@@ -96,25 +173,33 @@
             onSubmit(){
                 if (this.$refs.form.validate()) {
                     const user = {
-                        username: this.email,
-                        password: this.password
-                    }
-
-                    // Можно будет добавть визуальщину или переход в лк при регистрации, пока этого нема
-                    axios.post('http://127.0.0.1:8081/api/registration/', user)
-                        .then(response => {
-                            if (response.code === '200') {
-                                // alert("User added to database")
-                                this.$root.$emit('authorized', {...user, token: response.data.token})
-                            } else {
-                                throw new Error('Some error occured')
-                            }
-                        })
+                        email: this.email,
+                        password: this.password,
+                        name: this.companyname,
+                        itn: this.TIN,
+                        address: this.address,
+                        website: this.website,
+                        description: this.description,
+                        first_name: this.first_name,
+                        last_name: this.last_name,
+                        patronymic: this.patronymic,
+                        position: this.position
+                    };
+                    axios.post('http://127.0.0.1:8081/api/organizations/', user)
+                        .then(response => console.log(response))
                         .catch(error => {
-                            alert(error);
-                        })
+                            console.log(error);
+                        });
+                    this.$router.push('/login')
                 }
             }
         }
     }
 </script>
+
+<style>
+    .compact-form {
+        transform: scale(0.875);
+        transform-origin: left;
+    }
+</style>

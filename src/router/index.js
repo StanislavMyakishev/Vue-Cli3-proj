@@ -8,6 +8,7 @@ import Orders from '@/components/User/Orders'
 import Login from '@/components/Auth/Login'
 import Registration from '@/components/Auth/Registration'
 import OrderCategory from '@/components/Items/OrderCategory'
+import OrganizationInfo from '@/components/User/OrganizationInfo'
 
 Vue.use(Router);
 
@@ -52,7 +53,13 @@ export default new Router({
             path: '/test',
             name: 'test',
             component: OrderCategory
-        }
+        },
+        {
+            path: '/organization',
+            // props: true,
+            name: 'organization',
+            component: OrganizationInfo
+        },
     ],
     mode: 'history'
 })

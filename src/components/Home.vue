@@ -39,7 +39,6 @@
                                 <v-card
                                         color="blue-grey lighten-4"
                                         class="align-center"
-                                        height="200"
                                         @click="showCategory(item.id)"
                                 >
                                     <v-card-title

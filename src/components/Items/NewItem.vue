@@ -18,12 +18,12 @@
                                     required
 
                             ></v-text-field>
-                            <v-text-field
+                            <v-textarea
                                     v-model="descr"
                                     label="Description"
                                     :rules="descrRules"
                                     required
-                            ></v-text-field>
+                            ></v-textarea>
                             <v-select
                                     v-model="select"
                                     :items="items"
@@ -85,20 +85,22 @@
                     const order = {
                         name: this.name,
                         description: this.descr,
-                        field: this.select
-                    }
-
+                        category: this.select,
+                        customer_id: 2,
+                    };
+                    //Ошибка 401 (unauthorized) + Uncaught (in promise) Error: Request failed with status code 401
                     this.$root.$emit('newItem', order);
                     axios.post('http://127.0.0.1:8081/api/orders/', order)
-                        .then(response => {
-                            // Add some logiccccc
-                        })
+                        .then(response => console.log(response))
+                        .catch(error => {
+                            console.log(error);
+                        });
                 }
             },
             clear() {
-                this.name = ''
-                this.descr = ''
-                this.select = null
+                this.name = '',
+                this.descr = '',
+                this.select = null,
                 this.checkbox = false
             }
         }
