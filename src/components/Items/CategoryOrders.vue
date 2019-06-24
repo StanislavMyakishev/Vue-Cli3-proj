@@ -43,41 +43,44 @@
 
 <script>
     import axios from 'axios'
+
     export default {
         data() {
             return {
-                categoryDict: {
-                    'IT': 0,
-                    'Finance': 1,
-                    'Human Resources': 2,
-                    'Marketing': 3,
-                    'Retail': 4,
-                    'Others': 5
-                },
+                // categoryDict: {
+                //     'IT': 0,
+                //     'Finance': 1,
+                //     'Human Resources': 2,
+                //     'Marketing': 3,
+                //     'Retail': 4,
+                //     'Others': 5
+                // },
+                categoryDict: [
+                    [0, 'IT'],
+                    [1, 'Finance'],
+                    [2, 'HR'],
+                    [3, 'Marketing'],
+                    [4, 'Retail'],
+                    [5, 'Others']
+                ],
                 orders: []
             }
         },
-        mounted() {
+        created() {
             this.$root.$on('showCategory', category => {
-                    axios.get('http://127.0.0.1:8081/api/orders/')
-                        .then(response => {
-                            let test = response.data.filter(element => element.category === this.categoryDict[category]);
-                            return test;
-                        })
-                        .then((test) => {
-                                this.orders = test;
-                                console.log(this.orders);
-                                return this.orders
-                            }
-                        );
-                },
-            )
+                this.showOrders(category);
+            });
         },
+
         methods: {
-            showOrders() {
-                console.log('Hallo');
-                console.log(this.orders)
-            },
+            async showOrders(category) {
+                console.log(this.categoryDict[category][0]);
+                const response = await axios.get('http://127.0.0.1:8081/api/orders/');
+                console.log('1', response);
+                this.orders = response.data.filter(element => element.category === this.categoryDict[category][0]);
+                console.log('2', this.orders);
+                return this.orders
+            }
         }
     }
 </script>

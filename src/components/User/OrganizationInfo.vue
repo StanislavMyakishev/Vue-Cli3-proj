@@ -47,6 +47,8 @@
                     this.organization = data;
                 });
         }
+
+    //    ДОБАВИТЬ ОТЗЫВЫ
     }
 </script>
 

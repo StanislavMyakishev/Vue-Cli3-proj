@@ -12,9 +12,11 @@
                 >
                     <v-layout row>
                         <v-flex xs4>
-                            <v-avatar>
-                                {{}}
-                            </v-avatar>
+                            <v-img
+                                    :src="ord.imageSrc"
+                                    height="160px"
+                            >
+                            </v-img>
                         </v-flex>
                         <v-flex xs8>
                             <v-card-text>

@@ -41,6 +41,12 @@
                                         class="align-center"
                                         @click="showCategory"
                                 >
+                                    <!--<v-img-->
+                                            <!--:src="category.image"-->
+                                            <!--height="150px"-->
+                                            <!--width="150px">-->
+
+                                    <!--</v-img>-->
                                     <v-card-title
                                             primary class="title black--text"
                                     >{{category.title}}
@@ -68,31 +74,37 @@
                 orderCategories: [
                     {
                         id: 1,
+                        image: 'https://www.bhphotovideo.com/images/images150x150/1541085733000_1441742.jpg',
                         title: 'IT',
                         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet at debitis deserunt, optio rem eaque obcaecati non possimus nisi assumenda architecto exercitationem dolore quo praesentium, deleniti reiciendis sed ab nihil!"
                     },
                     {
                         id: 2,
+                        icon: 'personal_video',
                         title: 'Finance',
                         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet at debitis deserunt, optio rem eaque obcaecati non possimus nisi assumenda architecto exercitationem dolore quo praesentium, deleniti reiciendis sed ab nihil!"
                     },
                     {
                         id: 3,
+                        icon: 'personal_video',
                         title: 'HR',
                         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet at debitis deserunt, optio rem eaque obcaecati non possimus nisi assumenda architecto exercitationem dolore quo praesentium, deleniti reiciendis sed ab nihil!"
                     },
                     {
                         id: 4,
+                        icon: 'personal_video',
                         title: 'Marketing',
                         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet at debitis deserunt, optio rem eaque obcaecati non possimus nisi assumenda architecto exercitationem dolore quo praesentium, deleniti reiciendis sed ab nihil!"
                     },
                     {
                         id: 5,
+                        icon: 'personal_video',
                         title: 'Retail',
                         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet at debitis deserunt, optio rem eaque obcaecati non possimus nisi assumenda architecto exercitationem dolore quo praesentium, deleniti reiciendis sed ab nihil!"
                     },
                     {
                         id: 6,
+                        icon: 'personal_video',
                         title: 'Other',
                         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet at debitis deserunt, optio rem eaque obcaecati non possimus nisi assumenda architecto exercitationem dolore quo praesentium, deleniti reiciendis sed ab nihil!"
                     }
@@ -100,18 +112,13 @@
             }
         },
 
-        //ЕБОТНЯ КАКАЯ-ТО, ПАМАГИТИ, Я ТУПАЯ
-        // methods: {
-        //     // goToField(category) {
-        //     //     this.$router.push({path: category.title, component: CategoryOrders})
-        //     // },
-        //
-        //     showCategory(event) {
-        //         const category = event.currentTarget.firstElementChild.innerText;
-        //         router.push({path: this.orderCategories.title});
-        //         this.$root.$emit('showCategory', category);
-        //     }
-        // }
+        methods: {
+            showCategory(id) {
+                const category = id - 1;
+                this.$root.$emit('showCategory', category);
+                router.push({ path: `/category` });
+            }
+        }
     }
 </script>
 
