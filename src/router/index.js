@@ -11,6 +11,7 @@ import Field from '@/components/Filter/fields'
 import Test from '@/components/test'
 import VueRouter from 'vue-router'
 import Modify from '@/components/Auth/Modify'
+import OrganizationInfo from '@/components/User/OrganizationInfo'
 
 Vue.use(Router);
 
@@ -67,7 +68,13 @@ export default new VueRouter({
             path: '/orders',
             name: 'orders',
             component: Orders
-        }
+        },
+        {
+            path: '/organization',
+            // props: true,
+            name: 'organization',
+            component: OrganizationInfo
+        },
     ],
     mode: 'history'
 })
