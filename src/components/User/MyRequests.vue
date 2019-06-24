@@ -2,7 +2,7 @@
     <v-container>
         <v-layout>
             <v-flex xs12 sm6 offset-sm3>
-                <h1 class="text--secondary mb-3">My orders</h1>
+                <h1 class="text--secondary mb-3">My Requests</h1>
 
                 <v-card
                         color="blue-grey lighten-4"
@@ -46,7 +46,7 @@
                 ordList: [
                     {
                         title: 'First order',
-                        description: 'This is our first company order',
+                        description: 'Order description',
                         promo: false,
                         imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
                         id: '1'

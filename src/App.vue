@@ -73,11 +73,10 @@
             links() {
                 if (this.loggedIn) {
                     return [
-                        {title: 'Orders', icon: 'bookmark_border', url: '/orders'},
+                        {title: 'My Orders', icon: 'bookmark_border', url: '/myorders'},
                         {title: 'New order', icon: 'note_add', url: '/new'},
                         {title: 'My requests', icon: 'description', url: '/list'},
                         {title: 'logout', icon: 'lock', url: '/'},
-                        {title: 'My orders', icon: 'list', url: '/list'}
                     ]
                 } else {
                     return [
@@ -89,7 +88,7 @@
             config() {
                 return {
                     headers: {
-                        Authorization: this.user.token
+                        Authorization: 'Token ' + this.user.token
                     }
                 }
             }
@@ -99,13 +98,20 @@
                 this.user.username = user.username;
                 this.user.token = user.token;
             });
-            this.$root.$on('newItem', order => {
-                axios.post('http://127.0.0.1:8081/api/orders/', order)
+
+            this.$root.$on('newOrder', order => {
+                axios.post('http://127.0.0.1:8081/api/orders/', order, this.config)
                     .then(response => {
-                        alert("NEW ITEM ADDED");
                         // Add some logic, waiting for spec
                     })
+                    .catch(error => {
+                        console.log(error);
+                    })
             });
+
+            this.$root.$on('logout', () => {
+                this.user.token = '';
+            })
         }
     }
 </script>

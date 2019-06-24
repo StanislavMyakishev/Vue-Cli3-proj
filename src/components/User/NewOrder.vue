@@ -20,7 +20,6 @@
                             >
                                 <v-text-field
                                         v-model="name"
-                                        :counter="10"
                                         label="New Item name"
                                         :rules="nameRules"
                                         required
@@ -34,6 +33,8 @@
                                 <v-select
                                         v-model="select"
                                         :items="items"
+                                        item-text="text"
+                                        item-value="value"
                                         label="Areas"
                                         :rules="selectRules"
                                         required
@@ -60,18 +61,19 @@
 
 
 <script>
+
     export default {
         data: () => ({
             name: '',
             descr: '',
             select: null,
             items: [
-                'IT',
-                'Finance',
-                'Human Resources',
-                'Marketing',
-                'Retail',
-                'Other'
+                {value: 1, text: 'IT'},
+                {value: 2, text: 'Finance'},
+                {value: 3, text: 'Human Resources'},
+                {value: 4, text: 'Marketing'},
+                {value: 5, text: 'Retail'},
+                {value: 6, text: 'Other'}
             ],
             checkbox: false,
             valid: true,
@@ -92,13 +94,18 @@
         methods: {
             validate() {
                 if (this.$refs.form.validate()) {
-                    // Add POST request
+                    const order = {
+                        name: this.name,
+                        description: this.descr,
+                        category: this.select - 1,
+                    };
+                    this.$root.$emit('newOrder', order);
                 }
             },
             clear() {
-                this.name = ''
-                this.descr = ''
-                this.select = null
+                this.name = '',
+                this.descr = '',
+                this.select = null,
                 this.checkbox = false
             }
         }

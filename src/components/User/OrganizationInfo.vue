@@ -40,10 +40,15 @@
             }
         },
         created() {
+            // const organization_id = this.$route.organization.id;
+            // axios.get('http://127.0.0.1:8081/api/organizations/', organization_id)
             axios.get('http://127.0.0.1:8081/api/organizations/2/')
                 .then(response => response.data)
                 .then(data => {
                     this.organization = data;
+                })
+                .catch(error => {
+                    console.log(error)
                 });
         }
         //    ДОБАВИТЬ ОТЗЫВЫ

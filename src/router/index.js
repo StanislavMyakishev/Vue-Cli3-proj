@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
-import Item from '@/components/Items/Item'
-import ItemsList from '@/components/Items/List'
-import NewItem from '@/components/Items/NewItem'
-import Orders from '@/components/User/Orders'
+import Order from '@/components/Items/Order'
+import MyRequests from '@/components/User/MyRequests'
+import NewOrder from '@/components/User/NewOrder'
+import MyOrders from '@/components/User/MyOrders'
 import Login from '@/components/Auth/Login'
 import Registration from '@/components/Auth/Registration'
-import Field from '@/components/Filter/fields'
+import OrderCategory from '@/components/Filter/OrderCategory'
 import Test from '@/components/test'
 import VueRouter from 'vue-router'
 import Modify from '@/components/Auth/Modify'
@@ -36,23 +36,17 @@ export default new VueRouter({
             path: '/ord/:id',
             props: true,
             name: 'order',
-            component: Item
+            component: Order
         },
         {
-            path: '/field/:id',
-            props: true,
-            name: 'field',
-            component: Field
-        },
-        {
-            path: '/list',
-            name: 'list',
-            component: ItemsList
+            path: '/myrequests',
+            name: 'myRequests',
+            component: MyRequests
         },
         {
             path: '/new',
-            name: 'newItem',
-            component: NewItem
+            name: 'newOrder',
+            component: NewOrder
         },
         {
             path: '/login',
@@ -65,15 +59,21 @@ export default new VueRouter({
             component: Registration
         },
         {
-            path: '/orders',
-            name: 'orders',
-            component: Orders
+            path: '/myorders',
+            name: 'myOrders',
+            component: MyOrders
         },
         {
             path: '/organization',
+            // path: '/organization/:id',
             // props: true,
             name: 'organization',
             component: OrganizationInfo
+        },
+        {
+            path: '/category',
+            name: 'category',
+            component: OrderCategory
         },
     ],
     mode: 'history'

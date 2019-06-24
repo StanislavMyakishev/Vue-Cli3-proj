@@ -40,7 +40,7 @@
                                         color="blue-grey lighten-4"
                                         class="align-center"
                                         height="200"
-                                        @click="goToField(item)"
+                                        @click="showCategory(item.id)"
                                 >
                                     <v-card-title
                                             primary class="title black--text"
@@ -59,7 +59,7 @@
 </template>
 
 <script>
-
+    import router from '../router/index'
     export default {
         data() {
             return {
@@ -98,8 +98,10 @@
             }
         },
         methods: {
-            goToField(item) {
-                this.$router.push({ path: `/field/${item.title}` })
+            showCategory(id) {
+                const category = id - 1;
+                this.$root.$emit('showCategory');
+                router.push({ path: '/category', query: { category: category } });
             }
         }
     }
