@@ -133,10 +133,11 @@
     export default {
         data() {
             return {
-                order:  {name: ''},
+                order:  {name: '', customer: {name: ''}, date_created: ''},
                 id: NaN,
                 imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-                perform: null
+                perform: null,
+                performers: []
             }
         },
 
@@ -156,7 +157,7 @@
                 .then(response => response.data)
                 .then(data => {
                     this.order = data;
-                    this.perform = this.order.customer.id === this.userId;
+                    this.perform = this.order.customer.id !== this.userId;
                 })
                 .catch(error => {
                     console.log(error)

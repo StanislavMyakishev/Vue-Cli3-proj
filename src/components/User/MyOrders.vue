@@ -60,7 +60,6 @@
                     this.myorders = data;
                 })
                 .catch(error => console.log(error));
-            console.log(this.config);
         },
         methods: {
             goToOrder(index) {

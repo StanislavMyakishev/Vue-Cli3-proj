@@ -79,7 +79,6 @@
                     };
                     axios.post('http://127.0.0.1:8081/api/login/', user)
                         .then(response => {
-                            console.log(response.data.user_id);
                             this.$root.$emit('authorized', {...user, token: response.data.token, userId: response.data.user_id})
                         })
                         .catch(error => {

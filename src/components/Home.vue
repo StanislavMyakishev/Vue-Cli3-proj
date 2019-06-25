@@ -17,9 +17,9 @@
                             <v-icon>search</v-icon>
                         </v-btn>
                         <v-form
-                                v-model="valid"
                                 ref="form"
                         >
+                            <!--v-model="valid"-->
                         </v-form>
                     </v-layout>
                 </v-flex>

@@ -71,6 +71,7 @@
         computed: {
             loggedIn() {
                 return this.user.token.length > 0;
+
                 // return true;
             },
             links() {
@@ -99,10 +100,9 @@
         },
         mounted() {
             this.$root.$on('authorized', user => {
-                console.log(user)
-                // this.user.username = user.username;
-                // this.user.token = user.token;
-                // this.user.userId = user.userId;
+                this.user.username = user.username;
+                this.user.token = user.token;
+                this.user.userId = user.userId;
 
             });
 
