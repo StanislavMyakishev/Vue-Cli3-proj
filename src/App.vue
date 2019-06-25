@@ -24,7 +24,7 @@
                 </v-navigation-drawer>
                 <app-header :links="links"></app-header>
                 <v-content>
-                    <router-view :config="config"></router-view>
+                    <router-view :config="config" :userId="userId"></router-view>
                 </v-content>
             </div>
             <app-footer></app-footer>

@@ -151,15 +151,12 @@
         // }
         created() {
             this.id = this.$route.query.id;
-            // if (!this.$route.query.my) {
-            //     this.perform = this.$route.query.my;
-            // }
-
 
             axios.get('http://127.0.0.1:8081/api/orders/' + this.id + '/')
                 .then(response => response.data)
                 .then(data => {
                     this.order = data;
+                    this.perform = this.order.customer.id === this.userId;
                 })
                 .catch(error => {
                     console.log(error)
@@ -171,6 +168,7 @@
                 return date.replace(/(\d+)-(\d+)-(\d+)T(\d+):(\d+).+/, '$1-$2-$3 $4:$5')
             }
         },
+        props: ['userId']
     }
 </script>
 
