@@ -7,7 +7,7 @@
                 <v-card
                         color="blue-grey lighten-4"
                         class="elevation-10 mb-3"
-                        v-for="ord in myorders"
+                        v-for="(ord, index) in myorders"
                         :key="ord.id"
                 >
                     <v-layout row>
@@ -22,6 +22,7 @@
                             <v-card-text>
                                 <h2 class="text--primary">{{ord.name}}</h2>
                                 <!--ord.description переделать, выезжает текст за рамки карточки-->
+                                <p>{{ord.customer.name}}</p>
                                 <p>{{ord.description}}</p>
                                 <p>{{ord.date_created}}</p>
                             </v-card-text>
@@ -29,7 +30,7 @@
                                 <v-spacer></v-spacer>
                                 <v-btn
                                         class="info"
-                                        :to="/ord/ + ord.id"
+                                        @click="goToOrder(index)"
                                 >Open
                                 </v-btn>
                             </v-card-actions>
@@ -42,7 +43,9 @@
 </template>
 
 <script>
+    import router from '../../router/index'
     import axios from 'axios';
+
     export default {
         data() {
             return {
@@ -54,8 +57,16 @@
                 .then(response => response.data)
                 .then(data => {
                     this.myorders = data;
-                })
+                });
+            console.log()
             // + ДОБАВИТЬ ФИЛЬТРАЦИЮ ПО customer_id
+        },
+        methods: {
+            goToOrder(index) {
+                console.log(this.myorders[index].id);
+                // this.$root.$emit('goToOrder', this.myorders[index]);
+                router.push({path: '/order', query: {id: this.myorders[index].id}})
+            }
         }
     }
 </script>

@@ -12,6 +12,8 @@ import Test from '@/components/test'
 import VueRouter from 'vue-router'
 import Modify from '@/components/Auth/Modify'
 import OrganizationInfo from '@/components/User/OrganizationInfo'
+import SettingsPage from '@/components/User/SettingsPage'
+import EditSettingsPage from '@/components/User/EditSettingsPage'
 
 Vue.use(Router);
 
@@ -33,8 +35,8 @@ export default new VueRouter({
             component: Modify
         },
         {
-            path: '/ord/:id',
-            props: true,
+            path: '/order',
+            // props: true,
             name: 'order',
             component: Order
         },
@@ -74,6 +76,16 @@ export default new VueRouter({
             path: '/category',
             name: 'category',
             component: OrderCategory
+        },
+        {
+            path: '/settingspage',
+            name: 'settingsPage',
+            component: SettingsPage
+        },
+        {
+            path: '/editinfo',
+            name: 'editSettingsPage',
+            component: EditSettingsPage
         },
     ],
     mode: 'history'
