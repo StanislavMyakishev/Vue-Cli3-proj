@@ -133,7 +133,7 @@
     export default {
         data() {
             return {
-                order: null,
+                order:  {name: ''},
                 id: NaN,
                 imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
                 perform: null

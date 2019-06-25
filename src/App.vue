@@ -24,7 +24,7 @@
                 </v-navigation-drawer>
                 <app-header :links="links"></app-header>
                 <v-content>
-                    <router-view :config="config" :userId="userId"></router-view>
+                    <router-view :config="config" :userId="user.userId"></router-view>
                 </v-content>
             </div>
             <app-footer></app-footer>
@@ -64,7 +64,7 @@
             authorized(user) {
                 this.user.username = user.username;
                 this.user.token = user.token;
-                this.user.userId = user.user_id;
+                this.user.userId = user.userId;
                 // Может еще какие данные передавать чтоб в ЛК отображать
             }
         },
@@ -99,9 +99,10 @@
         },
         mounted() {
             this.$root.$on('authorized', user => {
-                this.user.username = user.username;
-                this.user.token = user.token;
-                this.user.userId = user.user_id;
+                console.log(user)
+                // this.user.username = user.username;
+                // this.user.token = user.token;
+                // this.user.userId = user.userId;
 
             });
 
