@@ -9,7 +9,7 @@
                             <v-card flat>
                                 <v-responsive>
                                     <v-avatar
-                                            :tile=true
+                                            :tile="tile"
                                             :size="300"
                                             color="grey lighten-4"
                                     >
