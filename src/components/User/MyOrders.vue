@@ -23,7 +23,7 @@
                                 <h2 class="text--primary">{{ord.name}}</h2>
                                 <!--ord.description переделать, выезжает текст за рамки карточки-->
                                 <p>{{ord.customer.name}}</p>
-                                <p>{{ord.description}}</p>
+                                <p class="break">{{ord.description}}</p>
                                 <p>{{ord.date_created}}</p>
                             </v-card-text>
                             <v-card-actions>
@@ -53,20 +53,27 @@
             }
         },
         created() {
-            axios.get('http://127.0.0.1:8081/api/orders/')
+            let config = this.config;
+            axios.get('http://127.0.0.1:8081/api/organizations/get_orders/', config)
                 .then(response => response.data)
                 .then(data => {
                     this.myorders = data;
-                });
-            console.log()
-            // + ДОБАВИТЬ ФИЛЬТРАЦИЮ ПО customer_id
+                })
+                .catch(error => console.log(error));
+            console.log(this.config);
         },
         methods: {
             goToOrder(index) {
-                console.log(this.myorders[index].id);
                 // this.$root.$emit('goToOrder', this.myorders[index]);
                 router.push({path: '/order', query: {id: this.myorders[index].id}})
             }
-        }
+        },
+        props: ['config']
     }
 </script>
+
+<style>
+    .break {
+        word-wrap: break-word;
+    }
+</style>

@@ -24,7 +24,7 @@
                 </v-navigation-drawer>
                 <app-header :links="links"></app-header>
                 <v-content>
-                    <router-view></router-view>
+                    <router-view :config="config"></router-view>
                 </v-content>
             </div>
             <app-footer></app-footer>
@@ -36,6 +36,7 @@
     import Footer from '@/components/core/Footer'
     import Header from '@/components/core/Header'
     import axios from 'axios'
+    import router from './router/index'
 
     export default {
         data() {
@@ -43,7 +44,8 @@
                 drawer: false,
                 user: {
                     username: "",
-                    token: ""
+                    token: "",
+                    userId: "",
                 }
                 // links: [
                 //     {title: 'login', icon: 'lock', url: '/login'},
@@ -62,12 +64,13 @@
             authorized(user) {
                 this.user.username = user.username;
                 this.user.token = user.token;
+                this.user.userId = user.user_id;
                 // Может еще какие данные передавать чтоб в ЛК отображать
             }
         },
         computed: {
             loggedIn() {
-                return this.user.token.length > 0 ? true : false;
+                return this.user.token.length > 0;
                 // return true;
             },
             links() {
@@ -75,7 +78,8 @@
                     return [
                         {title: 'My Orders', icon: 'bookmark_border', url: '/myorders'},
                         {title: 'New order', icon: 'note_add', url: '/new'},
-                        {title: 'My requests', icon: 'description', url: '/list'},
+                        {title: 'My requests', icon: 'description', url: '/myrequests'},
+                        {title: 'Org Info', icon: 'face', url: '/organization'},
                         {title: 'logout', icon: 'lock', url: '/'},
                     ]
                 } else {
@@ -97,12 +101,14 @@
             this.$root.$on('authorized', user => {
                 this.user.username = user.username;
                 this.user.token = user.token;
+                this.user.userId = user.user_id;
+
             });
 
             this.$root.$on('newOrder', order => {
                 axios.post('http://127.0.0.1:8081/api/orders/', order, this.config)
                     .then(response => {
-                        // Add some logic, waiting for spec
+                        router.push('/myorders')
                     })
                     .catch(error => {
                         console.log(error);

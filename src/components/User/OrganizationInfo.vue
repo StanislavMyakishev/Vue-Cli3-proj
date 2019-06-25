@@ -22,6 +22,8 @@
                         <v-card-title>
                             {{organization.address}}
                         </v-card-title>
+                        <v-btn
+                            @click="getReviews"></v-btn>
                     </v-card>
                 </v-flex>
             </v-layout>
@@ -40,9 +42,8 @@
             }
         },
         created() {
-            // const organization_id = this.$route.organization.id;
-            // axios.get('http://127.0.0.1:8081/api/organizations/', organization_id)
-            axios.get('http://127.0.0.1:8081/api/organizations/2/')
+            let id = 2;
+            axios.get('http://127.0.0.1:8081/api/organizations/' + id + '/')
                 .then(response => response.data)
                 .then(data => {
                     this.organization = data;
@@ -50,6 +51,21 @@
                 .catch(error => {
                     console.log(error)
                 });
+        },
+
+        methods: {
+            getReviews() {
+                axios.get('http://127.0.0.1:8081/api/organizations/get_reviews')
+                    .then(response => {console.log(response)})
+                    // // response.data
+                    // .then(data => {
+                    //     this.organization = data;
+                    // })
+                    .catch(error => {
+                        console.log(error)
+                    });
+            }
+
         }
         //    ДОБАВИТЬ ОТЗЫВЫ
     }

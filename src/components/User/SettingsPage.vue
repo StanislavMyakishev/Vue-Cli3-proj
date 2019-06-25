@@ -9,7 +9,7 @@
                         <v-toolbar
                                 dark color="primary"
                         >
-                            <v-toolbar-title>Registration form</v-toolbar-title>
+                            <v-toolbar-title>My Account</v-toolbar-title>
                         </v-toolbar>
 
                         <v-card-actions>
@@ -21,9 +21,15 @@
                             </v-btn>
                             <v-btn
                                     color="primary"
+                                    @click="editPassword"
+                            >Password
+                            </v-btn>
+                            <v-btn
+                                    color="primary"
                                     @click="deleteAccount"
                             >Delete Account
                             </v-btn>
+
                         </v-card-actions>
                     </v-card>
                 </v-flex>
@@ -93,6 +99,10 @@
             },
 
             toEditPage() {
+
+            },
+
+            editPassword() {
 
             },
 
