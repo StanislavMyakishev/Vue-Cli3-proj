@@ -15,10 +15,10 @@
                         </v-img>
                     </v-responsive>
                     <v-card-text class="test">
-                        <h1 class="text-md-center">{{order.name}}</h1>
-                        <h2 class="text-md-center"> от компании "{{order.customer.name}}"</h2>
-                        <p class="text-md-center test2">{{order.description}}</p>
-                        <p class="text-md-right">{{order.date_created | parseDate}} </p>
+                        <component :is="editable" class="text-md-center">{{order.name}}</component>
+                        <component :is="editable" class="text-md-center"> от компании "{{order.customer.name}}"</component>
+                        <component :is="editable" class="text-md-center test2">{{order.description}}</component>
+                        <component :is="editable" class="text-md-right">{{order.date_created | parseDate}} </component>
                     </v-card-text>
                 </v-card>
                 <v-card v-if=perform>
@@ -137,7 +137,8 @@
                 id: NaN,
                 imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
                 perform: null,
-                performers: []
+                performers: [],
+                editable: 'p'
             }
         },
 
@@ -167,6 +168,12 @@
         filters: {
             parseDate(date) {
                 return date.replace(/(\d+)-(\d+)-(\d+)T(\d+):(\d+).+/, '$1-$2-$3 $4:$5')
+            }
+        },
+        methods: {
+            editOrder() {
+                this.editabe = "v-text-field";
+                // axios.patch('http://127.0.0.1:8081/api/orders/', this.order)
             }
         },
         props: ['userId']
