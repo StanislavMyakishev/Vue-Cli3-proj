@@ -47,27 +47,20 @@
                     token: "",
                     userId: "",
                 }
-                // links: [
-                //     {title: 'login', icon: 'lock', url: '/login'},
-                //     {title: 'Registration', icon: 'face', url: '/reg'},
-                //     {title: 'Orders', icon: 'bookmark_border', url: '/orders'},
-                //     {title: 'New order', icon: 'note_add', url: '/new'},
-                //     {title: 'My orders', icon: 'list', url: '/list'}
-                // ]
             }
         },
         components: {
             appFooter: Footer,
             appHeader: Header
         },
-        methods: {
-            authorized(user) {
-                this.user.username = user.username;
-                this.user.token = user.token;
-                this.user.userId = user.userId;
-                // Может еще какие данные передавать чтоб в ЛК отображать
-            }
-        },
+        // methods: {
+        //     authorized(user) {
+        //         this.user.username = user.username;
+        //         this.user.token = user.token;
+        //         this.user.userId = user.userId;
+        //         // Может еще какие данные передавать чтоб в ЛК отображать
+        //     }
+        // },
         computed: {
             loggedIn() {
                 return this.user.token.length > 0;
@@ -99,10 +92,20 @@
             }
         },
         mounted() {
+            if (localStorage.getItem('username') !== null) {
+                this.user.username = localStorage.getItem('username');
+                this.user.token = localStorage.getItem('token');
+                this.user.userId = localStorage.getItem('userId');
+            }
+
             this.$root.$on('authorized', user => {
                 this.user.username = user.username;
                 this.user.token = user.token;
                 this.user.userId = user.userId;
+
+                localStorage.setItem('username', this.user.username);
+                localStorage.setItem('token', this.user.token);
+                localStorage.setItem('userId', this.user.userId);
 
             });
 
@@ -118,6 +121,9 @@
 
             this.$root.$on('logout', () => {
                 this.user.token = '';
+                localStorage.removeItem('username');
+                localStorage.removeItem('token');
+                localStorage.removeItem('userId');
             })
         }
     }

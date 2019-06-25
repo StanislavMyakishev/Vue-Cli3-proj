@@ -52,19 +52,23 @@
                 myorders: []
             }
         },
-        created() {
-            let config = this.config;
-            axios.get('http://127.0.0.1:8081/api/organizations/get_orders/', config)
-                .then(response => response.data)
-                .then(data => {
-                    this.myorders = data;
-                })
-                .catch(error => console.log(error));
+        mounted() {
+            this.getMyOrders();
+            this.$root.$on('orderDeleted', this.getMyOrders);
         },
         methods: {
             goToOrder(index) {
                 // this.$root.$emit('goToOrder', this.myorders[index]);
                 router.push({path: '/order', query: {id: this.myorders[index].id}})
+            },
+            getMyOrders() {
+                let config = this.config;
+                axios.get('http://127.0.0.1:8081/api/organizations/get_orders/', config)
+                    .then(response => response.data)
+                    .then(data => {
+                        this.myorders = data;
+                    })
+                    .catch(error => console.log(error));
             }
         },
         props: ['config']

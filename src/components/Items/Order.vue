@@ -1,7 +1,7 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
     <v-container>
         <v-layout align-center justify-center column fill-height>
-            <v-flex xs12 md10>
+            <v-flex xs12 md10 xl10>
                 <v-card
                         class="elevation-10 mb-3">
                     <v-responsive
@@ -15,10 +15,20 @@
                         </v-img>
                     </v-responsive>
                     <v-card-text class="test">
-                        <component :is="editable" class="text-md-center">{{order.name}}</component>
-                        <component :is="editable" class="text-md-center"> от компании "{{order.customer.name}}"</component>
-                        <component :is="editable" class="text-md-center test2">{{order.description}}</component>
-                        <component :is="editable" class="text-md-right">{{order.date_created | parseDate}} </component>
+                        <component
+                                :is="editable"
+                                class="text-md-center"
+                                v-model="order.name"
+                        >{{order.name}}
+                        </component>
+                        <h2 class="text-md-center"
+                        > от компании "{{order.customer.name}}"</h2>
+                        <component
+                                :is="editable"
+                                class="text-md-center test2"
+                                v-model="order.description">{{order.description}}
+                        </component>
+                        <p class="text-md-right">{{order.date_created | parseDate}} </p>
                     </v-card-text>
                 </v-card>
                 <v-card v-if=perform>
@@ -35,13 +45,25 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <div class="text-xs-center">
-                            <v-btn large color="success">Заказ выполнен</v-btn>
+                            <v-btn
+                                    large color="success"
+                                    @click="completeOrder">Заказ выполнен
+                            </v-btn>
                         </div>
                         <div class="text-xs-center">
-                            <v-btn large color="warning">Изменить заказ</v-btn>
+                            <v-btn v-if="editable === 'p'"
+                                   large color="warning"
+                                   @click="editOrder">Изменить заказ
+                            </v-btn>
+                            <v-btn v-else
+                                   large color="success"
+                                   @click="saveChanges">Сохранить изменения
+                            </v-btn>
                         </div>
                         <div class="text-xs-center">
-                            <v-btn large color="error">Удалить заказ</v-btn>
+                            <v-btn large color="error"
+                                   @click="deleteOrder">Удалить заказ
+                            </v-btn>
                         </div>
                     </v-card-actions>
                 </v-card>
@@ -96,44 +118,41 @@
 </template>
 
 
-
-
-
-
-
 <!--<template>-->
-    <!--<v-container>-->
-        <!--<v-layout row>-->
-            <!--<v-flex xs12>-->
-                <!--<v-card>-->
-                    <!--<v-img-->
-                            <!--:src="imageSrc"-->
-                            <!--height="300px"-->
-                    <!--&gt;-->
-                    <!--</v-img>-->
-                    <!--<v-card-text>-->
-                        <!--<h1 class="text&#45;&#45;primary">{{order.name}}</h1>-->
-                        <!--<h2>{{order.customer.name}}</h2>-->
-                        <!--<p>{{order.description}}</p>-->
-                        <!--<p>{{order.date_created}}</p>-->
-                    <!--</v-card-text>-->
-                    <!--<v-card-actions>-->
-                        <!--<v-spacer></v-spacer>-->
-                        <!--<v-btn class="warning" flat>Edit</v-btn>-->
-                        <!--<v-btn class="success">Get</v-btn>-->
-                    <!--</v-card-actions>-->
-                <!--</v-card>-->
-            <!--</v-flex>-->
-        <!--</v-layout>-->
-    <!--</v-container>-->
+<!--<v-container>-->
+<!--<v-layout row>-->
+<!--<v-flex xs12>-->
+<!--<v-card>-->
+<!--<v-img-->
+<!--:src="imageSrc"-->
+<!--height="300px"-->
+<!--&gt;-->
+<!--</v-img>-->
+<!--<v-card-text>-->
+<!--<h1 class="text&#45;&#45;primary">{{order.name}}</h1>-->
+<!--<h2>{{order.customer.name}}</h2>-->
+<!--<p>{{order.description}}</p>-->
+<!--<p>{{order.date_created}}</p>-->
+<!--</v-card-text>-->
+<!--<v-card-actions>-->
+<!--<v-spacer></v-spacer>-->
+<!--<v-btn class="warning" flat>Edit</v-btn>-->
+<!--<v-btn class="success">Get</v-btn>-->
+<!--</v-card-actions>-->
+<!--</v-card>-->
+<!--</v-flex>-->
+<!--</v-layout>-->
+<!--</v-container>-->
 <!--</template>-->
 
 <script>
     import axios from 'axios'
+    import router from '../../router/index'
+
     export default {
         data() {
             return {
-                order:  {name: '', customer: {name: ''}, date_created: ''},
+                order: {name: '', customer: {name: ''}, date_created: ''},
                 id: NaN,
                 imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
                 perform: null,
@@ -141,16 +160,6 @@
                 editable: 'p'
             }
         },
-
-        // mounted() {
-        //     // this.$root.$on('showOrder', this.showOrder(orderToShow))
-        // },
-        //
-        // methods: {
-        //     showOrder(orderToShow) {
-        //         this.order = orderToShow;
-        //     },
-        // }
         created() {
             this.id = this.$route.query.id;
 
@@ -172,11 +181,33 @@
         },
         methods: {
             editOrder() {
-                this.editabe = "v-text-field";
+                this.editable = "v-text-field";
                 // axios.patch('http://127.0.0.1:8081/api/orders/', this.order)
+            },
+            saveChanges() {
+                let config = this.config;
+                axios.put('http://127.0.0.1:8081/api/orders/' + this.id + '/', this.order, config)
+                    .then(response => {
+                        alert('Order has been successfully changed');
+                    })
+                    .catch(error => console.log(error));
+                this.editable = 'p'
+
+            },
+            deleteOrder() {
+                let config = this.config;
+                axios.delete('http://127.0.0.1:8081/api/orders/' + this.id + '/', config);
+                this.$root.$emit('orderDeleted');
+                router.push('/myorders')
+            },
+
+            completeOrder() {
+                let config = this.config;
+                axios.post('http://127.0.0.1:8081/api/orders/' + this.id + '/complete_order', null, config)
+            //    Игорь должен исправить
             }
         },
-        props: ['userId']
+        props: ['userId', 'config']
     }
 </script>
 
@@ -184,6 +215,7 @@
     .rel {
         position: relative;
     }
+
     .abs {
         top: 20px;
         left: 20px;
