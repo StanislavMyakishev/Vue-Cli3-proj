@@ -21,47 +21,56 @@ export default new VueRouter({
             path: '',
             name: 'home',
             component: Home
+            //+
         },
         {
             path: '/test',
             name: 'test',
             component: Test
+            //+
         },
         {
             path: '/modify',
             name: 'modify',
             component: Modify
+            //+
         },
         {
             path: '/ord/:id',
             props: true,
             name: 'order',
             component: Order
+            //+
         },
         {
             path: '/myrequests',
             name: 'myRequests',
             component: MyRequests
+            //+
         },
         {
             path: '/new',
             name: 'newOrder',
             component: NewOrder
+            //+
         },
         {
             path: '/login',
             name: 'login',
             component: Login
+            //+
         },
         {
             path: '/reg',
             name: 'reg',
             component: Registration
+            //+
         },
         {
             path: '/myorders',
             name: 'myOrders',
             component: MyOrders
+            //+
         },
         {
             path: '/organization',
@@ -69,11 +78,13 @@ export default new VueRouter({
             // props: true,
             name: 'organization',
             component: OrganizationInfo
+            //+
         },
         {
             path: '/category',
             name: 'category',
             component: OrderCategory
+            //+
         },
     ],
     mode: 'history'

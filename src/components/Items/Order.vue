@@ -5,13 +5,11 @@
                 <v-card
                         class="elevation-10 mb-3">
                     <v-responsive
-                            class="rel"
-                    >
+                            class="rel">
                         <img class="abs" src="https://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar">
                         <v-img
                                 :src="testOrder.imageSrc"
-                                height="300px"
-                        >
+                                height="300px">
                         </v-img>
                     </v-responsive>
                     <v-card-text>
@@ -37,7 +35,7 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <div class="text-xs-center">
-                            <v-btn large color="success">Заказ выполнен</v-btn>
+                            <v-btn large color="secondary">Заказ выполнен</v-btn>
                         </div>
                         <div class="text-xs-center">
                             <v-btn large color="warning">Изменить заказ</v-btn>
@@ -52,8 +50,7 @@
                         <template v-for="(item, index) in performers">
                             <v-subheader
                                     v-if="item.header"
-                                    :key="item.header"
-                            >
+                                    :key="item.header">
                                 {{ item.header }}
                             </v-subheader>
 
@@ -66,8 +63,7 @@
                             <v-list-tile
                                     v-else
                                     :key="item.title"
-                                    avatar
-                            >
+                                    avatar>
                                 <v-list-tile-avatar>
                                     <img :src="item.avatar">
                                 </v-list-tile-avatar>
@@ -78,7 +74,7 @@
                                 </v-list-tile-content>
                                 <v-btn
                                         v-if=!hired
-                                        color="success"
+                                        color="secondary"
                                         @click="hired = !hired"
                                 >Принять заявку
                                 </v-btn>
@@ -101,9 +97,7 @@
     export default {
         data() {
             return {
-
-                perform: false,
-                perform: true,
+                perform: !true,
                 hired: false,
                 id: this.$route.params.id,
                 testOrder: {
@@ -122,8 +116,7 @@
                     id: '1',
                 },
                 performers: [
-                    {header: 'Комментарии'},
-                    {header: 'Today'},
+                    {header: 'Заявки'},
                     {
                         avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
                         performerName: 'Иван Иванов',

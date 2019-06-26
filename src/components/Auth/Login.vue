@@ -4,19 +4,16 @@
             <v-layout align-center justify-center>
                 <v-flex xs12 sm8 md6>
                     <v-card
-                            class="elevation-12"
-                    >
+                            class="elevation-12">
                         <v-toolbar
-                                dark color="primary"
-                        >
+                                dark color="primary lighten-1">
                             <v-toolbar-title>Login form</v-toolbar-title>
                         </v-toolbar>
                         <v-card-text>
                             <v-form
                                     v-model="valid"
                                     ref="form"
-                                    lazy-validation
-                            >
+                                    lazy-validation>
                                 <v-text-field
                                         prepend-icon="person"
                                         name="email"
@@ -39,7 +36,7 @@
                         <v-card-actions>
                             <v-spacer></v-spacer>
                             <v-btn
-                                    color="primary"
+                                    color="secondary"
                                     @click="onSubmit"
                                     :disabled="!valid"
                             >Login
@@ -54,6 +51,7 @@
 
 <script>
     import axios from 'axios'
+
     export default {
         data() {
             return {

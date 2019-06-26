@@ -1,36 +1,36 @@
 <template>
     <v-container>
         <v-layout>
-            <v-flex xs12 sm8 offset-sm2>
-                <h1 class="text--secondary mb-3">My orders</h1>
-
+            <v-flex xs12 sm6 offset-sm3>
+                <v-card flat>
+                    <v-card-text
+                            class="display-2">
+                        <span class="clr">My orders</span>
+                    </v-card-text>
+                </v-card>
                 <v-card
-                        color="blue-grey lighten-4"
                         class="elevation-10 mb-3"
-                        v-for="ord in myorders"
-                        :key="ord.id"
-                >
+                        v-for="ord in ordList"
+                        :key="ord.id">
                     <v-layout row>
                         <v-flex xs4>
                             <v-img
-                                    :src="'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'"
-                                    height="160px"
-                            >
+                                    :src="ord.imageSrc"
+                                    height="160px">
                             </v-img>
                         </v-flex>
                         <v-flex xs8>
                             <v-card-text>
                                 <h2 class="text--primary">{{ord.name}}</h2>
-                                <!--ord.description переделать, выезжает текст за рамки карточки-->
                                 <p>{{ord.description}}</p>
                                 <p>{{ord.date_created}}</p>
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
                                 <v-btn
-                                        class="info"
-                                        :to="/ord/ + ord.id"
-                                >Open
+                                        class="secondary"
+                                        :to="/ord/ + ord.id">
+                                    Open
                                 </v-btn>
                             </v-card-actions>
                         </v-flex>
@@ -43,10 +43,24 @@
 
 <script>
     import axios from 'axios';
+
     export default {
         data() {
             return {
-                myorders: []
+                ordList: [
+                    {
+                        name: 'First order',
+                        description: 'Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description ',
+                        imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+                        date_created: new Date(),
+                    },
+                    {
+                        name: 'Second order',
+                        description: 'Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description ',
+                        imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+                        date_created: new Date(),
+                    },
+                ]
             }
         },
         created() {

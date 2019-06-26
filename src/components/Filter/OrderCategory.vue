@@ -1,19 +1,15 @@
 <template>
     <v-layout justify-center>
         <v-flex xs12 sm8>
-            <v-card
-                    color="blue-grey lighten-4"
-                    class="elevation-10 mb-3">
+            <v-card flat>
                 <v-container
                         fluid
-                        grid-list-md
-                >
+                        grid-list-md>
                     <v-layout row wrap>
                         <v-flex
                                 v-for="card in orders"
                                 :key="card.name"
-                                xs12 sm6
-                        >
+                                xs12 sm6>
                             <v-card>
                                 <v-img
                                         :src=src
@@ -30,7 +26,7 @@
                                 <v-card-actions>
                                     <v-spacer></v-spacer>
                                     <v-btn
-                                            class="info"
+                                            class="secondary"
                                             :to="/ord/ + card.id"
                                     >Open
                                     </v-btn>
@@ -46,6 +42,7 @@
 
 <script>
     import axios from 'axios'
+
     export default {
         data() {
             return {
@@ -57,7 +54,26 @@
                     [4, 'Retail'],
                     [5, 'Others']
                 ],
-                orders: null,
+                orders: [
+                    {
+                        name: 'First name',
+                        customer_id: 1,
+                        id: 1
+                    },
+                    {
+                        name: 'First name',
+                        customer_id: 1,
+                        id: 1
+                    }, {
+                        name: 'First name',
+                        customer_id: 1,
+                        id: 1
+                    }, {
+                        name: 'First name',
+                        customer_id: 1,
+                        id: 1
+                    },
+                ],
                 src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg'
             }
         },

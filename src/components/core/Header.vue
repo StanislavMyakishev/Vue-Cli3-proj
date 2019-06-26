@@ -8,8 +8,7 @@
             <router-link
                     to="/"
                     tag="span"
-                    class="pointer"
-            >
+                    class="pointer">
                 Treasury
             </router-link>
         </v-toolbar-title>
@@ -20,8 +19,7 @@
                     :key="link.title"
                     :to="link.url"
                     flat
-                    @click="logout(link.title)"
-            >
+                    @click="logout(link.title)">
                 <v-icon left>{{link.icon}}</v-icon>
                 {{link.title}}
             </v-btn>
@@ -31,6 +29,7 @@
 
 <script>
     import axios from 'axios'
+
     axios.defaults.headers.get['Access-Control-Allow-Origin'] = '';
 
     export default {
@@ -42,7 +41,7 @@
         },
         methods: {
             logout(title) {
-                if(title === 'logout') {
+                if (title === 'logout') {
                     this.$root.$emit('logout');
                     this.$router.push('/');
                 }

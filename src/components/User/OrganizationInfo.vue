@@ -3,16 +3,14 @@
         <v-layout>
             <v-flex>
                 <v-card>
-                    <v-layout
-                            row wrap>
+                    <v-layout row wrap>
                         <v-flex xs4 md4 sm4>
                             <v-card flat>
                                 <v-responsive>
                                     <v-avatar
                                             :tile="tile"
                                             :size="300"
-                                            color="grey lighten-4"
-                                    >
+                                            color="grey lighten-4">
                                         <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar">
                                     </v-avatar>
                                 </v-responsive>
@@ -28,7 +26,7 @@
                                     <v-rating
                                             v-model="rating"
                                             background-color="white"
-                                            color="yellow accent-4"
+                                            color="secondary"
                                             dense
                                             half-increments
                                             hover
@@ -55,8 +53,7 @@
                                     <template v-for="(user, index) in users">
                                         <v-subheader
                                                 v-if="user.header"
-                                                :key="user.header"
-                                        >
+                                                :key="user.header">
                                             {{ user.header }}
                                         </v-subheader>
 
@@ -69,8 +66,7 @@
                                         <v-list-tile
                                                 v-else
                                                 :key="user.title"
-                                                avatar
-                                        >
+                                                avatar>
                                             <v-list-tile-avatar>
                                                 <img :src="user.avatar">
                                             </v-list-tile-avatar>
@@ -86,7 +82,7 @@
                                                 <v-rating
                                                         v-model="user.rating"
                                                         background-color="white"
-                                                        color="yellow accent-4"
+                                                        color="secondary"
                                                         dense
                                                         :readonly="true"
                                                         half-increments
@@ -115,14 +111,14 @@
                                     <v-rating
                                             v-model="ownRating"
                                             background-color="white"
-                                            color="yellow accent-4"
+                                            color="secondary"
                                             half-increments
                                             hover
                                             size="18"
                                     ></v-rating>
                                 </v-card-actions>
                                 <div class="text-xs-center">
-                                    <v-btn large color="primary">Отправить отзыв</v-btn>
+                                    <v-btn large color="secondary">Отправить отзыв</v-btn>
                                 </div>
                             </v-card>
                         </v-flex>

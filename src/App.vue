@@ -5,14 +5,12 @@
                 <v-navigation-drawer
                         app
                         temporary=""
-                        v-model="drawer"
-                >
+                        v-model="drawer">
                     <v-list>
                         <v-list-tile
                                 v-for="link of links"
                                 :key="link.title"
-                                :to="link.url"
-                        >
+                                :to="link.url">
                             <v-list-tile-action>
                                 <v-icon>{{link.icon}}</v-icon>
                             </v-list-tile-action>
@@ -45,13 +43,6 @@
                     username: "",
                     token: ""
                 }
-                // links: [
-                //     {title: 'login', icon: 'lock', url: '/login'},
-                //     {title: 'Registration', icon: 'face', url: '/reg'},
-                //     {title: 'Orders', icon: 'bookmark_border', url: '/orders'},
-                //     {title: 'New order', icon: 'note_add', url: '/new'},
-                //     {title: 'My orders', icon: 'list', url: '/list'}
-                // ]
             }
         },
         components: {
@@ -112,14 +103,14 @@
             this.$root.$on('logout', () => {
                 this.user.token = '';
             })
-        }
+        },
     }
 </script>
 
 <style scoped>
 
     #app {
-        background-color: #607d8b;
+        background-color: #FFFFFF;
     }
 
     .body {

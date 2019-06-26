@@ -5,19 +5,16 @@
 
                 <v-flex>
                     <v-card
-                            class="elevation-12"
-                    >
+                            class="elevation-12">
                         <v-toolbar
-                                dark color="primary"
-                        >
+                                dark color="primary lighten-1">
                             <v-toolbar-title>New Order</v-toolbar-title>
                         </v-toolbar>
                         <v-card-text>
                             <v-form
                                     v-model="valid"
                                     ref="form"
-                                    lazy-validation
-                            >
+                                    lazy-validation>
                                 <v-text-field
                                         v-model="name"
                                         label="New Item name"
@@ -49,8 +46,8 @@
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn @click="validate" :disabled="!valid" class="blue-grey lighten-4">submit</v-btn>
-                            <v-btn @click="clear" class="blue-grey lighten-4">clear</v-btn>
+                            <v-btn @click="validate" :disabled="!valid" class="secondary">submit</v-btn>
+                            <v-btn @click="clear" class="error">clear</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>
@@ -104,9 +101,9 @@
             },
             clear() {
                 this.name = '',
-                this.descr = '',
-                this.select = null,
-                this.checkbox = false
+                    this.descr = '',
+                    this.select = null,
+                    this.checkbox = false
             }
         }
     }

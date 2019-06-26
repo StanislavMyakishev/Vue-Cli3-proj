@@ -5,19 +5,16 @@
 
                 <v-flex>
                     <v-card
-                            class="elevation-12"
-                    >
+                            class="elevation-12">
                         <v-toolbar
-                                dark color="primary"
-                        >
+                                dark color="primary lighten-1">
                             <v-toolbar-title>Account settings</v-toolbar-title>
                         </v-toolbar>
                         <v-card-text>
                             <v-form
                                     v-model="valid"
                                     ref="form"
-                                    lazy-validation
-                            >
+                                    lazy-validation>
                                 <v-text-field
                                         name="email"
                                         label="Email"
@@ -62,7 +59,7 @@
                         <v-card-actions>
                             <v-spacer></v-spacer>
                             <v-btn
-                                    color="primary"
+                                    color="secondary"
                                     @click="onSubmit"
                                     :disabled="!valid"
                             >Save changes

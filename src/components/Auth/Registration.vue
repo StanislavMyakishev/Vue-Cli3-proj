@@ -4,19 +4,16 @@
             <v-layout align-center justify-center>
                 <v-flex xs12 sm8 md8>
                     <v-card
-                            class="elevation-10"
-                    >
+                            class="elevation-10">
                         <v-toolbar
-                                dark color="primary"
-                        >
+                                dark color="primary lighten-1">
                             <v-toolbar-title>Registration form</v-toolbar-title>
                         </v-toolbar>
                         <v-card-text>
                             <v-form
                                     v-model="valid"
                                     ref="form"
-                                    lazy-validation
-                            >
+                                    lazy-validation>
                                 <v-text-field
                                         prepend-icon="person"
                                         name="email"
@@ -125,10 +122,11 @@
                         <v-card-actions>
                             <v-spacer></v-spacer>
                             <v-btn
-                                    color="primary"
+                                    color="secondary"
                                     @click="onSubmit"
                                     :disabled="!valid"
-                            >Create account</v-btn>
+                            >Create account
+                            </v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>
@@ -139,6 +137,7 @@
 
 <script>
     import axios from 'axios'
+
     export default {
         data() {
             return {
@@ -170,7 +169,7 @@
             }
         },
         methods: {
-            onSubmit(){
+            onSubmit() {
                 if (this.$refs.form.validate()) {
                     const user = {
                         email: this.email,

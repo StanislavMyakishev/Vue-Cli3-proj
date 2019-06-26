@@ -3,16 +3,16 @@ import App from './App.vue'
 import router from './router'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
+import colors from 'vuetify/es5/util/colors'
 
 Vue.use(Vuetify, {
     theme: {
-        primary: '#607d8b',
-        secondary: '#FFF59D',
-        accent: '#ff5722',
-        error: '#FF6D00',
-        warning: '#ff9800',
-        info: '#8bc34a',
-        success: '#4caf50'
+        primary: '#6200EE',
+        secondary: '#03DAC5',
+        background: '#FFFFFF',
+        black: '#000000',
+        error: '#B00020',
+        warning: '#018786'
     }
 });
 
