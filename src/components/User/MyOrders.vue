@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-layout>
-            <v-flex xs12 sm6 offset-sm3>
+            <v-flex xs12 sm8 offset-sm2>
                 <v-card flat>
                     <v-card-text
                             class="display-2">
@@ -10,26 +10,27 @@
                 </v-card>
                 <v-card
                         class="elevation-10 mb-3"
-                        v-for="ord in ordList"
+                        v-for="(ord, index) in myorders"
                         :key="ord.id">
                     <v-layout row>
                         <v-flex xs4>
                             <v-img
-                                    :src="ord.imageSrc"
-                                    height="160px">
+                                    :src="'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'"
+                                    height="230px">
                             </v-img>
                         </v-flex>
                         <v-flex xs8>
                             <v-card-text>
                                 <h2 class="text--primary">{{ord.name}}</h2>
+                                <p>{{ord.customer.name}}</p>
                                 <p>{{ord.description}}</p>
-                                <p>{{ord.date_created}}</p>
+                                <p>{{ord.date_created | parseDate}}</p>
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
                                 <v-btn
                                         class="secondary"
-                                        :to="/ord/ + ord.id">
+                                        @click="goToOrder(index)">
                                     Открыть
                                 </v-btn>
                             </v-card-actions>
@@ -42,34 +43,55 @@
 </template>
 
 <script>
-    import axios from 'axios';
+    import axios from 'axios'
+    import router from '../../router/index'
 
     export default {
         data() {
             return {
-                ordList: [
-                    {
-                        name: 'Первый заказ',
-                        description: 'Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа ',
-                        imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-                        date_created: new Date(),
-                    },
-                    {
-                        name: 'Второй заказ',
-                        description: 'Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа ',
-                        imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-                        date_created: new Date(),
-                    },
+                myorders: [
+                    // {
+                    //     name: 'Первый заказ',
+                    //     description: 'Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа ',
+                    //     imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+                    //     date_created: new Date(),
+                    // },
+                    // {
+                    //     name: 'Второй заказ',
+                    //     description: 'Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа ',
+                    //     imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+                    //     date_created: new Date(),
+                    // },
                 ]
             }
         },
-        created() {
-            axios.get('http://127.0.0.1:8081/api/orders/')
-                .then(response => response.data)
-                .then(data => {
-                    this.myorders = data;
-                })
-            // + ДОБАВИТЬ ФИЛЬТРАЦИЮ ПО customer_id
-        }
+        mounted() {
+            this.getMyOrders();
+            this.$root.$on('orderDeleted', this.getMyOrders);
+        },
+
+        filters: {
+            parseDate(date) {
+                return date.replace(/(\d+)-(\d+)-(\d+)T(\d+):(\d+).+/, '$1-$2-$3 $4:$5')
+            }
+        },
+
+        methods: {
+            goToOrder(index) {
+                // this.$root.$emit('goToOrder', this.myorders[index]);
+                router.push({path: '/order', query: {id: this.myorders[index].id}})
+            },
+            getMyOrders() {
+                let config = this.config;
+                axios.get('http://127.0.0.1:8081/api/organizations/' + localStorage.getItem('userId') + '/get_orders/', config)
+                    .then(response => response.data)
+                    .then(data => {
+                        this.myorders = data;
+                    })
+                    .catch(error => console.log(error));
+            }
+        },
+        props: ['config']
     }
 </script>
+
