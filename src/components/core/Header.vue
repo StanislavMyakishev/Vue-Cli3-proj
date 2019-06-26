@@ -62,7 +62,7 @@
         },
         methods: {
             logout(title) {
-                if(title === 'logout') {
+                if(title === 'Выйти') {
                     this.$root.$emit('logout');
                     this.$router.push('/');
                 }

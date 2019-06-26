@@ -33,7 +33,7 @@
             appFooter: Footer,
             appHeader: Header
         },
-       
+
         computed: {
             loggedIn() {
                 return this.user.token.length > 0;
