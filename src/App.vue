@@ -4,7 +4,7 @@
             <div class="wrapper">
                 <app-header :links="links"></app-header>
                 <v-content>
-                    <router-view></router-view>
+                    <router-view :config="config" :userId="user.userId"></router-view>
                 </v-content>
             </div>
             <app-footer></app-footer>
@@ -16,6 +16,7 @@
     import Footer from '@/components/core/Footer'
     import Header from '@/components/core/Header'
     import axios from 'axios'
+    import router from './router/index'
 
     export default {
         data() {
@@ -23,7 +24,8 @@
                 drawer: false,
                 user: {
                     username: "",
-                    token: ""
+                    token: "",
+                    userId: "",
                 }
             }
         },
@@ -31,17 +33,10 @@
             appFooter: Footer,
             appHeader: Header
         },
-        methods: {
-            authorized(user) {
-                this.user.username = user.username;
-                this.user.token = user.token;
-                // Может еще какие данные передавать чтоб в ЛК отображать
-            }
-        },
+       
         computed: {
             loggedIn() {
-                return true;
-                // return true;
+                return this.user.token.length > 0;
             },
             links() {
                 if (this.loggedIn) {
@@ -67,15 +62,26 @@
             }
         },
         mounted() {
+            if (localStorage.getItem('username') !== null) {
+                this.user.username = localStorage.getItem('username');
+                this.user.token = localStorage.getItem('token');
+                this.user.userId = localStorage.getItem('userId');
+            }
+
             this.$root.$on('authorized', user => {
                 this.user.username = user.username;
                 this.user.token = user.token;
+                this.user.userId = user.userId;
+
+                localStorage.setItem('username', this.user.username);
+                localStorage.setItem('token', this.user.token);
+                localStorage.setItem('userId', this.user.userId);
             });
 
             this.$root.$on('newOrder', order => {
                 axios.post('http://127.0.0.1:8081/api/orders/', order, this.config)
                     .then(response => {
-                        // Add some logic, waiting for spec
+                        router.push('/myorders')
                     })
                     .catch(error => {
                         console.log(error);
@@ -84,6 +90,9 @@
 
             this.$root.$on('logout', () => {
                 this.user.token = '';
+                localStorage.removeItem('username');
+                localStorage.removeItem('token');
+                localStorage.removeItem('userId');
             })
         },
     }

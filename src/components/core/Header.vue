@@ -34,7 +34,8 @@
                 <v-list-tile
                         v-for="link of links"
                         :key="link.title"
-                        :to="link.url">
+                        :to="link.url"
+                        @click="logout(link.title)">
                     <v-list-tile-action>
                         <v-icon>{{link.icon}}</v-icon>
                     </v-list-tile-action>
