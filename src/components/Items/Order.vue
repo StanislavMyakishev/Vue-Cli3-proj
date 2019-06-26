@@ -28,7 +28,7 @@
                         </v-textarea>
                     </v-card-text>
                     <div class="text-xs-center">
-                        <v-btn large color="primary">Оставить заявку на заказ</v-btn>
+                        <v-btn large color="secondary">Оставить заявку на заказ</v-btn>
                     </div>
                 </v-card>
                 <v-card v-else>
@@ -97,7 +97,7 @@
     export default {
         data() {
             return {
-                perform: !true,
+                perform: true,
                 hired: false,
                 id: this.$route.params.id,
                 testOrder: {
@@ -149,6 +149,5 @@
         top: 20px;
         left: 20px;
         position: absolute;
-        z-index: 100;
     }
 </style>
