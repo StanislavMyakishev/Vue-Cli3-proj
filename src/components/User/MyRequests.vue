@@ -67,7 +67,13 @@
                     .catch(error => console.log(error));
             }
         },
-        props: ['config']
+        props: ['config'],
+
+        filters: {
+            parseDate(date) {
+                return date.replace(/(\d+)-(\d+)-(\d+)T(\d+):(\d+).+/, '$1-$2-$3 $4:$5')
+            }
+        },
     }
 </script>
 

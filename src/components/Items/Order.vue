@@ -2,6 +2,8 @@
     <v-container>
         <v-layout align-center justify-center column fill-height>
             <v-flex xs12>
+
+                <!--САМ ЗАКАЗ-->
                 <v-card
                         class="elevation-10 mb-3">
                     <v-responsive>
@@ -10,19 +12,26 @@
                         </div>
                         <v-img
                                 class="backg"
-                                :src="testOrder.imageSrc"
+                                :src="'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'"
                                 height="300px">
                         </v-img>
                     </v-responsive>
                     <v-card-text>
-                        <h1 class="text-md-center">{{testOrder.title}}</h1>
-                        <h2 class="text-md-center"> от компании "{{testOrder.company}}"</h2>
-                        <p class="text-md-center">{{testOrder.description}}</p>
-                        <p class="text-md-right">{{testOrder.createdDate.getFullYear() + '/' +
-                            testOrder.createdDate.getMonth() + '/' + testOrder.createdDate.getDate() + ' ' +
-                            testOrder.createdDate.getHours() + ':' + testOrder.createdDate.getMinutes()}} </p>
+                        <h1 class="text-md-center"
+                            :is="editable"
+                            v-model="order.name"
+                        >{{order.name}}</h1>
+                        <h2 class="text-md-center"> от компании "{{order.customer.name}}"</h2>
+                        <p class="text-md-center"
+                           :is="editable"
+                           v-model="order.description"
+                        >{{order.description}}</p>
+                        <p class="text-md-right">{{order.date_created | parseDate}} </p>
                     </v-card-text>
                 </v-card>
+                <!--САМ ЗАКАЗ ЗАКОНЧИЛСЯ-->
+
+
                 <v-card v-if=perform>
                     <v-card-text>
                         <v-textarea
@@ -30,17 +39,35 @@
                         </v-textarea>
                     </v-card-text>
                     <div class="text-xs-center">
-                        <v-btn large color="secondary">Оставить заявку на заказ</v-btn>
+                        <v-btn large color="secondary"
+                               @click="applyForOrder"
+                        >Оставить заявку на заказ
+                        </v-btn>
                     </div>
                 </v-card>
+
+
                 <v-card class="elevation-10">
                     <v-layout align-center justify-center row fill-height>
                         <v-flex lg12 sm12 xs12>
                             <v-card v-if=!perform flat>
                                 <div class="text-xs-center">
-                                    <v-btn large color="secondary">Заказ выполнен</v-btn>
-                                    <v-btn large color="warning">Изменить заказ</v-btn>
-                                    <v-btn large color="error">Удалить заказ</v-btn>
+                                    <v-btn large color="secondary"
+                                           @click="completeOrder">Заказ выполнен
+                                    </v-btn>
+
+                                    <v-btn large color="warning"
+                                           v-if="editable === 'p'"
+                                           @click="editOrder">Изменить заказ
+                                    </v-btn>
+                                    <v-btn v-else
+                                           large color="warning"
+                                           @click="saveChanges">Сохранить изменения
+                                    </v-btn>
+
+                                    <v-btn large color="error"
+                                           @click="deleteOrder">Удалить заказ
+                                    </v-btn>
                                 </div>
                             </v-card>
                         </v-flex>
@@ -66,7 +93,7 @@
                                             :key="item.title"
                                             avatar>
                                         <v-list-tile-avatar>
-                                            <img :src="item.avatar">
+                                            <img :src="'https://cdn.vuetifyjs.com/images/lists/1.jpg'">
                                         </v-list-tile-avatar>
 
                                         <v-list-tile-content>
@@ -97,49 +124,126 @@
 </template>
 
 <script>
+    import axios from 'axios'
+    import router from '../../router/index'
+
     export default {
         data() {
             return {
-                perform: true,
+                order: {name: '', customer: {name: ''}, date_created: ''},
+                perform: null,
+                id: NaN,
+                performers: [],
+                editable: 'p',
+                comment: '',
+
+
                 hired: false,
-                id: this.$route.params.id,
-                testOrder: {
-                    title: 'Фриланс-биржа',
-                    company: 'Университет ИТМО',
-                    category: "IT",
-                    createdDate: new Date(2019, 0, 1, 0, 0, 0, 0),
-                    description: 'Наша компания предлагает Вам выполнить восхитительный проект: создание фриланс биржи!' +
-                        ' Нам необходима реализация сайта этого проекта на стеке python + js используя vue (использование ' +
-                        'Нам необходима реализация сайта этого проекта на стеке python + js используя vue (использование ' +
-                        'инструментов по типу vuetify оставется на ваш вкус). Сайт должен быть красивым и функциональным,' +
-                        'страницы должны быть реализованы с использованием material design компонентов и в принципе выглядеть ' +
-                        'приятно. Это сампл описания заказа, так что особо не зачитывайтесь. Далее будет сгенерированный текст,' +
-                        ' спасибо за внимание! ' + 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                    imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-                    id: '1',
-                },
-                performers: [
-                    {header: 'Заявки'},
-                    {
-                        avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-                        performerName: 'Иван Иванов',
-                        subtitle: "<span class='text--primary'>Проект интересный, очень заинтересован его выполнить за зачет по вебу :)</span>"
-                    },
-                    {divider: true, inset: true},
-                    {
-                        avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-                        performerName: 'Павел Григорьев <span class="grey--text text--lighten-1"></span>',
-                        subtitle: "<span class='text--primary'>Куда нажать, чтобы просто получить зачет по вебу?</span>"
-                    },
-                    {divider: true, inset: true},
-                    {
-                        avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-                        performerName: 'Анна Некифорова',
-                        subtitle: "<span class='text--primary'>Согласна остановить горящую избу на скаку за тройку по вебу</span>"
-                    }
-                ]
+                // testOrder: {
+                //     title: 'Фриланс-биржа',
+                //     company: 'Университет ИТМО',
+                //     category: "IT",
+                //     createdDate: new Date(2019, 0, 1, 0, 0, 0, 0),
+                //     description: 'Наша компания предлагает Вам выполнить восхитительный проект: создание фриланс биржи!' +
+                //         ' Нам необходима реализация сайта этого проекта на стеке python + js используя vue (использование ' +
+                //         'Нам необходима реализация сайта этого проекта на стеке python + js используя vue (использование ' +
+                //         'инструментов по типу vuetify оставется на ваш вкус). Сайт должен быть красивым и функциональным,' +
+                //         'страницы должны быть реализованы с использованием material design компонентов и в принципе выглядеть ' +
+                //         'приятно. Это сампл описания заказа, так что особо не зачитывайтесь. Далее будет сгенерированный текст,' +
+                //         ' спасибо за внимание! ' + 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+                //     imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+                //     id: '1',
+                // },
+
+                // performers: [
+                //     {header: 'Заявки'},
+                //     {
+                //         avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
+                //         performerName: 'Иван Иванов',
+                //         subtitle: "<span class='text--primary'>Проект интересный, очень заинтересован его выполнить за зачет по вебу :)</span>"
+                //     },
+                //     {divider: true, inset: true},
+                //     {
+                //         avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
+                //         performerName: 'Павел Григорьев <span class="grey--text text--lighten-1"></span>',
+                //         subtitle: "<span class='text--primary'>Куда нажать, чтобы просто получить зачет по вебу?</span>"
+                //     },
+                //     {divider: true, inset: true},
+                //     {
+                //         avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
+                //         performerName: 'Анна Некифорова',
+                //         subtitle: "<span class='text--primary'>Согласна остановить горящую избу на скаку за тройку по вебу</span>"
+                //     }
+                // ]
             }
-        }
+        },
+
+        mounted() {
+            this.id = this.$route.query.id;
+            axios.get('http://127.0.0.1:8081/api/orders/' + this.id + '/')
+                .then(response => response.data)
+                .then(data => {
+                    this.order = data;
+                    this.perform = this.order.customer.id !== this.userId;
+                })
+                .catch(error => {
+                    console.log(error)
+                });
+            this.getPerformers();
+        },
+        filters: {
+            parseDate(date) {
+                return date.replace(/(\d+)-(\d+)-(\d+)T(\d+):(\d+).+/, '$1-$2-$3 $4:$5')
+            }
+        },
+        methods: {
+            editOrder() {
+                this.editable = "v-text-field";
+                // axios.patch('http://127.0.0.1:8081/api/orders/', this.order)
+            },
+            saveChanges() {
+                let config = this.config;
+                axios.put('http://127.0.0.1:8081/api/orders/' + this.id + '/', this.order, config)
+                    .then(response => {
+                        alert('Order has been successfully changed');
+                    })
+                    .catch(error => console.log(error));
+                this.editable = 'p'
+            },
+            deleteOrder() {
+                let config = this.config;
+                axios.delete('http://127.0.0.1:8081/api/orders/' + this.id + '/', config);
+                this.$root.$emit('orderDeleted');
+                router.push('/myorders')
+            },
+            completeOrder() {
+                let config = this.config;
+                axios.post('http://127.0.0.1:8081/api/orders/' + this.id + '/complete_order/', null, config)
+            },
+            applyForOrder() {
+                let config = this.config;
+                axios.post('http://127.0.0.1:8081/api/orders/' + this.id + '/apply_for_order/', {comment: this.comment}, config);
+                this.$root.$emit('updateRequests');
+                router.push('/myrequests')
+            },
+            getPerformers() {
+                let config = this.config;
+                axios.get('http://127.0.0.1:8081/api/orders/' + this.id + '/get_order_requests/', config)
+                    .then(response => response.data)
+                    .then(data => {
+                        this.performers = data
+                    });
+            },
+            acceptOrderRequest() {
+                let config = this.config;
+                axios.post('http://127.0.0.1:8081/api/orders/' + this.id + '/accept_order_requests/', null, config)
+            },
+            removePerformer() {
+                let config = this.config;
+                axios.post('http://127.0.0.1:8081/api/orders/' + this.id + '/remove_performer/', null, config)
+            }
+        },
+        props: ['userId', 'config']
     }
 </script>
 
@@ -147,12 +251,15 @@
     .rel {
         position: relative;
     }
+
     .icon {
         z-index: 1;
         top: 20px;
         left: 20px;
         position: absolute;
-    },
+    }
+
+    ,
     .backg {
         z-index: 3;
     }
