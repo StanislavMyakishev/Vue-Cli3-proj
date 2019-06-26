@@ -31,62 +31,64 @@
                         <v-btn large color="secondary">Оставить заявку на заказ</v-btn>
                     </div>
                 </v-card>
-                <v-card v-else>
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <div class="text-xs-center">
-                            <v-btn large color="secondary">Заказ выполнен</v-btn>
-                        </div>
-                        <div class="text-xs-center">
-                            <v-btn large color="warning">Изменить заказ</v-btn>
-                        </div>
-                        <div class="text-xs-center">
-                            <v-btn large color="error">Удалить заказ</v-btn>
-                        </div>
-                    </v-card-actions>
-                </v-card>
-                <v-card v-if=!perform>
-                    <v-list two-line>
-                        <template v-for="(item, index) in performers">
-                            <v-subheader
-                                    v-if="item.header"
-                                    :key="item.header">
-                                {{ item.header }}
-                            </v-subheader>
+                <v-card class="elevation-10">
+                    <v-card v-if=!perform flat>
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <div class="text-xs-center">
+                                <v-btn large color="secondary">Заказ выполнен</v-btn>
+                            </div>
+                            <div class="text-xs-center">
+                                <v-btn large color="warning">Изменить заказ</v-btn>
+                            </div>
+                            <div class="text-xs-center">
+                                <v-btn large color="error">Удалить заказ</v-btn>
+                            </div>
+                        </v-card-actions>
+                    </v-card>
+                    <v-card v-if=!perform flat>
+                        <v-list two-line>
+                            <template v-for="(item, index) in performers">
+                                <v-subheader
+                                        v-if="item.header"
+                                        :key="item.header">
+                                    {{ item.header }}
+                                </v-subheader>
 
-                            <v-divider
-                                    v-else-if="item.divider"
-                                    :key="index"
-                                    :inset="item.inset"
-                            ></v-divider>
+                                <v-divider
+                                        v-else-if="item.divider"
+                                        :key="index"
+                                        :inset="item.inset"
+                                ></v-divider>
 
-                            <v-list-tile
-                                    v-else
-                                    :key="item.title"
-                                    avatar>
-                                <v-list-tile-avatar>
-                                    <img :src="item.avatar">
-                                </v-list-tile-avatar>
-
-                                <v-list-tile-content>
-                                    <v-list-tile-title v-html="item.performerName"></v-list-tile-title>
-                                    <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
-                                </v-list-tile-content>
-                                <v-btn
-                                        v-if=!hired
-                                        color="secondary"
-                                        @click="hired = !hired"
-                                >Принять заявку
-                                </v-btn>
-                                <v-btn
+                                <v-list-tile
                                         v-else
-                                        color="error"
-                                        @click="hired = !hired"
-                                >Удалить перформера
-                                </v-btn>
-                            </v-list-tile>
-                        </template>
-                    </v-list>
+                                        :key="item.title"
+                                        avatar>
+                                    <v-list-tile-avatar>
+                                        <img :src="item.avatar">
+                                    </v-list-tile-avatar>
+
+                                    <v-list-tile-content>
+                                        <v-list-tile-title v-html="item.performerName"></v-list-tile-title>
+                                        <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
+                                    </v-list-tile-content>
+                                    <v-btn
+                                            v-if=!hired
+                                            color="secondary"
+                                            @click="hired = !hired"
+                                    >Принять заявку
+                                    </v-btn>
+                                    <v-btn
+                                            v-else
+                                            color="error"
+                                            @click="hired = !hired"
+                                    >Удалить перформера
+                                    </v-btn>
+                                </v-list-tile>
+                            </template>
+                        </v-list>
+                    </v-card>
                 </v-card>
             </v-flex>
         </v-layout>
@@ -97,7 +99,7 @@
     export default {
         data() {
             return {
-                perform: true,
+                perform: !true,
                 hired: false,
                 id: this.$route.params.id,
                 testOrder: {
