@@ -20,7 +20,7 @@
                         </v-card>
                         <v-flex xs12>
                             <v-card flat>
-                                <v-list two-line>
+                                <v-list three-line>
                                     <v-card-text class="title text-xs-center">
                                         <span class="clr">Заметки по работе над проектом</span>
                                     </v-card-text>
