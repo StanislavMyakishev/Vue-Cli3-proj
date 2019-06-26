@@ -52,17 +52,19 @@
 
         mounted() {
             this.getMyRequests();
+            this.$root.$on('updateRequests', this.getMyRequests);
         },
         methods: {
             getMyRequests() {
                 let config = this.config;
-                axios.get('http://127.0.0.1:8081/api/organizations/' + this.userId + '/get_requested_orders/', config)
+                axios.get('http://127.0.0.1:8081/api/organizations/' + localStorage.getItem('userId') + '/get_requested_orders/', config)
                     .then(response => response.data)
                     .then(data => {
                         this.requestedOrders = data;
                     })
                     .catch(error => console.log(error));
             }
-        }
+        },
+        props: ['config']
     }
 </script>

@@ -177,6 +177,7 @@
             applyForOrder() {
                 let config = this.config;
                 axios.post('http://127.0.0.1:8081/api/orders/' + this.id + '/apply_for_order/', {comment: this.comment}, config);
+                this.$root.$emit('updateRequests');
                 router.push('/myrequests')
             },
             getPerformers() {
