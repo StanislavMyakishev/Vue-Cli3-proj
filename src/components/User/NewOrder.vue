@@ -100,7 +100,8 @@
                         name: this.name,
                         description: this.descr,
                         category: this.select - 1,
-                        tags: []
+                        tags: [],
+
                     };
                     console.log(order);
                     this.$root.$emit('newOrder', order);

@@ -23,7 +23,40 @@
                             {{organization.address}}
                         </v-card-title>
                         <v-btn
-                            @click="getReviews"></v-btn>
+                                @click="getReviews"></v-btn>
+                        <v-layout>
+                            <v-flex xs12 md12 sm12>
+                                <v-card flat>
+                                    <v-card-text>
+                                        <v-text-field
+                                            label="Title"
+                                            v-model="title">
+                                        </v-text-field>
+                                        <v-textarea
+                                                label="Комментарий"
+                                                v-model="review">
+                                        </v-textarea>
+                                    </v-card-text>
+                                    <v-card-actions class="pa-3">
+                                        Оценка:
+                                        <v-spacer></v-spacer>
+                                        <v-rating
+                                                v-model="ownRating"
+                                                background-color="white"
+                                                color="secondary"
+                                                half-increments
+                                                hover
+                                                size="18"
+                                        ></v-rating>
+                                    </v-card-actions>
+                                    <div class="text-xs-center">
+                                        <v-btn large color="secondary"
+                                               @click="makeReview">Отправить отзыв
+                                        </v-btn>
+                                    </div>
+                                </v-card>
+                            </v-flex>
+                        </v-layout>
                     </v-card>
                 </v-flex>
             </v-layout>
@@ -33,12 +66,15 @@
 
 <script>
     import axios from 'axios'
-
+    import router from '../../router/index'
     export default {
-        props: ['id'],
+        props: ['id',  'config'],
         data() {
             return {
-                organization: []
+                organization: [],
+                ownRating: 0,
+                review: '',
+                title: ''
             }
         },
         created() {
@@ -50,12 +86,15 @@
                 .catch(error => {
                     console.log(error)
                 });
+            this.getReviews();
         },
 
         methods: {
             getReviews() {
-                axios.get('http://127.0.0.1:8081/api/organizations/get_reviews')
-                    .then(response => {console.log(response)})
+                axios.get('http://127.0.0.1:8081/api/organizations/' + this.id + '/get_reviews/')
+                    .then(response => {
+                        console.log(response)
+                    })
                     // // response.data
                     // .then(data => {
                     //     this.organization = data;
@@ -63,9 +102,21 @@
                     .catch(error => {
                         console.log(error)
                     });
+            },
+            makeReview() {
+                const review = {
+                    title: this.title,
+                    review: this.review,
+                    rating: this.ownRating
+
+                };
+                let config = this.config;
+                axios.post('http://127.0.0.1:8081/api/organizations/' + this.id + '/make_review/', review, config)
+                    .catch(error => {console.log(error)});
+                router.push('/')
             }
 
-        }
-        //    ДОБАВИТЬ ОТЗЫВЫ
+        },
+
     }
 </script>
