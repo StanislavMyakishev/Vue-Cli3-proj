@@ -66,9 +66,8 @@ export default new VueRouter({
             component: MyOrders
         },
         {
-            path: '/organization',
-            // path: '/organization/:id',
-            // props: true,
+            path: '/organization/:id',
+            props: true,
             name: 'organization',
             component: OrganizationInfo
         },

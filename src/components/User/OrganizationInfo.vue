@@ -42,7 +42,6 @@
             }
         },
         created() {
-            let id = 2;
             axios.get('http://127.0.0.1:8081/api/organizations/' + id + '/')
                 .then(response => response.data)
                 .then(data => {
