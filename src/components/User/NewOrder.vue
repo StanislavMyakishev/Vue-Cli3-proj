@@ -94,6 +94,7 @@
                         name: this.name,
                         description: this.descr,
                         category: this.select - 1,
+                        // tags: []
                     };
                     this.$root.$emit('newOrder', order);
                 }
