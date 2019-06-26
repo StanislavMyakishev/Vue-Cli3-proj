@@ -1,3 +1,5 @@
+<!--ПОЛНОСТЬЮ РАБОЧАЯ СТРАНИЦА-->
+
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
     <v-content>
         <v-container fluid fill-height>
