@@ -42,7 +42,7 @@
             }
         },
         created() {
-            axios.get('http://127.0.0.1:8081/api/organizations/' + id + '/')
+            axios.get('http://127.0.0.1:8081/api/organizations/' + this.id + '/')
                 .then(response => response.data)
                 .then(data => {
                     this.organization = data;
