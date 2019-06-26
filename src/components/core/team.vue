@@ -1,58 +1,63 @@
 <template>
-    <v-container>
-        <v-layout column>
-            <v-flex lg8 sm8 xs8>
-                <v-layout align-center justify-center column>
-                    <v-card flat>
-                        <v-card-title>
-                            <v-card-text class="display-4">
-                                <span class="clr">Команда</span>
-                            </v-card-text>
-                        </v-card-title>
-                    </v-card>
-                    <v-flex>
-                        <v-layout>
-                            <v-card flat>
-                                <v-list>
-                                    <v-card-text class="display-1">
-                                        <span class="clr">Senior</span>
-                                    </v-card-text>
-                                    <v-list-tile
-                                            v-for="(name, i) in senior"
-                                            :key="i">
-                                        <v-list-tile-action>
-                                            <v-icon color="secondary">star</v-icon>
-                                        </v-list-tile-action>
-                                        <v-list-tile-content>
-                                            <v-list-tile-title v-text="name.title"></v-list-tile-title>
-                                        </v-list-tile-content>
-                                    </v-list-tile>
-                                </v-list>
-                            </v-card>
-
-                            <v-card flat>
-                                <v-list>
-                                    <v-card-text class="display-1">
-                                        <span class="clr">Junior</span>
-                                    </v-card-text>
-                                    <v-list-tile
-                                            v-for="(name, i) in junior"
-                                            :key="i">
-                                        <v-list-tile-action>
-                                            <v-icon color="secondary">star</v-icon>
-                                        </v-list-tile-action>
-                                        <v-list-tile-content>
-                                            <v-list-tile-title v-text="name.title"></v-list-tile-title>
-                                        </v-list-tile-content>
-                                    </v-list-tile>
-                                </v-list>
-                            </v-card>
-                        </v-layout>
-                    </v-flex>
-                </v-layout>
-            </v-flex>
-        </v-layout>
-    </v-container>
+    <v-content>
+        <v-container fluid fill-height>
+            <v-layout column>
+                <v-flex lg8 sm8 xs12>
+                    <v-layout align-center justify-center column fill-height>
+                        <v-card flat>
+                            <v-card-title>
+                                <v-card-text class="display-2">
+                                    <span class="clr">Команда</span>
+                                </v-card-text>
+                            </v-card-title>
+                        </v-card>
+                        <v-flex xs12>
+                            <v-layout column>
+                                <v-flex xs12>
+                                    <v-card flat>
+                                        <v-list>
+                                            <v-card-text class="display-1">
+                                                <span class="clr">Senior</span>
+                                            </v-card-text>
+                                            <v-list-tile
+                                                    v-for="(name, i) in senior"
+                                                    :key="i">
+                                                <v-list-tile-action>
+                                                    <v-icon color="secondary">star</v-icon>
+                                                </v-list-tile-action>
+                                                <v-list-tile-content>
+                                                    <v-list-tile-title v-text="name.title"></v-list-tile-title>
+                                                </v-list-tile-content>
+                                            </v-list-tile>
+                                        </v-list>
+                                    </v-card>
+                                </v-flex>
+                                <v-flex xs12>
+                                    <v-card flat>
+                                        <v-list>
+                                            <v-card-text class="display-1">
+                                                <span class="clr">Junior</span>
+                                            </v-card-text>
+                                            <v-list-tile
+                                                    v-for="(name, i) in junior"
+                                                    :key="i">
+                                                <v-list-tile-action>
+                                                    <v-icon color="secondary">star</v-icon>
+                                                </v-list-tile-action>
+                                                <v-list-tile-content>
+                                                    <v-list-tile-title v-text="name.title"></v-list-tile-title>
+                                                </v-list-tile-content>
+                                            </v-list-tile>
+                                        </v-list>
+                                    </v-card>
+                                </v-flex>
+                            </v-layout>
+                        </v-flex>
+                    </v-layout>
+                </v-flex>
+            </v-layout>
+        </v-container>
+    </v-content>
 </template>
 
 
