@@ -15,6 +15,7 @@ import OrganizationInfo from '@/components/User/OrganizationInfo'
 import About from '@/components/core/aboutUs'
 import Team from '@/components/core/team'
 import Blog from '@/components/core/blog'
+import EmailConfirm from "@/components/Auth/EmailConfirm";
 
 Vue.use(Router);
 
@@ -107,6 +108,11 @@ export default new VueRouter({
             component: Blog
             //+
         },
+        {
+            path: '/emailconfirm',
+            name: 'EmailConfirm',
+            component: EmailConfirm
+        }
     ],
     mode: 'history'
 })

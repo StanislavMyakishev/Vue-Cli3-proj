@@ -7,7 +7,7 @@
                             class="elevation-12">
                         <v-toolbar
                                 dark color="primary lighten-1">
-                            <v-toolbar-title>Вход</v-toolbar-title>
+                            <v-toolbar-title>Подтверждение по email</v-toolbar-title>
                         </v-toolbar>
                         <v-card-text>
                             <v-form
@@ -25,11 +25,11 @@
                                 <v-text-field
                                         prepend-icon="lock"
                                         name="password"
-                                        label="Пароль"
-                                        type="password"
+                                        label="Token"
+                                        type="token"
                                         counter
-                                        v-model="password"
-                                        :rules="passwordRules"
+                                        v-model="token"
+                                        :rules="tokenRules"
                                 ></v-text-field>
                             </v-form>
                         </v-card-text>
@@ -39,7 +39,7 @@
                                     color="secondary"
                                     @click="onSubmit"
                                     :disabled="!valid"
-                            >Войти
+                            >Подтвердить e-mail
                             </v-btn>
                         </v-card-actions>
                     </v-card>
@@ -56,36 +56,32 @@
         data() {
             return {
                 email: '',
-                password: '',
+                token: '',
                 valid: false,
                 emailRules: [
                     v => !!v || 'Введите Ваш e-mail',
                     v => /.+@.+/.test(v) || 'E-mail должен быть реальным'
                 ],
-                passwordRules: [
-                    v => !!v || 'Введите пароль',
-                    v => (v && v.length >= 4) || 'Пароль должен состоять не менее чем из 6 символов'
+                tokenRules: [
+                    v => !!v || 'Введите Token из письма'
                 ]
             }
         },
+
         methods: {
             onSubmit() {
                 if (this.$refs.form.validate()) {
                     const user = {
-                        username: this.email,
-                        password: this.password
+                        email: this.email,
+                        token: this.token
                     };
-                    axios.post('http://127.0.0.1:8081/api/login/', user)
+                    axios.post('http://127.0.0.1:8081/api/organizations/confirm_email/', user)
                         .then(response => {
                             if (response.status === 200) {
                                 console.log('Alles gut');
-                                this.$root.$emit('authorized', {
-                                    ...user,
-                                    token: response.data.token,
-                                    userId: response.data.user_id
-                                });
-                                this.$router.push('/')
-                            }})
+                                this.$router.push('/login')
+                            }
+                        })
                         .catch(error => {
                             console.log(error);
                         });

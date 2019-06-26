@@ -44,10 +44,11 @@
                                     <v-text-field
                                             prepend-icon="person"
                                             class="compact-form"
-                                            name="Название компании"
-                                            label="Company name"
+                                            name="Company name"
+                                            label="Название компании"
                                             type="text"
                                             v-model="companyname"
+                                            :rules="companyNameRules"
                                     ></v-text-field>
                                     <v-text-field
                                             prepend-icon="person"
@@ -56,6 +57,7 @@
                                             label="ИНН"
                                             type="text"
                                             v-model="TIN"
+                                            :rules="TINRules"
                                     ></v-text-field>
                                 </v-layout>
                                 <v-layout row wrap>
@@ -66,6 +68,7 @@
                                             label="Адрес"
                                             type="text"
                                             v-model="address"
+                                            :rules="addressRules"
                                     ></v-text-field>
                                     <v-text-field
                                             prepend-icon="person"
@@ -116,6 +119,7 @@
                                         label="Должность"
                                         type="text"
                                         v-model="position"
+                                        :rules="positionRules"
                                 ></v-text-field>
                             </v-form>
                         </v-card-text>
@@ -153,19 +157,36 @@
                 patronymic: '',
                 position: '',
                 valid: false,
-                confirmPasswrod: '',
+                confirmPassword: '',
                 emailRules: [
-                    v => !!v || 'E-mail is required',
+                    v => !!v || 'Введите Ваш e-mail',
                     v => /.+@.+/.test(v) || 'E-mail должен быть реальным'
                 ],
                 passwordRules: [
-                    v => !!v || 'Password is required',
+                    v => !!v || 'Введите пароль',
                     v => (v && v.length >= 4) || 'Пароль должен состоять не менее чем из 6 символов'
                 ],
                 confirmPasswordRules: [
-                    v => !!v || 'Password confirm is required',
+                    v => !!v || 'Подтвердите пароль',
                     v => v === this.password || 'Пароли должны совпадать'
+                ],
+                companyNameRules: [
+                    v => !!v || 'Введите название компании',
+                    v => (v && v.length > 1) || 'Введите название компании'
+                ],
+                TINRules: [
+                    v => !!v || 'Введите ИНН',
+                    v => (v && v.length >= 10) || 'Введите ИНН'
+                ],
+                addressRules: [
+                    v => !!v || 'Введите адрес компании',
+                    v => (v && v.length > 1) || 'Введите адрес компании'
+                ],
+                positionRules: [
+                    v => !!v || 'Укажите Вашу должность',
+                    v => (v && v.length > 1) || 'Укажите Вашу должность'
                 ]
+
             }
         },
         methods: {
@@ -185,11 +206,16 @@
                         position: this.position
                     };
                     axios.post('http://127.0.0.1:8081/api/organizations/', user)
-                        .then(response => console.log(response))
+                        .then(response => {
+                            if (response.status === 200) {
+                                console.log('Alles gut');
+                                this.$router.push('/emailconfirm')
+                            }
+                        })
                         .catch(error => {
                             console.log(error);
                         });
-                    this.$router.push('/login')
+
                 }
             }
         }
