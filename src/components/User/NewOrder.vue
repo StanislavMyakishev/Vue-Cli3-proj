@@ -39,6 +39,7 @@
                                         :rules="selectRules"
                                         required
                                 ></v-select>
+
                                 <v-checkbox
                                         v-model="checkbox"
                                         label="I read Terms and conditions"
@@ -76,7 +77,7 @@
                 {value: 6, text: 'Other'}
             ],
             checkbox: false,
-            tags: [],
+            // tags: [],
             valid: true,
             nameRules: [
                 v => !!v || 'Name is required',
@@ -99,8 +100,9 @@
                         name: this.name,
                         description: this.descr,
                         category: this.select - 1,
-                        tags: this.tags
+                        tags: []
                     };
+                    console.log(order);
                     this.$root.$emit('newOrder', order);
                 }
             },
