@@ -100,7 +100,7 @@
     export default {
         data() {
             return {
-                perform: !true,
+                perform: true,
                 hired: false,
                 id: this.$route.params.id,
                 testOrder: {

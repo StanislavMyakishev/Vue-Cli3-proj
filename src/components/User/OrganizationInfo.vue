@@ -132,7 +132,7 @@
         props: ['id'],
         data() {
             return {
-                perform: !true,
+                perform: true,
                 rating: 2,
                 ownRating: 5,
                 organization: {

@@ -156,15 +156,15 @@
                 confirmPasswrod: '',
                 emailRules: [
                     v => !!v || 'E-mail is required',
-                    v => /.+@.+/.test(v) || 'E-mail must be valid'
+                    v => /.+@.+/.test(v) || 'E-mail должен быть реальным'
                 ],
                 passwordRules: [
                     v => !!v || 'Password is required',
-                    v => (v && v.length >= 6) || 'Password must be equal or more than 6 characters'
+                    v => (v && v.length >= 4) || 'Пароль должен состоять не менее чем из 6 символов'
                 ],
                 confirmPasswordRules: [
                     v => !!v || 'Password confirm is required',
-                    v => v === this.password || 'Passwords have to match '
+                    v => v === this.password || 'Пароли должны совпадать'
                 ]
             }
         },
