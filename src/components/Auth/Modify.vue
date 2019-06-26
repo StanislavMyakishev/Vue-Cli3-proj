@@ -8,7 +8,7 @@
                             class="elevation-12">
                         <v-toolbar
                                 dark color="primary lighten-1">
-                            <v-toolbar-title>Account settings</v-toolbar-title>
+                            <v-toolbar-title>Настройки аккаунта</v-toolbar-title>
                         </v-toolbar>
                         <v-card-text>
                             <v-form
@@ -24,7 +24,7 @@
                                 ></v-text-field>
                                 <v-text-field
                                         name="password"
-                                        label="Password"
+                                        label="Пароль"
                                         type="password"
                                         counter
                                         v-model="password"
@@ -32,7 +32,7 @@
                                 ></v-text-field>
                                 <v-text-field
                                         name="confirmpassword"
-                                        label="Confirm password"
+                                        label="Подтвердите пароль"
                                         type="password"
                                         counter
                                         v-model="password"
@@ -42,14 +42,14 @@
                                     <v-text-field
                                             class="compact-form"
                                             name="companyname"
-                                            label="Company name"
+                                            label="Название компании"
                                             type="text"
                                             v-model="textNode"
                                     ></v-text-field>
                                     <v-text-field
                                             name="taxnumber"
                                             class="compact-form"
-                                            label="TIN"
+                                            label="ИНН"
                                             type="text"
                                             v-model="textNode"
                                     ></v-text-field>
@@ -62,7 +62,7 @@
                                     color="secondary"
                                     @click="onSubmit"
                                     :disabled="!valid"
-                            >Save changes
+                            >Сохранить изменения
                             </v-btn>
                         </v-card-actions>
                     </v-card>

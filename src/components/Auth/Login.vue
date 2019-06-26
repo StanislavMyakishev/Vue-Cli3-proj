@@ -7,7 +7,7 @@
                             class="elevation-12">
                         <v-toolbar
                                 dark color="primary lighten-1">
-                            <v-toolbar-title>Login form</v-toolbar-title>
+                            <v-toolbar-title>Вход</v-toolbar-title>
                         </v-toolbar>
                         <v-card-text>
                             <v-form
@@ -25,7 +25,7 @@
                                 <v-text-field
                                         prepend-icon="lock"
                                         name="password"
-                                        label="Password"
+                                        label="Пароль"
                                         type="password"
                                         counter
                                         v-model="password"
@@ -39,7 +39,7 @@
                                     color="secondary"
                                     @click="onSubmit"
                                     :disabled="!valid"
-                            >Login
+                            >Войти
                             </v-btn>
                         </v-card-actions>
                     </v-card>

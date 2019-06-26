@@ -2,13 +2,12 @@
     <v-content>
         <v-container fluid fill-height>
             <v-layout align-center justify-center>
-
                 <v-flex>
                     <v-card
                             class="elevation-12">
                         <v-toolbar
                                 dark color="primary lighten-1">
-                            <v-toolbar-title>New Order</v-toolbar-title>
+                            <v-toolbar-title>Новый заказ</v-toolbar-title>
                         </v-toolbar>
                         <v-card-text>
                             <v-form
@@ -17,13 +16,13 @@
                                     lazy-validation>
                                 <v-text-field
                                         v-model="name"
-                                        label="New Item name"
+                                        label="Название заказа"
                                         :rules="nameRules"
                                         required
                                 ></v-text-field>
                                 <v-textarea
                                         v-model="descr"
-                                        label="Description"
+                                        label="Описание"
                                         :rules="descrRules"
                                         required
                                 ></v-textarea>
@@ -32,13 +31,13 @@
                                         :items="items"
                                         item-text="text"
                                         item-value="value"
-                                        label="Areas"
+                                        label="Области"
                                         :rules="selectRules"
                                         required
                                 ></v-select>
                                 <v-checkbox
                                         v-model="checkbox"
-                                        label="I read Terms and conditions"
+                                        label="Я согласен с условиями Пользовательского соглашения"
                                         :rules="checkboxRules"
                                         required
                                 ></v-checkbox>
@@ -46,8 +45,8 @@
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn @click="validate" :disabled="!valid" class="secondary">submit</v-btn>
-                            <v-btn @click="clear" class="error">clear</v-btn>
+                            <v-btn @click="validate" :disabled="!valid" class="secondary">Оформить</v-btn>
+                            <v-btn @click="clear" class="error">Стереть</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>

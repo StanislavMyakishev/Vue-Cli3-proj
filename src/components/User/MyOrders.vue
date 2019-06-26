@@ -5,7 +5,7 @@
                 <v-card flat>
                     <v-card-text
                             class="display-2">
-                        <span class="clr">My orders</span>
+                        <span class="clr">Мои заказы</span>
                     </v-card-text>
                 </v-card>
                 <v-card
@@ -30,7 +30,7 @@
                                 <v-btn
                                         class="secondary"
                                         :to="/ord/ + ord.id">
-                                    Open
+                                    Открыть
                                 </v-btn>
                             </v-card-actions>
                         </v-flex>
@@ -49,14 +49,14 @@
             return {
                 ordList: [
                     {
-                        name: 'First order',
-                        description: 'Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description ',
+                        name: 'Первый заказ',
+                        description: 'Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа ',
                         imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
                         date_created: new Date(),
                     },
                     {
-                        name: 'Second order',
-                        description: 'Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description Order description ',
+                        name: 'Второй заказ',
+                        description: 'Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа Описание заказа ',
                         imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
                         date_created: new Date(),
                     },

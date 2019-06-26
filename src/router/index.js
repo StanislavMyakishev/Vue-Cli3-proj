@@ -12,6 +12,9 @@ import Test from '@/components/test'
 import VueRouter from 'vue-router'
 import Modify from '@/components/Auth/Modify'
 import OrganizationInfo from '@/components/User/OrganizationInfo'
+import About from '@/components/core/aboutUs'
+import Team from '@/components/core/team'
+import Blog from '@/components/core/blog'
 
 Vue.use(Router);
 
@@ -84,6 +87,24 @@ export default new VueRouter({
             path: '/category',
             name: 'category',
             component: OrderCategory
+            //+
+        },
+        {
+            path: '/about',
+            name: 'About',
+            component: About
+            //+
+        },
+        {
+            path: '/team',
+            name: 'team',
+            component: Team
+            //+
+        },
+        {
+            path: '/blog',
+            name: 'blog',
+            component: Blog
             //+
         },
     ],

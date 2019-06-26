@@ -19,7 +19,7 @@
                                 <v-card-title primary-title>
                                     <div>
                                         <h3 class="headline mb-0">{{card.name}}</h3>
-                                        <p class="mb-0">Company: {{card.customer_id}}</p>
+                                        <p class="mb-0">Компания {{card.customer_id}}</p>
                                     </div>
                                 </v-card-title>
 
@@ -56,20 +56,20 @@
                 ],
                 orders: [
                     {
-                        name: 'First name',
+                        name: 'Название заказа',
                         customer_id: 1,
                         id: 1
                     },
                     {
-                        name: 'First name',
+                        name: 'Название заказа',
                         customer_id: 1,
                         id: 1
                     }, {
-                        name: 'First name',
+                        name: 'Название заказа',
                         customer_id: 1,
                         id: 1
                     }, {
-                        name: 'First name',
+                        name: 'Название заказа',
                         customer_id: 1,
                         id: 1
                     },

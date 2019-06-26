@@ -8,11 +8,12 @@
                 wrap>
             <v-btn
                     v-for="link in links"
-                    :key="link"
+                    :key="link.name"
                     color="white"
                     flat
+                    :to=link.url
                     round>
-                {{ link }}
+                {{ link.name }}
             </v-btn>
             <v-flex
                     primary
@@ -30,13 +31,16 @@
 <script>
     export default {
         data: () => ({
-            links: [
-                'Home',
-                'About Us',
-                'Team',
-                'Blog',
-                'Contact Us'
-            ]
+            links: [{
+                name: 'О Нас',
+                url: '/about'
+            }, {
+                name: 'Команда',
+                url: '/team'
+            }, {
+                name: 'Блог',
+                url: '/blog',
+            },]
         })
     }
 </script>

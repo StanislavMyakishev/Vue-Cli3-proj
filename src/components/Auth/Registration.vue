@@ -7,7 +7,7 @@
                             class="elevation-10">
                         <v-toolbar
                                 dark color="primary lighten-1">
-                            <v-toolbar-title>Registration form</v-toolbar-title>
+                            <v-toolbar-title>Регистрация</v-toolbar-title>
                         </v-toolbar>
                         <v-card-text>
                             <v-form
@@ -25,7 +25,7 @@
                                 <v-text-field
                                         prepend-icon="lock"
                                         name="password"
-                                        label="Password"
+                                        label="Пароль"
                                         type="password"
                                         counter
                                         v-model="password"
@@ -34,7 +34,7 @@
                                 <v-text-field
                                         prepend-icon="lock"
                                         name="confirm-password"
-                                        label="Confirm password"
+                                        label="Подтвердить пароль"
                                         type="password"
                                         counter
                                         v-model="confirmPassword"
@@ -44,7 +44,7 @@
                                     <v-text-field
                                             prepend-icon="person"
                                             class="compact-form"
-                                            name="companyname"
+                                            name="Название компании"
                                             label="Company name"
                                             type="text"
                                             v-model="companyname"
@@ -53,7 +53,7 @@
                                             prepend-icon="person"
                                             name="taxnumber"
                                             class="compact-form"
-                                            label="TIN"
+                                            label="ИНН"
                                             type="text"
                                             v-model="TIN"
                                     ></v-text-field>
@@ -63,7 +63,7 @@
                                             prepend-icon="person"
                                             class="compact-form"
                                             name="address"
-                                            label="Address"
+                                            label="Адрес"
                                             type="text"
                                             v-model="address"
                                     ></v-text-field>
@@ -71,7 +71,7 @@
                                             prepend-icon="person"
                                             name="website"
                                             class="compact-form"
-                                            label="Website"
+                                            label="Вебсайт"
                                             type="text"
                                             v-model="website"
                                     ></v-text-field>
@@ -79,7 +79,7 @@
                                 <v-textarea
                                         prepend-icon="person"
                                         name="description"
-                                        label="Description"
+                                        label="Описание"
                                         type="text"
                                         v-model="description">
 
@@ -89,7 +89,7 @@
                                             prepend-icon="person"
                                             class="compact-form"
                                             name="first_name"
-                                            label="First Name"
+                                            label="Имя"
                                             type="text"
                                             v-model="first_name"
                                     ></v-text-field>
@@ -97,7 +97,7 @@
                                             prepend-icon="person"
                                             name="last_name"
                                             class="compact-form"
-                                            label="Last Name"
+                                            label="Фамилия"
                                             type="text"
                                             v-model="last_name"
                                     ></v-text-field>
@@ -105,7 +105,7 @@
                                             prepend-icon="person"
                                             name="patronymic"
                                             class="compact-form"
-                                            label="Patronymic"
+                                            label="Отчество"
                                             type="text"
                                             v-model="patronymic"
                                     ></v-text-field>
@@ -113,7 +113,7 @@
                                 <v-text-field
                                         prepend-icon="person"
                                         name="position"
-                                        label="Position"
+                                        label="Должность"
                                         type="text"
                                         v-model="position"
                                 ></v-text-field>
@@ -125,7 +125,7 @@
                                     color="secondary"
                                     @click="onSubmit"
                                     :disabled="!valid"
-                            >Create account
+                            >Создать аккаунт
                             </v-btn>
                         </v-card-actions>
                     </v-card>

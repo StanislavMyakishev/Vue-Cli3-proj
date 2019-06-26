@@ -40,21 +40,21 @@
         },
         computed: {
             loggedIn() {
-                return this.user.token.length > 0 ? true : false;
+                return true;
                 // return true;
             },
             links() {
                 if (this.loggedIn) {
                     return [
-                        {title: 'My Orders', icon: 'bookmark_border', url: '/myorders'},
-                        {title: 'New order', icon: 'note_add', url: '/new'},
-                        {title: 'My requests', icon: 'description', url: '/list'},
-                        {title: 'logout', icon: 'lock', url: '/'},
+                        {title: 'Мои заказы', icon: 'bookmark_border', url: '/myorders'},
+                        {title: 'Новый заказ', icon: 'note_add', url: '/new'},
+                        {title: 'Мои заявки', icon: 'description', url: '/myrequests'},
+                        {title: 'Выйти', icon: 'lock', url: '/'},
                     ]
                 } else {
                     return [
-                        {title: 'login', icon: 'lock', url: '/login'},
-                        {title: 'Registration', icon: 'face', url: '/reg'}
+                        {title: 'Вход', icon: 'lock', url: '/login'},
+                        {title: 'Регистрация', icon: 'face', url: '/reg'}
                     ]
                 }
             },
