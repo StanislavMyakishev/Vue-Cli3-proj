@@ -40,8 +40,9 @@ export default new VueRouter({
             //+
         },
         {
-            path: '/ord/:id',
-            props: true,
+            path: '/order',
+            // path: '/ord/:id',
+            // props: true,
             name: 'order',
             component: Order
             //+

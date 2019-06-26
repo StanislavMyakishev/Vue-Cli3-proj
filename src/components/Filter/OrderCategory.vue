@@ -19,7 +19,8 @@
                                 <v-card-title primary-title>
                                     <div>
                                         <h3 class="headline mb-0">{{card.name}}</h3>
-                                        <p class="mb-0">Компания {{card.customer_id}}</p>
+                                        <p class="mb-0">Компания {{card.customer.name}}</p>
+                                        <p>{{card.date_created | parseDate}} </p>
                                     </div>
                                 </v-card-title>
 
@@ -27,7 +28,7 @@
                                     <v-spacer></v-spacer>
                                     <v-btn
                                             class="secondary"
-                                            :to="/ord/ + card.id"
+                                            :to="'/order/?id=' + card.id"
                                     >Open
                                     </v-btn>
                                 </v-card-actions>
@@ -54,26 +55,7 @@
                     [4, 'Retail'],
                     [5, 'Others']
                 ],
-                orders: [
-                    {
-                        name: 'Название заказа',
-                        customer_id: 1,
-                        id: 1
-                    },
-                    {
-                        name: 'Название заказа',
-                        customer_id: 1,
-                        id: 1
-                    }, {
-                        name: 'Название заказа',
-                        customer_id: 1,
-                        id: 1
-                    }, {
-                        name: 'Название заказа',
-                        customer_id: 1,
-                        id: 1
-                    },
-                ],
+                orders: null,
                 src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg'
             }
         },
@@ -86,6 +68,12 @@
                 let category = this.$route.query.category;
                 this.orders = response.data.filter(element => element.category === this.categoryDict[category][0]);
             },
+        },
+
+        filters: {
+            parseDate(date) {
+                return date.replace(/(\d+)-(\d+)-(\d+)T(\d+):(\d+).+/, '$1-$2-$3 $4:$5')
+            }
         },
     }
 </script>

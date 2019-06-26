@@ -93,7 +93,7 @@
             onSubmit() {
                 if (this.$refs.form.validate()) {
                     const user = {
-                        emial: this.email,
+                        email: this.email,
                         password: this.password
                     }
                     alert(user.emial + ' ' + user.password)
