@@ -4,11 +4,11 @@
             <v-flex>
                 <v-card>
                     <v-layout row wrap>
-                        <v-flex xs4 md4 sm4>
+                        <v-flex xs12 md4 sm4>
                             <v-card flat>
                                 <v-responsive>
                                     <v-avatar
-                                            :tile="tile"
+                                            :tile=true
                                             :size="300"
                                             color="grey lighten-4">
                                         <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar">
@@ -35,7 +35,7 @@
                                 </v-card-actions>
                             </v-card>
                         </v-flex>
-                        <v-flex xs8 md8 sm8>
+                        <v-flex xs12 md8 sm8>
                             <v-card flat>
                                 <v-card-text class="headline">
                                     <span class="text-md-center">{{organization.name}}</span>
@@ -56,13 +56,11 @@
                                                 :key="user.header">
                                             {{ user.header }}
                                         </v-subheader>
-
                                         <v-divider
                                                 v-else-if="user.divider"
                                                 :key="index"
                                                 :inset="user.inset"
                                         ></v-divider>
-
                                         <v-list-tile
                                                 v-else
                                                 :key="user.title"
@@ -70,7 +68,6 @@
                                             <v-list-tile-avatar>
                                                 <img :src="user.avatar">
                                             </v-list-tile-avatar>
-
                                             <v-list-tile-content>
                                                 <v-list-tile-title v-html="user.performerName"></v-list-tile-title>
                                                 <v-list-tile-sub-title v-html="user.subtitle"></v-list-tile-sub-title>

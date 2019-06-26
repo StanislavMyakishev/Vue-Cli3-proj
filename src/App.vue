@@ -2,24 +2,6 @@
     <div id="app">
         <v-app class="body">
             <div class="wrapper">
-                <v-navigation-drawer
-                        app
-                        temporary=""
-                        v-model="drawer">
-                    <v-list>
-                        <v-list-tile
-                                v-for="link of links"
-                                :key="link.title"
-                                :to="link.url">
-                            <v-list-tile-action>
-                                <v-icon>{{link.icon}}</v-icon>
-                            </v-list-tile-action>
-                            <v-list-tile-content>
-                                <v-list-tile-title v-text="link.title"></v-list-tile-title>
-                            </v-list-tile-content>
-                        </v-list-tile>
-                    </v-list>
-                </v-navigation-drawer>
                 <app-header :links="links"></app-header>
                 <v-content>
                     <router-view></router-view>

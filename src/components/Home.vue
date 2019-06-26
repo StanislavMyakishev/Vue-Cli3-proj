@@ -3,7 +3,7 @@
         <v-container fluid grid-list-xl>
             <!--SEARCH-->
             <v-layout align-center justify-center row>
-                <v-flex xs12 sm8 md6 align-center justify-center column fill-height>
+                <v-flex lg6 xs10 sm8 md6 align-center justify-center column fill-height>
                     <v-layout>
                         <v-text-field
                                 class="text-md-center"
@@ -34,13 +34,13 @@
                                             {{item.title}}
                                         </p>
                                     </div>
-                                    <v-card-media
+                                    <v-responsive
                                             v-else>
                                         <v-img
                                                 :src="item.imgSrc"
                                                 height="200px"
                                         ></v-img>
-                                    </v-card-media>
+                                    </v-responsive>
                                 </v-card>
                             </v-item>
                         </v-flex>
