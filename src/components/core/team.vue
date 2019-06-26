@@ -10,18 +10,6 @@
                             </v-card-text>
                         </v-card-title>
                     </v-card>
-                    <v-carousel
-                            max="100"
-                            width="50000"
-                            delimiter-icon="stop"
-                            prev-icon="mdi-arrow-left"
-                            next-icon="mdi-arrow-right">
-                        <v-carousel-item
-                                v-for="(pic, i) in senior"
-                                :key="i"
-                                :src="pic.src">
-                        </v-carousel-item>
-                    </v-carousel>
                     <v-flex>
                         <v-layout>
                             <v-card flat>
