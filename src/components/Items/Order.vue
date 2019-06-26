@@ -31,7 +31,7 @@
                 </v-card>
                 <!--САМ ЗАКАЗ ЗАКОНЧИЛСЯ-->
 
-
+                <!--ДЛЯ ИСПОЛНИТЕЛЯ-->
                 <v-card v-if=perform>
                     <v-card-text>
                         <v-textarea
@@ -46,11 +46,14 @@
                     </div>
                 </v-card>
 
+                <!--ДЛЯ ЗАКАЗЧИКА-->
+                <v-card
+                        v-if="!perform && order.status !== 2"
+                        class="elevation-10">
 
-                <v-card class="elevation-10">
                     <v-layout align-center justify-center row fill-height>
                         <v-flex lg12 sm12 xs12>
-                            <v-card v-if=!perform flat>
+                            <v-card flat>
                                 <div class="text-xs-center">
                                     <v-btn large color="secondary"
                                            @click="completeOrder">Заказ выполнен
@@ -72,22 +75,20 @@
                             </v-card>
                         </v-flex>
                     </v-layout>
+
+                    <!--ЗАЯВКИ К ЗАКАЗУ-->
                     <v-flex lg12 sm12 xs12>
-                        <v-card v-if=!perform flat>
+                        <v-card flat>
                             <v-list two-line>
+                                <v-subheader>
+                                    {{ header }}
+                                </v-subheader>
                                 <template v-for="(item, index) in performers">
-                                    <v-subheader
-                                            v-if="item.header"
-                                            :key="item.header">
-                                        {{ item.header }}
-                                    </v-subheader>
-
                                     <v-divider
-                                            v-else-if="item.divider"
+                                            v-if="'index !== 0 && index !== performers.length'"
                                             :key="index"
-                                            :inset="item.inset"
+                                            inset
                                     ></v-divider>
-
                                     <v-list-tile
                                             v-else
                                             :key="item.title"
@@ -136,7 +137,7 @@
                 performers: [],
                 editable: 'p',
                 comment: '',
-
+                header: 'Заявки',
 
                 hired: false,
                 // testOrder: {
@@ -180,7 +181,9 @@
 
         mounted() {
             this.id = this.$route.query.id;
-            axios.get('http://127.0.0.1:8081/api/orders/' + this.id + '/')
+
+            let config = this.config;
+            axios.get('http://127.0.0.1:8081/api/orders/' + this.id + '/', config)
                 .then(response => response.data)
                 .then(data => {
                     this.order = data;
@@ -191,6 +194,7 @@
                 });
             this.getPerformers();
         },
+
         filters: {
             parseDate(date) {
                 return date.replace(/(\d+)-(\d+)-(\d+)T(\d+):(\d+).+/, '$1-$2-$3 $4:$5')
@@ -233,6 +237,7 @@
                     .then(data => {
                         this.performers = data
                     });
+                console.log(this.performers)
             },
             acceptOrderRequest() {
                 let config = this.config;
@@ -259,7 +264,6 @@
         position: absolute;
     }
 
-    ,
     .backg {
         z-index: 3;
     }
