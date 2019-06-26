@@ -31,7 +31,7 @@
                                     <v-spacer></v-spacer>
                                     <v-btn
                                             class="info"
-                                            :to="/ord/ + card.id"
+                                            :to="'/order/?id=' + card.id"
                                     >Open
                                     </v-btn>
                                 </v-card-actions>

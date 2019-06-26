@@ -7,27 +7,27 @@
                 <v-card
                         color="blue-grey lighten-4"
                         class="elevation-10 mb-3"
-                        v-for="ord in ordList"
+                        v-for="ord in requestedOrders"
                         :key="ord.id"
                 >
                     <v-layout row>
                         <v-flex xs4>
                             <v-img
-                                    :src="ord.imageSrc"
+                                    :src="imageSrc"
                                     height="160px"
                             >
                             </v-img>
                         </v-flex>
                         <v-flex xs8>
                             <v-card-text>
-                                <h2 class="text--primary">{{ord.title}}</h2>
+                                <h2 class="text--primary">{{ord.name}}</h2>
                                 <p>{{ord.description}}</p>
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
                                 <v-btn
                                         class="info"
-                                        :to="/ord/ + ord.id"
+                                        :to="'/order/?id=' + ord.id"
                                 >Open
                                 </v-btn>
                             </v-card-actions>
@@ -40,25 +40,28 @@
 </template>
 
 <script>
+    import axios from 'axios'
     export default {
         data() {
             return {
-                ordList: [
-                    {
-                        title: 'First order',
-                        description: 'Order description',
-                        promo: false,
-                        imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-                        id: '1'
-                    },
-                    {
-                        title: 'Second order',
-                        description: 'Second but not the last',
-                        promo: false,
-                        imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
-                        id: '2'
-                    }
-                ]
+                requestedOrders: [
+                ],
+                imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+            }
+        },
+
+        mounted() {
+            this.getMyRequests();
+        },
+        methods: {
+            getMyRequests() {
+                let config = this.config;
+                axios.get('http://127.0.0.1:8081/api/organizations/' + this.userId + '/get_requested_orders/', config)
+                    .then(response => response.data)
+                    .then(data => {
+                        this.requestedOrders = data;
+                    })
+                    .catch(error => console.log(error));
             }
         }
     }

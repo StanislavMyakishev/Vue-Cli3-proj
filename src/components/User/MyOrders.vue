@@ -63,7 +63,7 @@
             },
             getMyOrders() {
                 let config = this.config;
-                axios.get('http://127.0.0.1:8081/api/organizations/get_orders/', config)
+                axios.get('http://127.0.0.1:8081/api/organizations/' + this.userId + '/get_orders/', config)
                     .then(response => response.data)
                     .then(data => {
                         this.myorders = data;

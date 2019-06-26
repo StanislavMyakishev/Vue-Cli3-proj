@@ -2,7 +2,7 @@
     <v-container>
         <v-layout align-center justify-center column fill-height>
             <v-flex xs12 md10 xl10>
-                <v-card
+                <v-card xs12 md10
                         class="elevation-10 mb-3">
                     <v-responsive
                             class="rel"
@@ -34,11 +34,14 @@
                 <v-card v-if=perform>
                     <v-card-text>
                         <v-textarea
+                                v-model="comment"
                                 label="Комментарий">
                         </v-textarea>
                     </v-card-text>
                     <div class="text-xs-center">
-                        <v-btn large color="primary">Оставить заявку на заказ</v-btn>
+                        <v-btn large color="primary"
+                               @click="applyForOrder">Оставить заявку на заказ
+                        </v-btn>
                     </div>
                 </v-card>
                 <v-card v-else>
@@ -67,45 +70,34 @@
                         </div>
                     </v-card-actions>
                 </v-card>
-                <v-card v-if=!perform>
+
+<!--НАДО НОРМАЛЬНО ВЫВОДИТЬ-->
+                <v-card v-if="!perform && order.status !== 2">
                     <v-list two-line>
-                        <template v-for="(item, index) in performers">
-                            <v-subheader
-                                    v-if="item.header"
-                                    :key="item.header"
-                            >
-                                {{ item.header }}
-                            </v-subheader>
-
-                            <v-divider
-                                    v-else-if="item.divider"
-                                    :key="index"
-                                    :inset="item.inset"
-                            ></v-divider>
-
+                        <template v-for="(performer, index) in performers">
+                            <v-divider :key="index"></v-divider>
                             <v-list-tile
-                                    v-else
-                                    :key="item.title"
+                                    :key="performer.name"
                                     avatar
                             >
                                 <v-list-tile-avatar>
-                                    <img :src="item.avatar">
+                                    <span class="white--text headline">{{performer.name}}</span>
                                 </v-list-tile-avatar>
 
                                 <v-list-tile-content>
-                                    <v-list-tile-title v-html="item.performerName"></v-list-tile-title>
-                                    <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
+                                    <v-list-tile-title>{{performer.name}}</v-list-tile-title>
+                                    <v-list-tile-sub-title>{{performer.comment}}</v-list-tile-sub-title>
                                 </v-list-tile-content>
                                 <v-btn
-                                        v-if=!hired
+                                        v-if="order.status === 0"
                                         color="success"
-                                        @click="hired = !hired"
+                                        @click="acceptOrderRequest"
                                 >Принять заявку
                                 </v-btn>
                                 <v-btn
                                         v-else
                                         color="error"
-                                        @click="hired = !hired"
+                                        @click="removePerformer"
                                 >Удалить перформера
                                 </v-btn>
                             </v-list-tile>
@@ -117,33 +109,6 @@
     </v-container>
 </template>
 
-
-<!--<template>-->
-<!--<v-container>-->
-<!--<v-layout row>-->
-<!--<v-flex xs12>-->
-<!--<v-card>-->
-<!--<v-img-->
-<!--:src="imageSrc"-->
-<!--height="300px"-->
-<!--&gt;-->
-<!--</v-img>-->
-<!--<v-card-text>-->
-<!--<h1 class="text&#45;&#45;primary">{{order.name}}</h1>-->
-<!--<h2>{{order.customer.name}}</h2>-->
-<!--<p>{{order.description}}</p>-->
-<!--<p>{{order.date_created}}</p>-->
-<!--</v-card-text>-->
-<!--<v-card-actions>-->
-<!--<v-spacer></v-spacer>-->
-<!--<v-btn class="warning" flat>Edit</v-btn>-->
-<!--<v-btn class="success">Get</v-btn>-->
-<!--</v-card-actions>-->
-<!--</v-card>-->
-<!--</v-flex>-->
-<!--</v-layout>-->
-<!--</v-container>-->
-<!--</template>-->
 
 <script>
     import axios from 'axios'
@@ -157,10 +122,12 @@
                 imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
                 perform: null,
                 performers: [],
-                editable: 'p'
+                editable: 'p',
+                comment: '',
+
             }
         },
-        created() {
+        mounted() {
             this.id = this.$route.query.id;
 
             axios.get('http://127.0.0.1:8081/api/orders/' + this.id + '/')
@@ -171,7 +138,9 @@
                 })
                 .catch(error => {
                     console.log(error)
-                })
+                });
+            this.getPerformers();
+
         },
 
         filters: {
@@ -203,8 +172,29 @@
 
             completeOrder() {
                 let config = this.config;
-                axios.post('http://127.0.0.1:8081/api/orders/' + this.id + '/complete_order', null, config)
-            //    Игорь должен исправить
+                axios.post('http://127.0.0.1:8081/api/orders/' + this.id + '/complete_order/', null, config)
+            },
+            applyForOrder() {
+                let config = this.config;
+                axios.post('http://127.0.0.1:8081/api/orders/' + this.id + '/apply_for_order/', {comment: this.comment}, config);
+                router.push('/myrequests')
+            },
+            getPerformers() {
+                let config = this.config;
+                axios.get('http://127.0.0.1:8081/api/orders/' + this.id + '/get_order_requests/', config)
+                    .then(response => response.data)
+                    .then(data => {
+                        this.performers = data
+                    });
+            },
+            acceptOrderRequest() {
+                let config = this.config;
+                axios.post('http://127.0.0.1:8081/api/orders/' + this.id + '/accept_order_requests/', null, config)
+
+            },
+            removePerformer() {
+                let config = this.config;
+                axios.post('http://127.0.0.1:8081/api/orders/' + this.id + '/remove_performer/', null, config)
             }
         },
         props: ['userId', 'config']

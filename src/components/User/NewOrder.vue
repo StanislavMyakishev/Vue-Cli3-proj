@@ -76,6 +76,7 @@
                 {value: 6, text: 'Other'}
             ],
             checkbox: false,
+            tags: [],
             valid: true,
             nameRules: [
                 v => !!v || 'Name is required',
@@ -98,6 +99,7 @@
                         name: this.name,
                         description: this.descr,
                         category: this.select - 1,
+                        tags: this.tags
                     };
                     this.$root.$emit('newOrder', order);
                 }
