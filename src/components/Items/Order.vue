@@ -35,7 +35,8 @@
                 <v-card v-if=perform>
                     <v-card-text>
                         <v-textarea
-                                label="Комментарий">
+                                label="Комментарий"
+                                v-model="comment">
                         </v-textarea>
                     </v-card-text>
                     <div class="text-xs-center">
@@ -181,12 +182,11 @@
 
         mounted() {
             this.id = this.$route.query.id;
-
-            let config = this.config;
-            axios.get('http://127.0.0.1:8081/api/orders/' + this.id + '/', config)
+            axios.get('http://127.0.0.1:8081/api/orders/' + this.id + '/')
                 .then(response => response.data)
                 .then(data => {
                     this.order = data;
+                    console.log(this.order);
                     this.perform = this.order.customer.id !== this.userId;
                 })
                 .catch(error => {
@@ -194,7 +194,6 @@
                 });
             this.getPerformers();
         },
-
         filters: {
             parseDate(date) {
                 return date.replace(/(\d+)-(\d+)-(\d+)T(\d+):(\d+).+/, '$1-$2-$3 $4:$5')

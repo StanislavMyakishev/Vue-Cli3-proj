@@ -22,6 +22,7 @@
                                 <v-card-actions class="pa-3">
                                     Рейтинг:
                                     <v-spacer></v-spacer>
+
                                     <span class="grey--text text--lighten-2 caption mr-2">({{ rating }})</span>
                                     <v-rating
                                             v-model="rating"
@@ -29,6 +30,7 @@
                                             color="secondary"
                                             dense
                                             half-increments
+                                            :readonly="true"
                                             hover
                                             size="18"
                                     ></v-rating>
@@ -46,31 +48,30 @@
                             </v-card>
                         </v-flex>
                     </v-layout>
+
+                    <v-divider></v-divider>
                     <v-layout>
                         <v-flex xs12 md12 sm12>
                             <v-card flat>
-                                <v-list two-line>
+                                <v-list three-line>
+                                    <v-subheader>
+                                        Отзывы
+                                    </v-subheader>
                                     <template v-for="(user, index) in users">
-                                        <v-subheader
-                                                v-if="user.header"
-                                                :key="user.header">
-                                            {{ user.header }}
-                                        </v-subheader>
-                                        <v-divider
-                                                v-else-if="user.divider"
-                                                :key="index"
-                                                :inset="user.inset"
-                                        ></v-divider>
                                         <v-list-tile
-                                                v-else
-                                                :key="user.title"
+
+                                                :key="user.id"
                                                 avatar>
                                             <v-list-tile-avatar>
-                                                <img :src="user.avatar">
+                                                <img :src="'https://cdn.vuetifyjs.com/images/lists/1.jpg'">
                                             </v-list-tile-avatar>
                                             <v-list-tile-content>
-                                                <v-list-tile-title v-html="user.performerName"></v-list-tile-title>
-                                                <v-list-tile-sub-title v-html="user.subtitle"></v-list-tile-sub-title>
+                                                <v-list-tile-title v-html="user.title"></v-list-tile-title>
+                                                <v-list-tile-sub-title v-html="user.review"></v-list-tile-sub-title>
+                                                <v-list-tile-sub-title>
+                                                    {{user.reviewer}}
+                                                    {{user.date_created | parseDate}}
+                                                </v-list-tile-sub-title>
                                             </v-list-tile-content>
                                             <v-card-actions class="pa-3">
                                                 Оценка:
@@ -88,17 +89,29 @@
                                                 ></v-rating>
                                             </v-card-actions>
                                         </v-list-tile>
+                                        <v-divider :key="index"></v-divider>
                                     </template>
                                 </v-list>
                             </v-card>
                         </v-flex>
                     </v-layout>
+
+
                     <v-layout>
                         <v-flex xs12 md12 sm12>
                             <v-card flat v-if=perform>
+                                <v-toolbar
+                                        dark color="primary lighten-1">
+                                    <v-toolbar-title>Оставить отзыв</v-toolbar-title>
+                                </v-toolbar>
                                 <v-card-text>
+                                    <v-text-field
+                                            label="Название"
+                                            v-model="title">
+                                    </v-text-field>
                                     <v-textarea
-                                            label="Комментарий">
+                                            label="Комментарий"
+                                            v-model="review">
                                     </v-textarea>
                                 </v-card-text>
                                 <v-card-actions class="pa-3">
@@ -115,7 +128,9 @@
                                     ></v-rating>
                                 </v-card-actions>
                                 <div class="text-xs-center">
-                                    <v-btn large color="secondary">Отправить отзыв</v-btn>
+                                    <v-btn large color="secondary"
+                                           @click="makeReview">Отправить отзыв
+                                    </v-btn>
                                 </div>
                             </v-card>
                         </v-flex>
@@ -127,21 +142,26 @@
 </template>
 
 <script>
+    import axios from 'axios'
+    import router from '../../router/index'
 
     export default {
-        props: ['id'],
+        props: ['id', 'config', 'userId'],
         data() {
             return {
-                perform: true,
-                rating: 2,
+                perform: NaN,
+                rating: 5,
                 ownRating: 5,
+                review: '',
+                title: '',
+
                 organization: {
-                    name: 'Университет ИТМО',
-                    itn: '12345678912',
-                    description: 'Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur? At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non provident, similique sunt in culpa',
-                    website: 'www.itmo.ru',
-                    imgSrc: 'https://vuetifyjs.com/apple-touch-icon-180x180.png',
-                    address: 'Ulitsa Pushkina dom Kolotushkina',
+                    // name: 'Университет ИТМО',
+                    // itn: '12345678912',
+                    // description: 'Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur? At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non provident, similique sunt in culpa',
+                    // website: 'www.itmo.ru',
+                    // imgSrc: 'https://vuetifyjs.com/apple-touch-icon-180x180.png',
+                    // address: 'Ulitsa Pushkina dom Kolotushkina',
                 },
                 users: [
                     {header: 'Отзывы'},
@@ -168,7 +188,52 @@
                 ],
             }
         },
-        methods: {}
+        created() {
+            axios.get('http://127.0.0.1:8081/api/organizations/' + this.id + '/')
+                .then(response => response.data)
+                .then(data => {
+                    this.organization = data;
+                    this.perform = this.id !== this.userId;
+                })
+                .catch(error => {
+                    console.log(error)
+                });
+            this.getReviews();
+            this.$root.$on('reviewMade', this.getReviews);
+        },
+
+        filters: {
+            parseDate(date) {
+                return date.replace(/(\d+)-(\d+)-(\d+)T(\d+):(\d+).+/, '$1-$2-$3 $4:$5')
+            }
+        },
+
+        methods: {
+            getReviews() {
+                axios.get('http://127.0.0.1:8081/api/organizations/' + this.id + '/get_reviews/')
+                    .then(response => {
+                        this.users = response.data;
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    });
+            },
+
+            makeReview() {
+                const review = {
+                    title: this.title,
+                    review: this.review,
+                    rating: this.ownRating
+                };
+                let config = this.config;
+                axios.post('http://127.0.0.1:8081/api/organizations/' + this.id + '/make_review/', review, config)
+                    .catch(error => {
+                        console.log(error)
+                    });
+                this.$root.$emit('reviewMade');
+                router.push('/organization/2')
+            },
+        }
     }
 </script>
 
