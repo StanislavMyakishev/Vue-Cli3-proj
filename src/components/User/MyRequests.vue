@@ -64,7 +64,7 @@
                     .then(data => {
                         this.requestedOrders = data;
                     })
-                    .catch(error => console.log(error));
+                    .catch(error => this.$root.$emit('error', error));
             }
         },
         props: ['config'],

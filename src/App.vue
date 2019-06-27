@@ -9,6 +9,7 @@
             </div>
             <app-footer></app-footer>
         </v-app>
+        <app-error></app-error>
     </div>
 </template>
 
@@ -17,6 +18,7 @@
     import Header from '@/components/core/Header'
     import axios from 'axios'
     import router from './router/index'
+    import ErrorComp from '@/components/core/Error'
 
     export default {
         data() {
@@ -31,7 +33,8 @@
         },
         components: {
             appFooter: Footer,
-            appHeader: Header
+            appHeader: Header,
+            appError: ErrorComp
         },
 
         computed: {
@@ -84,7 +87,7 @@
                         router.push('/myorders')
                     })
                     .catch(error => {
-                        console.log(error);
+                        this.$root.$emit('error', error);
                     })
             });
 

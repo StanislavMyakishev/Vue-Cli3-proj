@@ -75,7 +75,7 @@
                     .then(data => {
                         this.myorders = data;
                     })
-                    .catch(error => console.log(error));
+                    .catch(error => this.$root.$emit('error', error));
             }
         },
         props: ['config']

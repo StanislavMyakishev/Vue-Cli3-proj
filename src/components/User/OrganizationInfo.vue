@@ -229,7 +229,7 @@
                 let config = this.config;
                 axios.post('http://127.0.0.1:8081/api/organizations/' + this.id + '/make_review/', review, config)
                     .catch(error => {
-                        console.log(error)
+                        this.$root.$emit('error', error);
                     });
                 this.title = '',
                this.review = '',

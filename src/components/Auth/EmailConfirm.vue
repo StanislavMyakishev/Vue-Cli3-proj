@@ -85,7 +85,7 @@
                             }
                         })
                         .catch(error => {
-                            console.log(error);
+                            this.$root.$emit('error', error);
                         });
                 }
             }

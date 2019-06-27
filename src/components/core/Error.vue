@@ -1,22 +1,52 @@
 <template>
-  <v-layout row>
-    <v-flex xs12 sm6 offset-sm3>
+  <v-layout row justify-center>
+    <v-dialog
+      v-model="dialog"
+      max-width="290"
+    >
       <v-card>
-        <v-img
-          src="https://cdn.allwallpaper.in/wallpapers/2560x1600/5480/sad-danbo-2560x1600-wallpaper.jpg"
-          height="200px"
-        >
-        </v-img>
+        <v-card-title class="headline">Ой-ой. Что-то пошло не так...</v-card-title>
 
-        <v-card-title primary-title>
-          <div>
-            <div class="headline">Error</div>
-          </div>
-        </v-card-title>
-          <v-card-text v-show="show">
-            Something has gone wrong!
-          </v-card-text>
+        <v-card-text>
+          {{text}}
+        </v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="green darken-1"
+            flat="flat"
+            @click="goBack"
+          >
+            Вернуться назад
+          </v-btn>
+        </v-card-actions>
       </v-card>
-    </v-flex>
+    </v-dialog>
   </v-layout>
 </template>
+
+<script>
+import router from '../../router/index'
+
+export default {
+    data() {
+        return {
+            dialog: false,
+            text: '',
+        }
+    },
+    mounted() {
+        this.$root.$on('error', error => {
+            this.dialog = true;
+            this.text = error;
+        })
+    },
+    methods: {
+        goBack() {
+            this.dialog = false;
+            router.go(-1);
+        }
+    }
+}
+</script>

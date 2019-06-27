@@ -193,7 +193,7 @@
                     .then(response => {
                         router.push('/myorders')
                     })
-                    .catch(error => console.log(error));
+                    .catch(error => this.$root.$emit('error', error));
                 this.editable = 'p'
             },
             deleteOrder() {
