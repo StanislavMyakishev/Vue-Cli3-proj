@@ -13,7 +13,7 @@
                             </div>
                             <v-img
                                     class="backg"
-                                    :src="'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'"
+                                    :src="'https://picjumbo.com/wp-content/uploads/morning-home-office-working-and-breakfast_free_stock_photos_picjumbo_DSC06051-2210x1473.jpg'"
                                     height="300px">
                             </v-img>
                         </v-responsive>
@@ -166,7 +166,7 @@
                 .then(response => response.data)
                 .then(data => {
                     this.order = data;
-                    console.log(this.order)
+                    console.log(this.order);
                     this.perform = this.order.customer.id !== this.userId;
                 })
                 .catch(error => {
@@ -191,6 +191,7 @@
                 let config = this.config;
                 axios.put('http://127.0.0.1:8081/api/orders/' + this.id + '/', this.order, config)
                     .then(response => {
+                        router.push('/myorders')
                     })
                     .catch(error => console.log(error));
                 this.editable = 'p'

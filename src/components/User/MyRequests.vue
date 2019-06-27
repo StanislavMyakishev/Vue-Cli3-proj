@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-layout>
-            <v-flex xs12 sm6 offset-sm3>
+            <v-flex xs12 sm8 offset-sm2>
                 <v-card flat>
                     <v-card-text
                             class="display-2">
@@ -15,7 +15,7 @@
                     <v-layout row>
                         <v-flex xs4>
                             <v-img
-                                    :src="'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'"
+                                    :src="'https://picjumbo.com/wp-content/uploads/morning-home-office-working-and-breakfast_free_stock_photos_picjumbo_DSC06051-2210x1473.jpg'"
                                     height="230px">
                             </v-img>
                         </v-flex>

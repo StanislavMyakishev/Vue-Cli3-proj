@@ -164,27 +164,27 @@
                     // address: 'Ulitsa Pushkina dom Kolotushkina',
                 },
                 users: [
-                    {header: 'Отзывы'},
-                    {
-                        avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-                        performerName: 'Иван Иванов',
-                        subtitle: "<span class='text--primary'>Организация неплохая и выпускники интересные!</span>",
-                        rating: 5,
-                    },
-                    {divider: true, inset: true},
-                    {
-                        avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-                        performerName: 'Павел Григорьев <span class="grey--text text--lighten-1"></span>',
-                        subtitle: "<span class='text--primary'>Куда нажать, чтобы просто получить зачет по вебу в этой контрое?</span>",
-                        rating: 4,
-                    },
-                    {divider: true, inset: true},
-                    {
-                        avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-                        performerName: 'Анна Некифорова',
-                        subtitle: "<span class='text--primary'>Какая оценка по вебу у меня, такая будет и у Вас!!!!</span>",
-                        rating: 3,
-                    }
+                    // {header: 'Отзывы'},
+                    // {
+                    //     avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
+                    //     performerName: 'Иван Иванов',
+                    //     subtitle: "<span class='text--primary'>Организация неплохая и выпускники интересные!</span>",
+                    //     rating: 5,
+                    // },
+                    // {divider: true, inset: true},
+                    // {
+                    //     avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
+                    //     performerName: 'Павел Григорьев <span class="grey--text text--lighten-1"></span>',
+                    //     subtitle: "<span class='text--primary'>Куда нажать, чтобы просто получить зачет по вебу в этой контрое?</span>",
+                    //     rating: 4,
+                    // },
+                    // {divider: true, inset: true},
+                    // {
+                    //     avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
+                    //     performerName: 'Анна Некифорова',
+                    //     subtitle: "<span class='text--primary'>Какая оценка по вебу у меня, такая будет и у Вас!!!!</span>",
+                    //     rating: 3,
+                    // }
                 ],
             }
         },
@@ -231,6 +231,9 @@
                     .catch(error => {
                         console.log(error)
                     });
+                this.title = '',
+               this.review = '',
+                this.ownRating = 5,
                 this.$root.$emit('reviewMade');
             },
         }

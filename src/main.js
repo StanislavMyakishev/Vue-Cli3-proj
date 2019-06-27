@@ -7,8 +7,8 @@ import colors from 'vuetify/es5/util/colors'
 
 Vue.use(Vuetify, {
     theme: {
-        primary: '#6200EE',
-        secondary: '#03DAC5',
+        primary: '#283593',
+        secondary: '#26A69A',
         background: '#FFFFFF',
         black: '#000000',
         error: '#B00020',

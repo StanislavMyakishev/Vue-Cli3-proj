@@ -15,7 +15,7 @@
                     <v-layout row>
                         <v-flex xs4>
                             <v-img
-                                    :src="'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'"
+                                    :src="'https://picjumbo.com/wp-content/uploads/morning-home-office-working-and-breakfast_free_stock_photos_picjumbo_DSC06051-2210x1473.jpg'"
                                     height="230px">
                             </v-img>
                         </v-flex>
@@ -23,7 +23,7 @@
                             <v-card-text>
                                 <h2 class="text--primary">{{ord.name}}</h2>
                                 <p>{{ord.customer.name}}</p>
-                                <p>{{ord.description}}</p>
+                                <p class="clamp">{{ord.description}}</p>
                                 <p>{{ord.date_created | parseDate}}</p>
                             </v-card-text>
                             <v-card-actions>
@@ -82,3 +82,12 @@
     }
 </script>
 
+<style>
+    .clamp {
+        overflow : hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+    }
+</style>

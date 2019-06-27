@@ -56,7 +56,7 @@
                     [5, 'Others']
                 ],
                 orders: null,
-                src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg'
+                src: 'https://picjumbo.com/wp-content/uploads/modern-desktop-setup-2210x1473.jpg'
             }
         },
         async mounted() {
