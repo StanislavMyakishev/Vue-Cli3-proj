@@ -47,6 +47,7 @@
                         {title: 'Мои заказы', icon: 'bookmark_border', url: '/myorders'},
                         {title: 'Новый заказ', icon: 'note_add', url: '/new'},
                         {title: 'Мои заявки', icon: 'description', url: '/myrequests'},
+                        {title: 'Аккаунт', icon: 'face', url: '/modify'},
                         {title: 'Выйти', icon: 'lock', url: '/'},
                     ]
                 } else {
