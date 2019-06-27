@@ -146,7 +146,7 @@
     import router from '../../router/index'
 
     export default {
-        props: ['id', 'config', 'userId'],
+        props: ['config', 'userId'],
         data() {
             return {
                 perform: NaN,
@@ -189,6 +189,7 @@
             }
         },
         created() {
+            this.id = this.$route.query.id;
             axios.get('http://127.0.0.1:8081/api/organizations/' + this.id + '/')
                 .then(response => response.data)
                 .then(data => {
@@ -231,7 +232,6 @@
                         console.log(error)
                     });
                 this.$root.$emit('reviewMade');
-                router.push('/organization/2')
             },
         }
     }

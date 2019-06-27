@@ -78,8 +78,8 @@ export default new VueRouter({
             //+
         },
         {
-            path: '/organization/:id',
-            props: true,
+            path: '/organization',
+            // props: true,
             name: 'organization',
             component: OrganizationInfo
         },
