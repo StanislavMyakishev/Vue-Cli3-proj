@@ -84,37 +84,37 @@
                                 <v-subheader>
                                     {{ header }}
                                 </v-subheader>
+                                <v-divider></v-divider>
                                 <template v-for="(item, index) in performers">
-                                    <v-divider
-                                            v-if="'index !== 0 && index !== performers.length'"
-                                            :key="index"
-                                            inset
-                                    ></v-divider>
                                     <v-list-tile
-                                            v-else
-                                            :key="item.title"
+                                            :key="item.performer_id"
                                             avatar>
                                         <v-list-tile-avatar>
                                             <img :src="'https://cdn.vuetifyjs.com/images/lists/1.jpg'">
                                         </v-list-tile-avatar>
 
                                         <v-list-tile-content>
-                                            <v-list-tile-title v-html="item.performerName"></v-list-tile-title>
-                                            <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
+                                            <v-list-tile-title v-html="item.performer.name"></v-list-tile-title>
+                                            <v-list-tile-sub-title v-html="item.comment"></v-list-tile-sub-title>
                                         </v-list-tile-content>
+
+
                                         <v-btn
-                                                v-if=!hired
+                                                v-if="order.status === 0"
                                                 color="secondary"
-                                                @click="hired = !hired"
+                                                @click="acceptOrderRequest"
                                         >Принять заявку
                                         </v-btn>
                                         <v-btn
                                                 v-else
                                                 color="error"
-                                                @click="hired = !hired"
+                                                @click="removePerformer"
                                         >Удалить перформера
                                         </v-btn>
                                     </v-list-tile>
+                                    <v-divider
+                                            :key="index"
+                                    ></v-divider>
                                 </template>
                             </v-list>
                         </v-card>
@@ -141,42 +141,7 @@
                 header: 'Заявки',
 
                 hired: false,
-                // testOrder: {
-                //     title: 'Фриланс-биржа',
-                //     company: 'Университет ИТМО',
-                //     category: "IT",
-                //     createdDate: new Date(2019, 0, 1, 0, 0, 0, 0),
-                //     description: 'Наша компания предлагает Вам выполнить восхитительный проект: создание фриланс биржи!' +
-                //         ' Нам необходима реализация сайта этого проекта на стеке python + js используя vue (использование ' +
-                //         'Нам необходима реализация сайта этого проекта на стеке python + js используя vue (использование ' +
-                //         'инструментов по типу vuetify оставется на ваш вкус). Сайт должен быть красивым и функциональным,' +
-                //         'страницы должны быть реализованы с использованием material design компонентов и в принципе выглядеть ' +
-                //         'приятно. Это сампл описания заказа, так что особо не зачитывайтесь. Далее будет сгенерированный текст,' +
-                //         ' спасибо за внимание! ' + 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                //     imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-                //     id: '1',
-                // },
 
-                // performers: [
-                //     {header: 'Заявки'},
-                //     {
-                //         avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-                //         performerName: 'Иван Иванов',
-                //         subtitle: "<span class='text--primary'>Проект интересный, очень заинтересован его выполнить за зачет по вебу :)</span>"
-                //     },
-                //     {divider: true, inset: true},
-                //     {
-                //         avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-                //         performerName: 'Павел Григорьев <span class="grey--text text--lighten-1"></span>',
-                //         subtitle: "<span class='text--primary'>Куда нажать, чтобы просто получить зачет по вебу?</span>"
-                //     },
-                //     {divider: true, inset: true},
-                //     {
-                //         avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-                //         performerName: 'Анна Некифорова',
-                //         subtitle: "<span class='text--primary'>Согласна остановить горящую избу на скаку за тройку по вебу</span>"
-                //     }
-                // ]
             }
         },
 
@@ -186,13 +151,16 @@
                 .then(response => response.data)
                 .then(data => {
                     this.order = data;
-                    console.log(this.order);
                     this.perform = this.order.customer.id !== this.userId;
                 })
                 .catch(error => {
                     console.log(error)
                 });
-            this.getPerformers();
+            console.log(this.perform);
+            if (this.perform == false || this.perform == null) {
+                this.getPerformers();
+            }
+
         },
         filters: {
             parseDate(date) {
@@ -234,13 +202,13 @@
                 axios.get('http://127.0.0.1:8081/api/orders/' + this.id + '/get_order_requests/', config)
                     .then(response => response.data)
                     .then(data => {
-                        this.performers = data
+                        this.performers = data;
+                        console.log(this.performers)
                     });
-                console.log(this.performers)
             },
             acceptOrderRequest() {
                 let config = this.config;
-                axios.post('http://127.0.0.1:8081/api/orders/' + this.id + '/accept_order_requests/', null, config)
+                axios.post('http://127.0.0.1:8081/api/orders/' + this.id + '/accept_order_request/', null, config)
             },
             removePerformer() {
                 let config = this.config;
