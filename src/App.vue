@@ -39,7 +39,8 @@
 
         computed: {
             loggedIn() {
-                return this.user.token.length > 0;
+                // return this.user.token.length > 0;
+                return true
             },
             links() {
                 if (this.loggedIn) {

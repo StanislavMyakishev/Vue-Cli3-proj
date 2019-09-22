@@ -224,11 +224,12 @@
             acceptOrderRequest(id) {
                 let config = this.config;
                 axios.post('http://127.0.0.1:8081/api/orders/' + this.id + '/accept_order_request/', {order_request_id: id}, config)
-
+                router.push('/myorders')
             },
             removePerformer() {
                 let config = this.config;
                 axios.post('http://127.0.0.1:8081/api/orders/' + this.id + '/remove_performer/', null, config)
+                router.push('/myorders')
             },
             goToOrganization(id) {
                 router.push({path: '/organization', query: {id: id}})

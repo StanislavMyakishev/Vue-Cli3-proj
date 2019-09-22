@@ -29,7 +29,7 @@
                                     <v-btn
                                             class="secondary"
                                             :to="'/order/?id=' + card.id"
-                                    >Open
+                                    >Открыть
                                     </v-btn>
                                 </v-card-actions>
                             </v-card>
